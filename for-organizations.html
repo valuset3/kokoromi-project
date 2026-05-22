@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>団体・企業の方へ | KOKOROMi</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Hiragino Sans', 'Meiryo', sans-serif;
+  background: #f5f5f3;
+  color: #1a1a1a;
+  line-height: 1.7;
+}
+:root {
+  --orange: #e07b39;
+  --dark: #1a1a1a;
+  --gray: #666;
+}
+
+/* NAV */
+nav {
+  background: var(--dark);
+  padding: 0 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 60px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+nav img { height: 26px; }
+.nav-links { display: flex; align-items: center; gap: 24px; }
+.nav-links a { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 13px; }
+.nav-links a:hover { color: white; }
+.cta-btn {
+  background: var(--orange);
+  color: white;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 10px 22px;
+  border-radius: 100px;
+  text-decoration: none;
+}
+
+/* HERO */
+.hero {
+  background: var(--dark);
+  padding: 80px 48px 72px;
+  border-bottom: 3px solid var(--orange);
+  text-align: center;
+}
+.hero-eyebrow {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: bold;
+  letter-spacing: 0.15em;
+  color: var(--orange);
+  background: rgba(224,123,57,0.12);
+  padding: 4px 16px;
+  border-radius: 100px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+.hero h1 {
+  font-size: 38px;
+  color: white;
+  font-weight: bold;
+  line-height: 1.4;
+  margin-bottom: 20px;
+}
+.hero h1 span { color: var(--orange); }
+.hero p {
+  font-size: 15px;
+  color: rgba(255,255,255,0.65);
+  max-width: 600px;
+  margin: 0 auto 36px;
+  line-height: 1.9;
+}
+.hero-cta {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--orange);
+  color: white;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 16px 32px;
+  border-radius: 100px;
+  text-decoration: none;
+  box-shadow: 0 4px 20px rgba(224,123,57,0.4);
+}
+.btn-line {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #06C755;
+  color: white;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 16px 32px;
+  border-radius: 100px;
+  text-decoration: none;
+  box-shadow: 0 4px 16px rgba(6,199,85,0.3);
+}
+.hero-note {
+  font-size: 12px;
+  color: rgba(255,255,255,0.35);
+  margin-top: 14px;
+}
+
+/* MAIN */
+.main {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 72px 48px 100px;
+}
+
+/* SECTION HEADER */
+.section-head {
+  text-align: center;
+  margin-bottom: 40px;
+}
+.section-eyebrow {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  color: var(--orange);
+  background: #fdf0e6;
+  padding: 3px 14px;
+  border-radius: 100px;
+  margin-bottom: 14px;
+}
+.section-head h2 {
+  font-size: 26px;
+  font-weight: bold;
+  color: var(--dark);
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+.section-head p {
+  font-size: 14px;
+  color: var(--gray);
+  line-height: 1.9;
+}
+
+/* PAIN CARDS */
+.pain-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-bottom: 72px;
+}
+.pain-card {
+  background: white;
+  border-radius: 12px;
+  padding: 24px 20px;
+  border-left: 4px solid var(--orange);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+.pain-card .emoji { font-size: 24px; margin-bottom: 10px; }
+.pain-card p {
+  font-size: 13px;
+  color: var(--dark);
+  line-height: 1.75;
+  font-weight: 500;
+}
+
+/* HOW IT WORKS */
+.steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  margin-bottom: 72px;
+  position: relative;
+}
+.steps::before {
+  content: '';
+  position: absolute;
+  top: 36px;
+  left: 12.5%;
+  right: 12.5%;
+  height: 2px;
+  background: #e8e8e8;
+}
+.step {
+  text-align: center;
+  padding: 0 12px;
+  position: relative;
+}
+.step-num {
+  width: 48px;
+  height: 48px;
+  background: var(--orange);
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 14px;
+  position: relative;
+  z-index: 1;
+}
+.step-num.gray { background: #e8e8e8; color: #999; }
+.step h4 {
+  font-size: 13px;
+  font-weight: bold;
+  color: var(--dark);
+  margin-bottom: 6px;
+  line-height: 1.4;
+}
+.step p {
+  font-size: 11px;
+  color: var(--gray);
+  line-height: 1.7;
+}
+
+/* MERIT */
+.merit-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 72px;
+}
+.merit-card {
+  background: white;
+  border-radius: 12px;
+  padding: 28px 24px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+}
+.merit-icon {
+  width: 44px;
+  height: 44px;
+  background: #fdf0e6;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+.merit-card h4 {
+  font-size: 15px;
+  font-weight: bold;
+  color: var(--dark);
+  margin-bottom: 6px;
+  line-height: 1.4;
+}
+.merit-card p {
+  font-size: 12px;
+  color: var(--gray);
+  line-height: 1.75;
+}
+
+/* WHO */
+.who-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-bottom: 72px;
+}
+.who-card {
+  background: white;
+  border-radius: 12px;
+  padding: 22px 20px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  text-align: center;
+}
+.who-card .who-icon { font-size: 32px; margin-bottom: 12px; }
+.who-card h4 {
+  font-size: 14px;
+  font-weight: bold;
+  color: var(--dark);
+  margin-bottom: 8px;
+}
+.who-card p {
+  font-size: 12px;
+  color: var(--gray);
+  line-height: 1.7;
+}
+
+/* SECTION DIVIDER */
+.sec-divider {
+  height: 1px;
+  background: #e8e8e8;
+  margin: 72px 0;
+}
+
+/* CTA SECTION */
+.cta-section {
+  background: var(--dark);
+  border-radius: 16px;
+  padding: 56px 48px;
+  text-align: center;
+  border: 2px solid var(--orange);
+}
+.cta-section h2 {
+  font-size: 26px;
+  color: white;
+  font-weight: bold;
+  margin-bottom: 14px;
+  line-height: 1.5;
+}
+.cta-section p {
+  font-size: 14px;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 32px;
+  line-height: 1.9;
+}
+.cta-section .cta-note {
+  font-size: 12px;
+  color: rgba(255,255,255,0.3);
+  margin-top: 16px;
+}
+
+/* FORM SECTION */
+.form-wrap {
+  max-width: 640px;
+  margin: 0 auto;
+}
+.form-intro {
+  background: white;
+  border-radius: 16px;
+  padding: 40px 40px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  margin-bottom: 72px;
+}
+.form-intro h2 {
+  font-size: 22px;
+  font-weight: bold;
+  color: var(--dark);
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+.form-intro p {
+  font-size: 13px;
+  color: var(--gray);
+  line-height: 1.9;
+  margin-bottom: 28px;
+}
+.field {
+  margin-bottom: 20px;
+}
+.field label {
+  display: block;
+  font-size: 12px;
+  font-weight: bold;
+  color: var(--dark);
+  margin-bottom: 6px;
+}
+.field label span {
+  color: var(--orange);
+  margin-left: 4px;
+  font-size: 10px;
+}
+.field input, .field textarea, .field select {
+  width: 100%;
+  border: 1.5px solid #e8e8e8;
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-size: 14px;
+  font-family: inherit;
+  color: var(--dark);
+  background: white;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.field input:focus, .field textarea:focus, .field select:focus {
+  border-color: var(--orange);
+}
+.field textarea { min-height: 100px; resize: vertical; }
+.submit-btn {
+  width: 100%;
+  background: var(--orange);
+  color: white;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 16px;
+  border: none;
+  border-radius: 100px;
+  cursor: pointer;
+  margin-top: 8px;
+  box-shadow: 0 4px 16px rgba(224,123,57,0.35);
+}
+.form-note {
+  font-size: 11px;
+  color: #aaa;
+  text-align: center;
+  margin-top: 10px;
+  line-height: 1.6;
+}
+
+/* FOOTER */
+footer {
+  background: var(--dark);
+  padding: 40px 48px;
+  text-align: center;
+}
+footer p {
+  font-size: 12px;
+  color: rgba(255,255,255,0.3);
+}
+footer a {
+  color: rgba(255,255,255,0.4);
+  text-decoration: none;
+  margin: 0 10px;
+}
+footer a:hover { color: white; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="/projects/kokoromi/index.html">
+    <img src="assets/ご決定デザイン_横組み_PNG.png" alt="KOKOROMi">
+  </a>
+  <div class="nav-links">
+    <a href="/projects/kokoromi/projects.html">プロジェクト一覧</a>
+    <a href="/projects/kokoromi/for-organizations.html" style="color:white;">団体・企業の方へ</a>
+    <a href="https://lin.ee/XOFzUEb" target="_blank" class="cta-btn">LINEで相談する</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">For Organizations & Companies</div>
+  <h1>あなたの活動に、<br><span>挑戦したい社会人</span>を届けます。</h1>
+  <p>KOKOROMiは「やりたいことがあるけど動けていない」30代前後の社会人と、<br>
+  一緒に動いてくれる仲間を求めるNPO・企業・地域団体をつなぐプロジェクトマッチングサービスです。</p>
+  <div class="hero-cta">
+    <a href="#apply" class="btn-primary">
+      <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+      掲載を申し込む（無料）
+    </a>
+    <a href="https://lin.ee/XOFzUEb" target="_blank" class="btn-line">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+      LINEで気軽に相談する
+    </a>
+  </div>
+  <p class="hero-note">掲載費用・仲介手数料はかかりません</p>
+</div>
+
+<div class="main">
+
+  <!-- こんなお気持ちはありませんか -->
+  <div style="margin-bottom: 72px;">
+    <div class="section-head">
+      <span class="section-eyebrow">Pain Points</span>
+      <h2>こんなお気持ちはありませんか？</h2>
+      <p>規模・業種を問わず、多くの団体からこういった声をいただいています。</p>
+    </div>
+    <div class="pain-grid">
+      <div class="pain-card">
+        <div class="emoji">😔</div>
+        <p>やりたいプロジェクトはあるのに、<br>動いてくれる人手がいない</p>
+      </div>
+      <div class="pain-card">
+        <div class="emoji">🔍</div>
+        <p>採用コストはかけられないけど、<br>スキルのある人に関わってほしい</p>
+      </div>
+      <div class="pain-card">
+        <div class="emoji">💬</div>
+        <p>「ボランティア募集」では集まらない。<br>本気で動ける人と一緒にやりたい</p>
+      </div>
+      <div class="pain-card">
+        <div class="emoji">🌱</div>
+        <p>社会貢献したい人と繋がりたいが、<br>どうやって探せばいいかわからない</p>
+      </div>
+      <div class="pain-card">
+        <div class="emoji">⏳</div>
+        <p>短期間だけ手伝ってほしいことがある。<br>正規雇用は難しい</p>
+      </div>
+      <div class="pain-card">
+        <div class="emoji">🤝</div>
+        <p>事業を一緒に考えてくれる<br>外部の人の視点がほしい</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 仕組み -->
+  <div style="margin-bottom: 72px;">
+    <div class="section-head">
+      <span class="section-eyebrow">How It Works</span>
+      <h2>KOKOROMiの仕組み</h2>
+      <p>プロジェクトの掲載から完了まで、KOKOROMiがコーディネートします。</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h4>ヒアリング・<br>プロジェクト設計</h4>
+        <p>どんな人に何をやってほしいか、一緒に整理します</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h4>プロジェクトを<br>ページに掲載</h4>
+        <p>KOKOROMiのサイトにプロジェクトカードを公開</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h4>参加者の<br>マッチング</h4>
+        <p>KOKOROMiが間に入り、双方の不安を解消しながら接続</p>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <h4>プロジェクト<br>スタート</h4>
+        <p>活動開始後もKOKOROMiがサポートします</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- メリット -->
+  <div style="margin-bottom: 72px;">
+    <div class="section-head">
+      <span class="section-eyebrow">Benefits</span>
+      <h2>掲載することで得られること</h2>
+    </div>
+    <div class="merit-grid">
+      <div class="merit-card">
+        <div class="merit-icon">🎯</div>
+        <div>
+          <h4>挑戦意欲の高い社会人にリーチできる</h4>
+          <p>「やりたいことがあるのに動けていない」30代前後の社会人が登録。スキルより熱量を重視したマッチングです。</p>
+        </div>
+      </div>
+      <div class="merit-card">
+        <div class="merit-icon">💰</div>
+        <div>
+          <h4>掲載費用・仲介手数料は無料</h4>
+          <p>採用コストをかけられない小規模NPOや地域団体でも利用できます。完全無料でプロジェクトを掲載できます。</p>
+        </div>
+      </div>
+      <div class="merit-card">
+        <div class="merit-icon">🛡️</div>
+        <div>
+          <h4>KOKOROMiが間に入ってサポート</h4>
+          <p>「いきなり来てもらうのは不安」という声に応え、KOKOROMiコーディネーターが双方の橋渡しをします。</p>
+        </div>
+      </div>
+      <div class="merit-card">
+        <div class="merit-icon">📣</div>
+        <div>
+          <h4>SNS・LINEで参加者に届く</h4>
+          <p>KOKOROMiのSNSやLINEマガジンで掲載プロジェクトを定期告知。自分で募集する手間がかかりません。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- こんな団体に -->
+  <div style="margin-bottom: 72px;">
+    <div class="section-head">
+      <span class="section-eyebrow">Who is this for?</span>
+      <h2>こんな団体・企業に使っていただいています</h2>
+    </div>
+    <div class="who-grid">
+      <div class="who-card">
+        <div class="who-icon">🌿</div>
+        <h4>NPO・非営利団体</h4>
+        <p>教育・福祉・環境・地域活性化など、社会課題に取り組む団体</p>
+      </div>
+      <div class="who-card">
+        <div class="who-icon">🏙️</div>
+        <h4>スタートアップ・ベンチャー</h4>
+        <p>社会課題解決型のビジネスを進めているチームやプロダクト</p>
+      </div>
+      <div class="who-card">
+        <div class="who-icon">🌾</div>
+        <h4>地域団体・コミュニティ</h4>
+        <p>地域の活性化・文化継承・まちづくりに取り組む任意団体</p>
+      </div>
+      <div class="who-card">
+        <div class="who-icon">🎓</div>
+        <h4>教育・学習関連</h4>
+        <p>キャリア教育・学習支援・若者向けプログラムを運営する団体</p>
+      </div>
+      <div class="who-card">
+        <div class="who-icon">💡</div>
+        <h4>社会起業家・個人事業</h4>
+        <p>一人ではできないけど、一緒に動いてくれる仲間を探している方</p>
+      </div>
+      <div class="who-card">
+        <div class="who-icon">🏢</div>
+        <h4>CSV推進中の中小企業</h4>
+        <p>社会貢献活動・地域連携を進めたいと考えている企業</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-divider"></div>
+
+  <!-- 申し込みフォーム -->
+  <div id="apply">
+    <div class="section-head">
+      <span class="section-eyebrow">Apply</span>
+      <h2>プロジェクト掲載を申し込む</h2>
+      <p>まずはカジュアルにご相談ください。内容を確認後、KOKOROMiスタッフからご連絡します。<br>費用はかかりません。</p>
+    </div>
+
+    <div class="form-wrap">
+      <div class="form-intro">
+        <h2>掲載申し込みフォーム</h2>
+        <p>以下のフォームからお気軽にご連絡ください。いただいた内容をもとにKOKOROMiスタッフがご連絡します。まだ「どんなプロジェクトにするか」が決まっていなくてもOKです。一緒に考えます。</p>
+
+        <form action="https://docs.google.com/forms/d/e/FORM_ID/formResponse" method="POST" target="_blank" onsubmit="handleSubmit(event)">
+          <div class="field">
+            <label>団体名・屋号 <span>必須</span></label>
+            <input type="text" name="entry.orgname" placeholder="例：○○NPO法人、△△プロジェクト">
+          </div>
+          <div class="field">
+            <label>担当者お名前 <span>必須</span></label>
+            <input type="text" name="entry.name" placeholder="例：山田 太郎">
+          </div>
+          <div class="field">
+            <label>メールアドレス <span>必須</span></label>
+            <input type="email" name="entry.email" placeholder="例：info@example.org">
+          </div>
+          <div class="field">
+            <label>団体の種別</label>
+            <select name="entry.orgtype">
+              <option value="">選択してください</option>
+              <option value="NPO法人">NPO法人</option>
+              <option value="任意団体">任意団体</option>
+              <option value="一般社団法人">一般社団法人</option>
+              <option value="株式会社・合同会社">株式会社・合同会社</option>
+              <option value="個人事業主">個人事業主・フリーランス</option>
+              <option value="地域団体">地域団体・コミュニティ</option>
+              <option value="その他">その他</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>どんな活動をしていますか？（簡単に）</label>
+            <textarea name="entry.activity" placeholder="例：農村での農業体験プログラムを運営しています。主に都市部の若者向けに年10回ほどイベントを開催。"></textarea>
+          </div>
+          <div class="field">
+            <label>どんな人に・何をやってほしいですか？（ざっくりでもOK）</label>
+            <textarea name="entry.request" placeholder="例：SNSを強化したい・写真撮影を手伝ってほしい・企画を一緒に考えてほしい など"></textarea>
+          </div>
+          <button type="submit" class="submit-btn">送信して申し込む →</button>
+          <p class="form-note">送信後、3営業日以内にメールまたはLINEでご連絡します。<br>急ぎの場合は <a href="https://lin.ee/XOFzUEb" target="_blank" style="color:var(--orange);">LINE</a> からご連絡ください。</p>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- LINE CTA -->
+  <div class="cta-section">
+    <h2>まずはLINEで<br>気軽に話しましょう</h2>
+    <p>「まだ具体的じゃないけど話してみたい」「掲載に興味がある」<br>そんな段階でもOKです。お気軽にご連絡ください。</p>
+    <div style="display:flex; justify-content:center;">
+      <a href="https://lin.ee/XOFzUEb" target="_blank" class="btn-line">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+        LINEで相談する（無料）
+      </a>
+    </div>
+    <p class="cta-note">掲載費用・仲介手数料は一切かかりません</p>
+  </div>
+
+</div>
+
+<footer>
+  <p>
+    <a href="/projects/kokoromi/index.html">ホーム</a>
+    <a href="/projects/kokoromi/projects.html">プロジェクト一覧</a>
+    <a href="/projects/kokoromi/for-organizations.html">団体・企業の方へ</a>
+  </p>
+  <p style="margin-top:12px;">© 2026 KOKOROMi. All rights reserved.</p>
+</footer>
+
+<script>
+function handleSubmit(e) {
+  e.preventDefault();
+  // Google Formが設定されるまでLINEに誘導
+  alert('ありがとうございます！\n\nフォームの設定が完了次第ご連絡します。\n急ぎの場合はLINEよりご連絡ください。');
+  window.open('https://lin.ee/XOFzUEb', '_blank');
+}
+</script>
+</body>
+</html>

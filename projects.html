@@ -137,6 +137,47 @@
       line-height: 1.9;
     }
 
+    .hero-cta {
+      margin-top: 32px;
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .line-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #06C755;
+      color: white;
+      font-size: 15px;
+      font-weight: 700;
+      padding: 14px 28px;
+      border-radius: 100px;
+      text-decoration: none;
+      transition: opacity 0.2s, transform 0.2s;
+      box-shadow: 0 4px 16px rgba(6,199,85,0.35);
+    }
+
+    .line-btn:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+    }
+
+    .line-btn svg {
+      width: 22px;
+      height: 22px;
+      flex-shrink: 0;
+    }
+
+    .hero-sub-note {
+      font-size: 12px;
+      color: rgba(255,255,255,0.45);
+      margin-top: 12px;
+    }
+
     /* ===== FILTER ===== */
     .filter-section {
       background: var(--white);
@@ -798,7 +839,7 @@
         <a href="#" class="active">プロジェクト一覧</a>
         <a href="#">応募の流れ</a>
         <a href="why-kokoromi.html">KOKOROMiとは</a>
-        <a href="#" class="cta-btn">参加を相談する</a>
+        <a href="https://lin.ee/XOFzUEb" target="_blank" class="cta-btn">参加を相談する</a>
       </nav>
     </div>
   </header>
@@ -812,6 +853,15 @@
       現場のリアルな課題に、あなたの経験と視点を。<br>
       本業はそのままに、新しい体験ができるプロジェクト一覧です。
     </p>
+    <div class="hero-cta">
+      <a href="https://lin.ee/XOFzUEb" target="_blank" class="line-btn">
+        <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2C6.477 2 2 6.027 2 11c0 3.395 1.9 6.373 4.784 8.118L6 22l3.276-1.708A10.85 10.85 0 0012 20.5c5.523 0 10-4.253 10-9.5S17.523 2 12 2zm0 1.5c4.687 0 8.5 3.581 8.5 8s-3.813 8-8.5 8a9.36 9.36 0 01-2.73-.403l-.37-.113-2.47 1.288.518-2.398-.248-.358C4.91 16.04 3.5 13.62 3.5 11c0-4.419 3.813-7.5 8.5-7.5z"/>
+        </svg>
+        LINEで参加登録する
+      </a>
+    </div>
+    <p class="hero-sub-note">登録無料・無償・副業届出不要</p>
   </section>
 
   <!-- ===== FILTER ===== -->
