@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>発信スケジュール｜浅野紘毅</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Hiragino Sans', 'Meiryo', sans-serif;
+    background: #f8f8f6;
+    padding: 40px 24px;
+    color: #333;
+  }
+  h1 { text-align: center; font-size: 22px; color: #333; margin-bottom: 6px; }
+  h2 { font-size: 16px; color: #333; margin: 40px 0 16px; padding-left: 12px; border-left: 4px solid #e07b39; }
+  .subtitle { text-align: center; font-size: 13px; color: #888; margin-bottom: 40px; }
+  .max-wrap { max-width: 960px; margin: 0 auto; }
+
+  /* 凡例 */
+  .legend { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-bottom: 32px; }
+  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #555; }
+  .legend-dot { width: 12px; height: 12px; border-radius: 3px; flex-shrink: 0; }
+
+  /* フェーズバー */
+  .phase-bar { display: grid; grid-template-columns: 110px repeat(5, 1fr); gap: 4px; margin-bottom: 4px; }
+  .phase { text-align: center; font-size: 11px; font-weight: bold; padding: 6px 4px; border-radius: 6px; color: white; }
+  .phase.prep { background: #94a3b8; }
+  .phase.launch { background: #e07b39; }
+  .phase.mid { background: #3a7bd5; }
+  .phase.last { background: #e05050; }
+
+  /* グリッド */
+  .schedule { display: grid; grid-template-columns: 110px repeat(5, 1fr); gap: 4px; margin-bottom: 8px; }
+  .week-label { background: white; border-radius: 8px; padding: 8px 6px; text-align: center; font-size: 11px; color: #555; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+  .week-label .dates { font-size: 12px; font-weight: bold; color: #333; display: block; margin-bottom: 2px; }
+
+  /* チャンネルラベル */
+  .channel-label { display: flex; align-items: center; font-size: 12px; font-weight: bold; color: #444; padding: 4px 0; }
+  .channel-icon { width: 22px; height: 22px; border-radius: 4px; margin-right: 6px; display: flex; align-items: center; justify-content: center; font-size: 10px; color: white; font-weight: bold; flex-shrink: 0; }
+  .icon-x { background: #000; }
+  .icon-note { background: #41c9b4; }
+  .icon-ig { background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+  .icon-yt { background: #ff0000; }
+
+  /* セル（トグル） */
+  .cell { border-radius: 8px; overflow: hidden; }
+  .cell details { height: 100%; }
+  .cell details summary {
+    padding: 8px 8px;
+    min-height: 56px;
+    font-size: 10px;
+    line-height: 1.6;
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    position: relative;
+  }
+  .cell details summary::-webkit-details-marker { display: none; }
+  .cell details summary::after {
+    content: '▼';
+    position: absolute;
+    right: 6px;
+    bottom: 6px;
+    font-size: 8px;
+    opacity: 0.4;
+  }
+  .cell details[open] summary::after { content: '▲'; }
+
+  /* トグル内容 */
+  .cell details .detail-content {
+    padding: 8px;
+    font-size: 10px;
+    line-height: 1.8;
+    border-top: 1px solid rgba(0,0,0,0.06);
+  }
+  .cell details .detail-content ul { padding-left: 12px; }
+  .cell details .detail-content li { margin-bottom: 2px; }
+
+  /* X */
+  .cell.x-cell details summary { background: #f5f5f5; }
+  .cell.x-cell details .detail-content { background: #fafafa; }
+  .cell.x-cell.key details summary { background: #1a1a1a; color: white; }
+  .cell.x-cell.key details .detail-content { background: #222; color: #ddd; }
+
+  /* Note */
+  .cell.note-cell details summary { background: #d4f5ef; color: #1a8a7a; }
+  .cell.note-cell details .detail-content { background: #e8faf6; color: #1a8a7a; }
+
+  /* Instagram */
+  .cell.ig-cell details summary { background: #fce4ec; color: #c2185b; }
+  .cell.ig-cell details .detail-content { background: #fdf0f5; color: #c2185b; }
+
+  /* YouTube */
+  .cell.yt-cell details summary { background: #ffebee; color: #c62828; }
+  .cell.yt-cell details .detail-content { background: #fff5f5; color: #c62828; }
+
+  /* empty */
+  .cell.empty-cell { background: #f0f0ee; border-radius: 8px; min-height: 56px; }
+
+  /* タグ */
+  .tag { display: inline-block; border-radius: 3px; padding: 1px 5px; font-size: 9px; font-weight: bold; margin-bottom: 2px; }
+  .tag.daily { background: #555; color: white; }
+  .tag.key { background: #e07b39; color: white; }
+  .tag.note { background: #41c9b4; color: white; }
+  .tag.yt { background: #ff0000; color: white; }
+
+  /* ===== X 日次スケジュール ===== */
+  .daily-schedule { margin-top: 8px; }
+  .phase-section { margin-bottom: 24px; }
+  .phase-header {
+    padding: 8px 16px;
+    border-radius: 8px;
+    color: white;
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 8px;
+  }
+  .phase-header.prep { background: #94a3b8; }
+  .phase-header.launch { background: #e07b39; }
+  .phase-header.mid { background: #3a7bd5; }
+  .phase-header.last { background: #e05050; }
+
+  .day-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 8px; }
+
+  .day-card { background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+  .day-card details summary {
+    padding: 10px 14px;
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .day-card details summary::-webkit-details-marker { display: none; }
+  .day-date {
+    font-size: 13px;
+    font-weight: bold;
+    color: #333;
+    min-width: 40px;
+    flex-shrink: 0;
+  }
+  .day-theme {
+    font-size: 12px;
+    color: #555;
+    flex: 1;
+    line-height: 1.4;
+  }
+  .day-arrow { font-size: 10px; color: #aaa; flex-shrink: 0; }
+  .day-card details[open] summary { border-bottom: 1px solid #f0f0f0; }
+  .day-detail {
+    padding: 10px 14px;
+    font-size: 11px;
+    color: #444;
+    line-height: 1.8;
+    background: #fafafa;
+  }
+  .day-detail .draft {
+    background: #fff;
+    border-left: 3px solid #e07b39;
+    padding: 8px 10px;
+    border-radius: 0 6px 6px 0;
+    margin-top: 8px;
+    font-size: 11px;
+    color: #333;
+    line-height: 1.7;
+    font-style: italic;
+  }
+  .day-card.highlight details summary { background: #fff8f3; }
+  .day-card.highlight .day-date { color: #e07b39; }
+</style>
+</head>
+<body>
+<div class="max-wrap">
+
+<h1>浅野紘毅 発信スケジュール</h1>
+<p class="subtitle">5/20〜6/22｜クラファン50万円達成に向けて</p>
+
+<!-- 凡例 -->
+<div class="legend">
+  <div class="legend-item"><div class="legend-dot" style="background:#222"></div>X 重要投稿</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#e8e8e8;border:1px solid #ccc"></div>X 毎日投稿</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#d4f5ef"></div>Note</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#fce4ec"></div>Instagram</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#ffebee"></div>YouTube</div>
+  <div class="legend-item" style="color:#888">▼ クリックで投稿案を表示</div>
+</div>
+
+<!-- フェーズバー -->
+<div class="phase-bar">
+  <div></div>
+  <div class="phase prep">仕込み①<br>5/20〜25</div>
+  <div class="phase prep">仕込み②<br>5/26〜31</div>
+  <div class="phase launch">初動期<br>6/1〜8</div>
+  <div class="phase mid">中間期<br>6/9〜16</div>
+  <div class="phase last">ラスト<br>6/17〜22</div>
+</div>
+
+<!-- グリッド -->
+<div class="schedule">
+
+  <!-- 週ラベル -->
+  <div></div>
+  <div class="week-label"><span class="dates">5/20〜25</span>原体験を発信</div>
+  <div class="week-label"><span class="dates">5/26〜31</span>クラファン予告</div>
+  <div class="week-label"><span class="dates">6/1〜8</span>スタートダッシュ</div>
+  <div class="week-label"><span class="dates">6/9〜16</span>中身を伝える</div>
+  <div class="week-label"><span class="dates">6/17〜22</span>ラストスパート</div>
+
+  <!-- X -->
+  <div class="channel-label"><div class="channel-icon icon-x">X</div>X個人</div>
+  <div class="cell x-cell key">
+    <details><summary><span class="tag key">重要</span><br>名前変更<br>毎日：原体験投稿</summary>
+    <div class="detail-content">・名前を「浅野紘毅｜6/1クラファン開始@KOKOROMi」に変更<br>・教師時代の話・退職・東京での気づきを1日1投稿<br>→ 詳細は下の日次スケジュールへ</div></details>
+  </div>
+  <div class="cell x-cell">
+    <details><summary>毎日：クラファン予告<br><span class="tag key">5/31 前日告知</span></summary>
+    <div class="detail-content">・クォーターライフクライシスへの共感<br>・KOKOROMiを始めた理由<br>・「6/1から始めます」予告投稿<br>→ 詳細は下の日次スケジュールへ</div></details>
+  </div>
+  <div class="cell x-cell key">
+    <details><summary><span class="tag key">6/1 開始宣言🎉</span><br>固定投稿に設定<br>毎日：進捗＋ストーリー</summary>
+    <div class="detail-content">・6/1朝：開始宣言＋動画リンク（固定投稿）<br>・6/1夜：最初の支援者への感謝<br>・以降毎日：進捗報告＋テーマ投稿<br>→ 詳細は下の日次スケジュールへ</div></details>
+  </div>
+  <div class="cell x-cell">
+    <details><summary>毎日：特徴・データ<br>応援コメント紹介</summary>
+    <div class="detail-content">・特徴①②③の解説<br>・転職希望者1,030万人 vs 転職者329万人のデータ<br>・負のサイクル図の投稿<br>・届いた応援コメントを紹介<br>→ 詳細は下の日次スケジュールへ</div></details>
+  </div>
+  <div class="cell x-cell key">
+    <details><summary><span class="tag key">カウントダウン</span><br>残り5・3・1日<br>6/22 最後の呼びかけ</summary>
+    <div class="detail-content">・残り日数を明示した投稿<br>・「まだ迷っている人へ」の投稿<br>・支援者への感謝投稿<br>・6/22：残り数時間の最後の呼びかけ<br>→ 詳細は下の日次スケジュールへ</div></details>
+  </div>
+
+  <!-- Note -->
+  <div class="channel-label"><div class="channel-icon icon-note">N</div>Note個人</div>
+  <div class="cell note-cell">
+    <details><summary><span class="tag note">Note①</span><br>「会社を辞めました」<br>〜教師後に学んだこと</summary>
+    <div class="detail-content">公開日：今週中（5/23〜25）<br><br>内容：<br>・2年9ヶ月勤めた会社を辞めた<br>・公務員→会社員のカルチャーショック<br>・終電まで働いた日々<br>・外の世界を知れてよかった<br>・だからKOKOROMiをつくる<br><br>着地：6/1クラファン開始の予告</div></details>
+  </div>
+  <div class="cell note-cell">
+    <details><summary><span class="tag note">Note②</span><br>「なぜクラファンを<br>するのか」</summary>
+    <div class="detail-content">公開日：5/29<br><br>内容：<br>・KOKOROMiに資金が必要な理由<br>・コミュニティ基盤づくり・コンテンツ制作<br>・支援することの意味<br>・SHIBUYA QWSでのピッチ経験<br><br>着地：For Goodページへのリンク</div></details>
+  </div>
+  <div class="cell note-cell">
+    <details><summary><span class="tag note">Note③</span><br>「KOKOROMiで<br>届けたいもの」</summary>
+    <div class="detail-content">公開日：6/4<br><br>内容：<br>・ビジョン「子どもに夢を語れる大人を増やす」<br>・負のサイクル→正のサイクル<br>・3つの特徴の紹介<br><br>着地：クラファンURL</div></details>
+  </div>
+  <div class="cell note-cell">
+    <details><summary><span class="tag note">Note④</span> 6/10<br>「転職しないと変われないのか」<br><br><span class="tag note">Note⑤</span> 6/15<br>「挑戦する大人が増えると」</summary>
+    <div class="detail-content">【Note④ 6/10】<br>・転職希望者1,030万人 vs 実際329万人<br>・転職しなくても変われる場所がある<br>・KOKOROMiという選択肢<br><br>【Note⑤ 6/15】<br>・大人が挑戦すると子どもの未来が変わる<br>・社会的インパクトの話<br>・支援のお願い</div></details>
+  </div>
+  <div class="cell empty-cell"></div>
+
+  <!-- Instagram Stories -->
+  <div class="channel-label"><div class="channel-icon icon-ig">IG</div>IGストーリー</div>
+  <div class="cell ig-cell">
+    <details><summary>毎日更新<br>Xをスクショして貼る</summary>
+    <div class="detail-content">やること：<br>・その日のX投稿をスクショ→ストーリーに貼る<br>・「6/1からクラファン始めます」スタンプ追加<br>・特に考えなくてOK、スクショ＋貼るだけ</div></details>
+  </div>
+  <div class="cell ig-cell">
+    <details><summary>毎日更新<br>予告・カウントダウン</summary>
+    <div class="detail-content">やること：<br>・X投稿をスクショして貼る<br>・「あと◯日でクラファン開始」テキスト追加<br>・5/31はFor GoodのURLリンクを貼る</div></details>
+  </div>
+  <div class="cell ig-cell">
+    <details><summary>毎日更新<br>進捗報告＋URLリンク</summary>
+    <div class="detail-content">やること：<br>・X投稿をスクショして貼る<br>・For GoodページのURLを毎日ストーリーリンクに設定<br>・「支援はこちら→」のスタンプをつける<br>・進捗（◯%達成）を文字で追加</div></details>
+  </div>
+  <div class="cell ig-cell">
+    <details><summary>毎日更新<br>応援コメント・進捗</summary>
+    <div class="detail-content">やること：<br>・X投稿をスクショして貼る<br>・届いた応援コメントをシェア<br>・「残り◯日」テキスト追加<br>・URLリンクを毎日貼る</div></details>
+  </div>
+  <div class="cell ig-cell">
+    <details><summary>毎日更新<br>カウントダウン</summary>
+    <div class="detail-content">やること：<br>・残り日数カウントダウンスタンプを使う<br>・X投稿をスクショして貼る<br>・6/21：YouTube②動画をシェア<br>・6/22：「今日が最終日です」＋URL</div></details>
+  </div>
+
+  <!-- Instagram Feed -->
+  <div class="channel-label"><div class="channel-icon icon-ig">IG</div>IGフィード</div>
+  <div class="cell ig-cell">
+    <details><summary>Note①公開時に投稿</summary>
+    <div class="detail-content">投稿内容：<br>・Noteの記事タイトルと一番刺さる一文を引用<br>・「続きはNoteで→」とリンクを貼る<br>・画像：シンプルな文字画像でOK（Canva不要）</div></details>
+  </div>
+  <div class="cell ig-cell">
+    <details><summary>Note②公開時<br>6/1クラファン告知</summary>
+    <div class="detail-content">【Note②公開時（5/29）】<br>・記事の一文を引用した投稿<br><br>【6/1クラファン告知】<br>・「今日から始まります」の投稿<br>・For GoodページのURLをプロフィールリンクに設定</div></details>
+  </div>
+  <div class="cell ig-cell">
+    <details><summary>開始宣言<br>YouTube①告知</summary>
+    <div class="detail-content">【6/1 開始宣言フィード投稿】<br>・「クラファン始めます」の投稿<br>・プロフィールリンクをFor GoodのURLに変更<br><br>【YouTube①告知（6/1〜2）】<br>・動画のサムネをフィードに投稿<br>・「YouTubeに動画をあげました」</div></details>
+  </div>
+  <div class="cell ig-cell">
+    <details><summary>Note③④⑤公開時<br>応援コメント紹介</summary>
+    <div class="detail-content">・Note公開のたびにフィード投稿1本<br>・応援コメントが集まったら紹介投稿<br>・「◯%達成しました」の節目投稿<br>（30%・50%・70%）</div></details>
+  </div>
+  <div class="cell ig-cell">
+    <details><summary>YouTube②告知<br>ラスト呼びかけ</summary>
+    <div class="detail-content">【6/21 YouTube②告知】<br>・動画サムネをフィードに投稿<br>・「明日で終わります」<br><br>【6/22 ラスト投稿】<br>・「今日が最終日です、よろしくお願いします」</div></details>
+  </div>
+
+  <!-- YouTube -->
+  <div class="channel-label"><div class="channel-icon icon-yt">YT</div>YouTube</div>
+  <div class="cell yt-cell">
+    <details><summary><span class="tag yt">今週中</span><br>チャンネル開設<br>「浅野紘毅」</summary>
+    <div class="detail-content">やること：<br>・Googleアカウントでチャンネル作成<br>・チャンネル名：浅野紘毅<br>・プロフィール画像・説明文を設定<br>・所要時間：約10〜15分</div></details>
+  </div>
+  <div class="cell yt-cell">
+    <details><summary>動画①の撮影・準備<br>「クラファン始めます」</summary>
+    <div class="detail-content">撮影メモ：<br>・スマホ縦撮りでOK<br>・編集不要・話すだけ<br>・尺：3〜5分<br>・台本：scripts.mdを参照<br>・5/28〜30までに撮影・アップ準備を完了</div></details>
+  </div>
+  <div class="cell yt-cell">
+    <details><summary><span class="tag yt">6/1 公開🎬</span><br>「クラファン始めます<br>KOKOROMiをつくる理由」</summary>
+    <div class="detail-content">内容：<br>①つかみ「今日からクラファン始めます」<br>②自己紹介（元教師・KOKOROMi代表）<br>③原体験（外の世界を知らなかった）<br>④KOKOROMiとは<br>⑤支援のお願い<br><br>公開後：X・Instagramでシェア</div></details>
+  </div>
+  <div class="cell empty-cell"></div>
+  <div class="cell yt-cell">
+    <details><summary><span class="tag yt">6/21 公開🎬</span><br>「残り1日、<br>最後のお願い」</summary>
+    <div class="detail-content">内容：<br>①「明日で終わります」<br>②進捗報告（◯円・◯人）<br>③感謝の言葉<br>④最後のお願い<br><br>尺：2〜3分<br>公開後：X・Instagramでシェア</div></details>
+  </div>
+
+</div>
+
+<!-- ===== X 日次スケジュール ===== -->
+<h2>📅 X 日次投稿スケジュール</h2>
+<div class="daily-schedule">
+
+  <!-- 仕込み期① -->
+  <div class="phase-section">
+    <div class="phase-header prep">仕込み期① 5/20〜5/25｜テーマ：原体験</div>
+    <div class="day-grid">
+      <div class="day-card highlight">
+        <details><summary>
+          <div class="day-date">5/20</div>
+          <div class="day-theme">名前変更＋教師時代「外の世界を知らなかった」</div>
+          <div class="day-arrow">▼</div>
+        </summary>
+        <div class="day-detail">
+          ポイント：まずXの名前を変える。原体験の起点となる投稿。
+          <div class="draft">「高校教師を5年やっていたとき、学校の外の世界をほとんど知らなかった。それが当たり前だと思っていた。」</div>
+        </div></details>
+      </div>
+      <div class="day-card">
+        <details><summary>
+          <div class="day-date">5/21</div>
+          <div class="day-theme">27歳で退職した日のこと</div>
+          <div class="day-arrow">▼</div>
+        </summary>
+        <div class="day-detail">
+          ポイント：退職の決断エピソードをリアルに。感情ベースで書く。
+          <div class="draft">「27歳で教師を辞めた。怖くなかったといえば嘘になる。でも、このままでいいのかという気持ちの方が強かった。」</div>
+        </div></details>
+      </div>
+      <div class="day-card">
+        <details><summary>
+          <div class="day-date">5/22</div>
+          <div class="day-theme">東京に来て初めて価値観が揺らいだ話</div>
+          <div class="day-arrow">▼</div>
+        </summary>
+        <div class="day-detail">
+          ポイント：「こういう世界があったのか」という驚きの感覚。
+          <div class="draft">「東京に来て、いろんな生き方の人に初めて出会った。同じ年代でも、こんなに違う道を歩いている人がいるのかと、正直ビビった。」</div>
+        </div></details>
+      </div>
+      <div class="day-card">
+        <details><summary>
+          <div class="day-date">5/23</div>
+          <div class="day-theme">「もっと早く知れていたら」という後悔</div>
+          <div class="day-arrow">▼</div>
+        </summary>
+        <div class="day-detail">
+          ポイント：KOKOROMiの出発点となる後悔を素直に。
+          <div class="draft">「もっと早く、こういう世界を知れていたら。教師のとき、生徒に語れることがもっとあったかもしれない。その後悔が今の自分を動かしている。」</div>
+        </div></details>
+      </div>
+      <div class="day-card highlight">
+        <details><summary>
+          <div class="day-date">5/24</div>
+          <div class="day-theme">Note①公開＋Xでシェア</div>
+          <div class="day-arrow">▼</div>
+        </summary>
+        <div class="day-detail">
+          ポイント：Noteの公開日。記事の一番刺さる一文を引用してシェア。
+          <div class="draft">「noteを書きました。『2年9ヶ月勤めた会社を辞めました』教師を辞めてから学んだことを、正直に書いています。→ [リンク]」</div>
+        </div></details>
+      </div>
+      <div class="day-card">
+        <details><summary>
+          <div class="day-date">5/25</div>
+          <div class="day-theme">かつての自分みたいな人に届けたい</div>
+          <div class="day-arrow">▼</div>
+        </summary>
+        <div class="day-detail">
+          ポイント：KOKOROMiのターゲットと自分の原体験をつなぐ。
+          <div class="draft">「仕事を辞めたいわけじゃないけど、このままでいいのかとも感じている。そういう人が、自分の外の世界を知れる場所をつくりたいと思っている。」</div>
+        </div></details>
+      </div>
+    </div>
+  </div>
+
+  <!-- 仕込み期② -->
+  <div class="phase-section">
+    <div class="phase-header prep">仕込み期② 5/26〜5/31｜テーマ：クラファン予告</div>
+    <div class="day-grid">
+      <div class="day-card">
+        <details><summary>
+          <div class="day-date">5/26</div>
+          <div class="day-theme">クォーターライフクライシスとは何か</div>
+          <div class="day-arrow">▼</div>
+        </summary>
+        <div class="day-detail">
+          ポイント：ターゲットに「これ自分だ」と思ってもらう投稿。
+          <div class="draft">「20代後半〜30代前半に訪れる『クォーターライフクライシス』。病気でも失敗でもなく、人生の通過点。でも、ひとりで抱えると本当に苦しい。」</div>
+        </div></details>
+      </div>
+      <div class="day-card">
+        <details><summary>
+          <div class="day-date">5/27</div>
+          <div class="day-theme">「転職したいわけじゃないけど…」への共感</div>
+          <div class="day-arrow">▼</div>
+        </summary>
+        <div class="day-detail">
+          ポイント：KOKOROMiのターゲット層に直接語りかける。
+          <div class="draft">「転職したいわけじゃない。でも、このままでもない気がする。そのあいだで立ち止まっている人に、届けたいものがある。」</div>
+        </div></details>
+      </div>
+      <div class="day-card highlight">
+        <details><summary>
+          <div class="day-date">5/28</div>
+          <div class="day-theme">クラファン予告①</div>
+          <div class="day-arrow">▼</div>
+        </summary>
+        <div class="day-detail">
+          ポイント：初めてクラファンを告知する投稿。シンプルに。
+          <div class="draft">「6月1日から、クラウドファンディングを始めます。アラサーが多様な生き方に出会える居場所『KOKOROMi』の立ち上げに向けて。詳しくはまた明日。」</div>
+        </div></details>
+      </div>
+      <div class="day-card highlight">
+        <details><summary>
+          <div class="day-date">5/29</div>
+          <div class="day-theme">Note②公開＋Xでシェア</div>
+          <div class="day-arrow">▼</div>
+        </summary>
+        <div class="day-detail">
+          ポイント：「なぜクラファンをするのか」の記事をシェア。
+          <div class="draft">「なぜクラファンをするのか、正直に書きました。→ [リンク]」</div>
+        </div></details>
+      </div>
+      <div class="day-card highlight">
+        <details><summary>
+          <div class="day-date">5/30</div>
+          <div class="day-theme">クラファン予告②＋URL公開</div>
+          <div class="day-arrow">▼</div>
+        </summary>
+        <div class="day-detail">
+          ポイント：初めてFor GoodのURLを貼る投稿。
+          <div class="draft">「明後日からクラウドファンディングを始めます。ページができました。よければのぞいてみてください。→ [For GoodのURL]」</div>
+        </div></details>
+      </div>
+      <div class="day-card highlight">
+        <details><summary>
+          <div class="day-date">5/31</div>
+          <div class="day-theme">前日告知「明日から始まります」</div>
+          <div class="day-arrow">▼</div>
+        </summary>
+        <div class="day-detail">
+          ポイント：シンプルに、素直な言葉で。
+          <div class="draft">「明日からクラウドファンディングが始まります。緊張しています。でも、やりきります。よろしくお願いします。」</div>
+        </div></details>
+      </div>
+    </div>
+  </div>
+
+  <!-- 初動期 -->
+  <div class="phase-section">
+    <div class="phase-header launch">初動期 6/1〜6/8｜テーマ：スタートダッシュ（1日2投稿）</div>
+    <div class="day-grid">
+      <div class="day-card highlight">
+        <details><summary>
+          <div class="day-date">6/1 朝</div>
+          <div class="day-theme">🎉 クラファン開始宣言＋動画（固定投稿に設定）</div>
+          <div class="day-arrow">▼</div>
+        </summary>
+        <div class="day-detail">
+          ポイント：この投稿をXの固定投稿に設定する。YouTube動画のリンクも貼る。
+          <div class="draft">「今日からクラウドファンディングを始めます。目標50万円・6月22日まで。挑戦したいアラサーが、多様な生き方に出会える居場所をつくります。→ [URL]」</div>
+        </div></details>
+      </div>
+      <div class="day-card">
+        <details><summary>
+          <div class="day-date">6/1 夜</div>
+          <div class="day-theme">最初の支援者への感謝</div>
+          <div class="day-arrow">▼</div>
+        </summary>
+        <div class="day-detail">
+          ポイント：最初に支援してくれた人への感謝を素直に。
+          <div class="draft">「初日、支援してくださった方、本当にありがとうございます。名前も顔も知っている人から最初の一歩をもらえることが、何より嬉しかったです。」</div>
+        </div></details>
+      </div>
+      <div class="day-card">
+        <details><summary>
+          <div class="day-date">6/2</div>
+          <div class="day-theme">進捗報告（残り20日）</div>
+          <div class="day-arrow">▼</div>
+        </summary>
+        <div class="day-detail">
+          <div class="draft">「クラファン2日目。残り20日、◯%達成。引き続きよろしくお願いします。→ [URL]」</div>
+        </div></details>
+      </div>
+      <div class="day-card">
+        <details><summary>
+          <div class="day-date">6/3</div>
+          <div class="day-theme">3日間の進捗＋シェアのお願い</div>
+          <div class="day-arrow">▼</div>
+        </summary>
+        <div class="day-detail">
+          <div class="draft">「3日間で◯円・◯人の方に支援いただきました。支援が難しい方も、シェアだけでも本当に助かります。よろしくお願いします。」</div>
+        </div></details>
+      </div>
+      <div class="day-card highlight">
+        <details><summary>
+          <div class="day-date">6/4</div>
+          <div class="day-theme">Note③公開＋KOKOROMiのビジョン</div>
+          <div class="day-arrow">▼</div>
+        </summary>
+        <div class="day-detail">
+          <div class="draft">「挑戦する大人が増えると、子どもの未来が変わる。大げさに聞こえるかもしれないけど、本気でそう思っています。→ [Note③リンク]」</div>
+        </div></details>
+      </div>
+      <div class="day-card">
+        <details><summary>
+          <div class="day-date">6/5</div>
+          <div class="day-theme">負のサイクル図を投稿</div>
+          <div class="day-arrow">▼</div>
+        </summary>
+        <div class="day-detail">
+          ポイント：図を画像として添付する。
+          <div class="draft">「多様な生き方を知らないまま大人になる→将来に不安を感じる→子どもに夢を語れない。この負のサイクルを断ち切りたい。」</div>
+        </div></details>
+      </div>
+      <div class="day-card">
+        <details><summary>
+          <div class="day-date">6/6</div>
+          <div class="day-theme">特徴①「知らないものにはなれない」</div>
+          <div class="day-arrow">▼</div>
+        </summary>
+        <div class="day-detail">
+          <div class="draft">「知らないものには、なれない。知らないものは、知ろうともしない。だからまず、知ってみる。KOKOROMiはそのための場所です。」</div>
+        </div></details>
+      </div>
+      <div class="day-card">
+        <details><summary>
+          <div class="day-date">6/7</div>
+          <div class="day-theme">進捗報告（残り15日）</div>
+          <div class="day-arrow">▼</div>
+        </summary>
+        <div class="day-detail">
+          <div class="draft">「残り15日。現在◯%達成。折り返し地点に向けて、引き続きよろしくお願いします。→ [URL]」</div>
+        </div></details>
+      </div>
+      <div class="day-card">
+        <details><summary>
+          <div class="day-date">6/8</div>
+          <div class="day-theme">応援コメント紹介①</div>
+          <div class="day-arrow">▼</div>
+        </summary>
+        <div class="day-detail">
+          ポイント：届いた応援コメントをスクショまたは引用して紹介。
+          <div class="draft">「応援コメントをいただきました。こういう言葉が、本当に力になります。ありがとうございます。」</div>
+        </div></details>
+      </div>
+    </div>
+  </div>
+
+  <!-- 中間期 -->
+  <div class="phase-section">
+    <div class="phase-header mid">中間期 6/9〜6/16｜テーマ：KOKOROMiの中身を伝える</div>
+    <div class="day-grid">
+      <div class="day-card">
+        <details><summary>
+          <div class="day-date">6/9</div>
+          <div class="day-theme">特徴②「MyStory YourShift・等身大ストーリー」</div>
+          <div class="day-arrow">▼</div>
+        </summary>
+        <div class="day-detail">
+          <div class="draft">「有名人の成功談じゃなく、同世代のリアルなストーリーに触れてほしい。KOKOROMiでは『MyStory YourShift』というイベントで、挑戦している大人の等身大の話を聞きます。」</div>
+        </div></details>
+      </div>
+      <div class="day-card highlight">
+        <details><summary>
+          <div class="day-date">6/10</div>
+          <div class="day-theme">転職希望者データ＋Note④シェア</div>
+          <div class="day-arrow">▼</div>
+        </summary>
+        <div class="day-detail">
+          <div class="draft">「転職を希望している人は約1,030万人。でも実際に転職した人は約329万人（2023年）。700万人が『動きたくても動けていない』状態にある。→ [Note④リンク]」</div>
+        </div></details>
+      </div>
+      <div class="day-card">
+        <details><summary>
+          <div class="day-date">6/11</div>
+          <div class="day-theme">応援コメント紹介②</div>
+          <div class="day-arrow">▼</div>
+        </summary>
+        <div class="day-detail">
+          <div class="draft">「また応援コメントが届きました。読むたびに、やってよかったと思います。」</div>
+        </div></details>
+      </div>
+      <div class="day-card">
+        <details><summary>
+          <div class="day-date">6/12</div>
+          <div class="day-theme">特徴③「自分アップデート集会・100個やりたいこと」</div>
+          <div class="day-arrow">▼</div>
+        </summary>
+        <div class="day-detail">
+          <div class="draft">「月1回、仲間と一緒に『最近こんな変化があった』を共有する場をつくります。挑戦の結果じゃなく、変化のプロセスを見せ合える場所。」</div>
+        </div></details>
+      </div>
+      <div class="day-card">
+        <details><summary>
+          <div class="day-date">6/13</div>
+          <div class="day-theme">「このままでいいのか」共感投稿</div>
+          <div class="day-arrow">▼</div>
+        </summary>
+        <div class="day-detail">
+          <div class="draft">「仕事に慣れてきた。任されることも増えた。でもふとした瞬間に、自分の人生もっとできることがあるんじゃないかと思う。その感覚、おかしくないです。」</div>
+        </div></details>
+      </div>
+      <div class="day-card">
+        <details><summary>
+          <div class="day-date">6/14</div>
+          <div class="day-theme">進捗報告（残り8日）</div>
+          <div class="day-arrow">▼</div>
+        </summary>
+        <div class="day-detail">
+          <div class="draft">「残り8日。現在◯%達成。終盤戦です。最後まで走りきります。→ [URL]」</div>
+        </div></details>
+      </div>
+      <div class="day-card highlight">
+        <details><summary>
+          <div class="day-date">6/15</div>
+          <div class="day-theme">応援コメント紹介③＋Note⑤シェア</div>
+          <div class="day-arrow">▼</div>
+        </summary>
+        <div class="day-detail">
+          <div class="draft">「挑戦する大人が増えると、何が変わるのか。今日のnoteに書きました。→ [Note⑤リンク]」</div>
+        </div></details>
+      </div>
+      <div class="day-card">
+        <details><summary>
+          <div class="day-date">6/16</div>
+          <div class="day-theme">ゲスト登壇リターンの紹介</div>
+          <div class="day-arrow">▼</div>
+        </summary>
+        <div class="day-detail">
+          <div class="draft">「3万円の支援コースでは、KOKOROMiコミュニティへのゲスト登壇権をお渡しします。自分の挑戦ストーリーや得意領域を、変わりたいアラサーに届けませんか。」</div>
+        </div></details>
+      </div>
+    </div>
+  </div>
+
+  <!-- ラスト -->
+  <div class="phase-section">
+    <div class="phase-header last">ラスト期 6/17〜6/22｜テーマ：カウントダウン</div>
+    <div class="day-grid">
+      <div class="day-card highlight">
+        <details><summary>
+          <div class="day-date">6/17</div>
+          <div class="day-theme">残り5日・カウントダウン開始</div>
+          <div class="day-arrow">▼</div>
+        </summary>
+        <div class="day-detail">
+          <div class="draft">「残り5日になりました。現在◯%達成。ラストスパート、よろしくお願いします。→ [URL]」</div>
+        </div></details>
+      </div>
+      <div class="day-card">
+        <details><summary>
+          <div class="day-date">6/18</div>
+          <div class="day-theme">応援コメント紹介④＋感謝</div>
+          <div class="day-arrow">▼</div>
+        </summary>
+        <div class="day-detail">
+          <div class="draft">「残り4日。支援してくださった方、コメントをくださった方、シェアしてくださった方、本当にありがとうございます。」</div>
+        </div></details>
+      </div>
+      <div class="day-card highlight">
+        <details><summary>
+          <div class="day-date">6/19</div>
+          <div class="day-theme">残り3日「まだ迷っている人へ」</div>
+          <div class="day-arrow">▼</div>
+        </summary>
+        <div class="day-detail">
+          <div class="draft">「残り3日です。まだ迷っている方がいたら、背中を押させてください。3,000円から支援できます。→ [URL]」</div>
+        </div></details>
+      </div>
+      <div class="day-card">
+        <details><summary>
+          <div class="day-date">6/20</div>
+          <div class="day-theme">残り2日・道のりを振り返る</div>
+          <div class="day-arrow">▼</div>
+        </summary>
+        <div class="day-detail">
+          <div class="draft">「残り2日。6/1から今日まで、本当にいろんなことがありました。支えてくれた人たちへの感謝を忘れずに、最後まで走ります。」</div>
+        </div></details>
+      </div>
+      <div class="day-card highlight">
+        <details><summary>
+          <div class="day-date">6/21</div>
+          <div class="day-theme">残り1日＋YouTube②公開</div>
+          <div class="day-arrow">▼</div>
+        </summary>
+        <div class="day-detail">
+          <div class="draft">「明日で終わります。動画を撮りました。最後のお願いです。→ [YouTube②リンク]」</div>
+        </div></details>
+      </div>
+      <div class="day-card highlight">
+        <details><summary>
+          <div class="day-date">6/22</div>
+          <div class="day-theme">🏁 最終日・最後の呼びかけ（2投稿）</div>
+          <div class="day-arrow">▼</div>
+        </summary>
+        <div class="day-detail">
+          【朝の投稿】
+          <div class="draft">「今日が最終日です。23:59まで。よろしくお願いします。→ [URL]」</div>
+          【夜の投稿（残り数時間）】
+          <div class="draft">「あと数時間です。最後まで諦めません。よろしくお願いします。→ [URL]」</div>
+        </div></details>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /daily-schedule -->
+
+</div>
+
+<script>
+// ===== 今日の日付を自動ハイライト =====
+(function() {
+  const now = new Date();
+  const month = now.getMonth() + 1; // 1-indexed
+  const day = now.getDate();
+  const todayStr = month + '/' + day; // e.g. "5/20"
+
+  // 過去・今日・未来を判定する関数
+  function parseDate(str) {
+    const parts = str.split('/');
+    if (parts.length !== 2) return null;
+    return new Date(2026, parseInt(parts[0]) - 1, parseInt(parts[1]));
+  }
+  const todayDate = new Date(2026, now.getMonth(), now.getDate());
+
+  // day-cardを全部取得してクラス付与
+  const dayCards = document.querySelectorAll('.day-card');
+  let todayCard = null;
+
+  dayCards.forEach(function(card) {
+    const dateEl = card.querySelector('.day-date');
+    if (!dateEl) return;
+    const dateStr = dateEl.textContent.trim();
+    const cardDate = parseDate(dateStr);
+    if (!cardDate) return;
+
+    if (cardDate < todayDate) {
+      card.classList.add('past');
+    } else if (dateStr === todayStr) {
+      card.classList.add('today');
+      const detailsEl = card.querySelector('details');
+      if (detailsEl) detailsEl.open = true;
+      todayCard = card;
+    }
+  });
+
+  // 今日のカードまでスクロール
+  if (todayCard) {
+    setTimeout(function() {
+      todayCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 300);
+  }
+
+  // 今日の日付をページタイトルに反映
+  const subtitle = document.querySelector('.subtitle');
+  if (subtitle) {
+    subtitle.textContent = '今日は ' + todayStr + ' ｜ 5/20〜6/22 クラファン期間';
+  }
+
+  // 今日セクションのタグを追加
+  if (todayCard) {
+    const themeEl = todayCard.querySelector('.day-theme');
+    if (themeEl) {
+      const todayBadge = document.createElement('span');
+      todayBadge.textContent = '📍今日';
+      todayBadge.style.cssText = 'display:inline-block;background:#e07b39;color:white;font-size:10px;font-weight:bold;padding:1px 6px;border-radius:4px;margin-right:6px;';
+      themeEl.prepend(todayBadge);
+    }
+  }
+})();
+</script>
+
+<style>
+/* 今日のカード */
+.day-card.today { box-shadow: 0 0 0 2px #e07b39, 0 4px 12px rgba(224,123,57,0.2); }
+.day-card.today .day-date { color: #e07b39; font-size: 16px; }
+.day-card.today details summary { background: #fff8f3; }
+
+/* 過去のカード */
+.day-card.past { opacity: 0.45; }
+.day-card.past .day-date { text-decoration: line-through; color: #aaa; }
+.day-card.past details summary { background: #f5f5f5; }
+</style>
+
+</div>
+</body>
+</html>

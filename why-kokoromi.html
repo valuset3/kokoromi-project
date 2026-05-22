@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KOKOROMiにしかできない理由 | KOKOROMi</title>
+  <style>
+    :root {
+      --orange: #e07b39;
+      --orange-light: #f5a06a;
+      --orange-pale: #fdf0e6;
+      --dark: #1a1a1a;
+      --gray-100: #f5f5f5;
+      --gray-200: #e8e8e8;
+      --gray-400: #999;
+      --gray-600: #555;
+      --white: #fff;
+      --radius: 12px;
+      --shadow: 0 2px 16px rgba(0,0,0,0.08);
+      --shadow-hover: 0 8px 32px rgba(0,0,0,0.14);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
+      color: var(--dark);
+      background: var(--white);
+      line-height: 1.7;
+    }
+
+    /* ===== HEADER ===== */
+    header {
+      background: var(--white);
+      border-bottom: 1px solid var(--gray-200);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-inner {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
+    }
+
+    .logo img {
+      height: 36px;
+      width: auto;
+    }
+
+    nav {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+    }
+
+    nav a {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--gray-600);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    nav a:hover,
+    nav a.active {
+      color: var(--orange);
+    }
+
+    nav .cta-btn {
+      background: var(--orange);
+      color: var(--white);
+      padding: 8px 20px;
+      border-radius: 100px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    nav .cta-btn:hover {
+      background: var(--orange-light);
+      color: var(--white);
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      background: linear-gradient(135deg, var(--dark) 0%, #2d2d2d 60%, #3a2510 100%);
+      color: var(--white);
+      padding: 96px 24px 88px;
+      text-align: center;
+    }
+
+    .hero-eyebrow {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--orange-light);
+      border: 1px solid var(--orange-light);
+      padding: 4px 14px;
+      border-radius: 100px;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 {
+      font-size: clamp(28px, 5vw, 52px);
+      font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: 24px;
+      letter-spacing: -0.02em;
+    }
+
+    .hero h1 span {
+      color: var(--orange-light);
+    }
+
+    .hero-sub {
+      font-size: 16px;
+      color: rgba(255,255,255,0.7);
+      max-width: 560px;
+      margin: 0 auto;
+      line-height: 1.9;
+    }
+
+    /* ===== SECTION COMMON ===== */
+    .section {
+      padding: 80px 24px;
+    }
+
+    .section-inner {
+      max-width: 1140px;
+      margin: 0 auto;
+    }
+
+    .section-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      color: var(--orange);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: clamp(22px, 4vw, 36px);
+      font-weight: 800;
+      line-height: 1.3;
+      margin-bottom: 48px;
+      letter-spacing: -0.01em;
+    }
+
+    /* ===== POSITIONING MAP ===== */
+    .map-section {
+      background: var(--gray-100);
+    }
+
+    .map-wrapper {
+      width: 100%;
+      overflow-x: auto;
+    }
+
+    .map-wrapper svg {
+      width: 100%;
+      min-width: 640px;
+      height: auto;
+      display: block;
+    }
+
+    /* ===== COMPARISON TABLE ===== */
+    .table-section {
+      background: var(--white);
+    }
+
+    .table-scroll {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .comparison-table {
+      width: 100%;
+      min-width: 820px;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    .comparison-table thead th {
+      padding: 14px 16px;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 700;
+      border-bottom: 2px solid var(--gray-200);
+    }
+
+    .comparison-table thead th:first-child {
+      text-align: left;
+      color: var(--gray-600);
+      font-weight: 600;
+    }
+
+    .comparison-table thead th.col-kokoromi {
+      background: #fff8f3;
+      color: var(--orange);
+      border-top: 3px solid var(--orange);
+      border-left: 1px solid #f5d5b8;
+      border-right: 1px solid #f5d5b8;
+    }
+
+    .comparison-table tbody tr {
+      border-bottom: 1px solid var(--gray-200);
+    }
+
+    .comparison-table tbody tr:hover {
+      background: #fafafa;
+    }
+
+    .comparison-table tbody td {
+      padding: 14px 16px;
+      text-align: center;
+      vertical-align: middle;
+      color: var(--gray-600);
+    }
+
+    .comparison-table tbody td:first-child {
+      text-align: left;
+      font-weight: 600;
+      color: var(--dark);
+      white-space: nowrap;
+    }
+
+    .comparison-table tbody td.col-kokoromi {
+      background: #fff8f3;
+      border-left: 1px solid #f5d5b8;
+      border-right: 1px solid #f5d5b8;
+    }
+
+    .val-great {
+      color: var(--orange);
+      font-weight: 800;
+      font-size: 16px;
+    }
+
+    .val-ok {
+      color: var(--dark);
+      font-weight: 600;
+    }
+
+    .val-fair {
+      color: var(--gray-400);
+    }
+
+    .val-no {
+      color: #ccc;
+    }
+
+    /* ===== WHY CARDS ===== */
+    .why-section {
+      background: var(--dark);
+    }
+
+    .why-section .section-eyebrow {
+      color: var(--orange-light);
+    }
+
+    .why-section .section-title {
+      color: var(--white);
+    }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .why-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius);
+      padding: 36px 28px;
+    }
+
+    .why-num {
+      font-size: 42px;
+      font-weight: 900;
+      color: var(--orange);
+      opacity: 0.6;
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+
+    .why-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 12px;
+      line-height: 1.5;
+    }
+
+    .why-desc {
+      font-size: 14px;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.85;
+    }
+
+    /* ===== ETIC SECTION ===== */
+    .etic-section {
+      background: var(--gray-100);
+    }
+
+    .etic-sub {
+      font-size: 15px;
+      color: var(--gray-600);
+      margin-top: -32px;
+      margin-bottom: 40px;
+    }
+
+    .etic-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .etic-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 32px 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .etic-card-label {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      padding: 5px 14px;
+      border-radius: 100px;
+      display: inline-block;
+    }
+
+    .etic-card-label.label-etic {
+      background: var(--gray-200);
+      color: var(--gray-600);
+    }
+
+    .etic-card-label.label-kokoromi {
+      background: var(--orange-pale);
+      color: var(--orange);
+    }
+
+    .etic-card ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .etic-card ul li {
+      font-size: 14px;
+      color: #444;
+      line-height: 1.8;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--gray-200);
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .etic-card ul li:last-child {
+      border-bottom: none;
+    }
+
+    .etic-card.etic-card--kokoromi ul li::before {
+      content: '◎';
+      color: var(--orange);
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .etic-card.etic-card--etic ul li::before {
+      content: '・';
+      color: var(--gray-400);
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* ===== FOUNDER STORY ===== */
+    .founder-section {
+      background: var(--white);
+      padding: 88px 24px;
+    }
+
+    .founder-inner {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .founder-label {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--orange);
+      border: 1px solid var(--orange);
+      padding: 4px 14px;
+      border-radius: 100px;
+      margin-bottom: 32px;
+    }
+
+    .founder-heading {
+      font-size: clamp(22px, 3.5vw, 34px);
+      font-weight: 800;
+      line-height: 1.4;
+      letter-spacing: -0.02em;
+      margin-bottom: 40px;
+      color: var(--dark);
+    }
+
+    .founder-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px 56px;
+      align-items: start;
+    }
+
+    .founder-text p {
+      font-size: 15px;
+      line-height: 2;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    .founder-text p:last-child {
+      margin-bottom: 0;
+    }
+
+    .founder-text strong {
+      color: var(--dark);
+      font-weight: 700;
+    }
+
+    .founder-profile {
+      background: var(--gray-100);
+      border-radius: var(--radius);
+      padding: 32px 28px;
+      border-left: 4px solid var(--orange);
+      position: sticky;
+      top: 80px;
+    }
+
+    .founder-profile-name {
+      font-size: 18px;
+      font-weight: 800;
+      margin-bottom: 4px;
+      color: var(--dark);
+    }
+
+    .founder-profile-title {
+      font-size: 12px;
+      color: var(--gray-400);
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      margin-bottom: 20px;
+    }
+
+    .founder-profile-history {
+      font-size: 13px;
+      line-height: 1.9;
+      color: var(--gray-600);
+      border-top: 1px solid var(--gray-200);
+      padding-top: 16px;
+    }
+
+    .founder-profile-history li {
+      list-style: none;
+      padding-left: 0;
+      margin-bottom: 6px;
+      display: flex;
+      gap: 8px;
+    }
+
+    .founder-profile-history li::before {
+      content: "→";
+      color: var(--orange);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .founder-quote {
+      margin: 40px 0 0;
+      padding: 28px 32px;
+      background: var(--orange-pale);
+      border-radius: var(--radius);
+      border-left: 4px solid var(--orange);
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 1.8;
+      color: var(--dark);
+      grid-column: 1 / -1;
+    }
+
+    @media (max-width: 768px) {
+      .founder-body {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .founder-profile {
+        position: static;
+      }
+
+      .founder-quote {
+        grid-column: 1;
+      }
+    }
+
+    /* ===== PERSONA SECTION ===== */
+    .persona-section {
+      background: var(--white);
+    }
+
+    .persona-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .persona-card {
+      background: var(--gray-100);
+      border-radius: var(--radius);
+      padding: 32px 24px;
+      border: 1.5px solid var(--gray-200);
+    }
+
+    .persona-icon {
+      font-size: 32px;
+      margin-bottom: 16px;
+    }
+
+    .persona-text {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--dark);
+      line-height: 1.7;
+    }
+
+    .persona-text em {
+      font-style: normal;
+      color: var(--orange);
+      font-weight: 700;
+    }
+
+    /* ===== CTA ===== */
+    .cta-section {
+      background: var(--dark);
+      padding: 96px 24px;
+      text-align: center;
+    }
+
+    .cta-section h2 {
+      font-size: clamp(24px, 4vw, 40px);
+      font-weight: 800;
+      color: var(--white);
+      margin-bottom: 32px;
+      letter-spacing: -0.01em;
+    }
+
+    .cta-btn-large {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--orange);
+      color: var(--white);
+      font-size: 16px;
+      font-weight: 700;
+      padding: 18px 40px;
+      border-radius: 100px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
+      letter-spacing: 0.02em;
+    }
+
+    .cta-btn-large:hover {
+      background: var(--orange-light);
+      transform: translateY(-2px);
+    }
+
+    .cta-sub {
+      margin-top: 20px;
+      font-size: 14px;
+      color: rgba(255,255,255,0.45);
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--dark);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 40px 24px;
+      text-align: center;
+    }
+
+    .footer-logo {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+
+    .footer-logo span {
+      color: var(--orange);
+    }
+
+    .footer-tagline {
+      font-size: 12px;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 24px;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+
+    .footer-links a {
+      font-size: 12px;
+      color: rgba(255,255,255,0.45);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--orange-light); }
+
+    .footer-copy {
+      font-size: 11px;
+      color: rgba(255,255,255,0.2);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 960px) {
+      .why-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      .etic-grid {
+        grid-template-columns: 1fr;
+      }
+      .persona-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      nav {
+        gap: 16px;
+      }
+      nav a:not(.cta-btn) {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header>
+    <div class="header-inner">
+      <a href="projects.html" class="logo"><img src="assets/ご決定デザイン_横組み_PNG.png" alt="KOKOROMi"></a>
+      <nav>
+        <a href="projects.html">プロジェクト一覧</a>
+        <a href="projects.html#how-to-join">応募の流れ</a>
+        <a href="#" class="cta-btn">参加を相談する</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero">
+    <span class="hero-eyebrow">Positioning</span>
+    <h1>KOKOROMiにしか<br><span>できない理由がある。</span></h1>
+    <p class="hero-sub">転職しなくていい。副業しなくていい。でも、本物の体験ができる。その交差点に、KOKOROMiがある。</p>
+  </section>
+
+  <!-- ===== FOUNDER STORY ===== -->
+  <section class="founder-section">
+    <div class="founder-inner">
+      <span class="founder-label">Why I started this</span>
+      <h2 class="founder-heading">なぜ、この取り組みをしているのか</h2>
+      <div class="founder-body">
+        <div class="founder-text">
+          <p>
+            5年間、高校教師として働いていました。生徒に「夢を持て」と言いながら、
+            自分が見ていた世界は学校の中だけでした。
+          </p>
+          <p>
+            27歳で退職して東京に来るまで、「会社員以外の働き方」も「自分の仕事を持つ大人」も、
+            ほとんど知らなかった。辞めてから初めて、<strong>こんなに多様な生き方があったのか</strong>と気づいた。
+          </p>
+          <p>
+            同時に思ったんです。もし教師をやめる前に、もっと多様な大人たちとつながれていたら——
+            わざわざ仕事を辞めなくても、もっと早く価値観が動いていたんじゃないかと。
+          </p>
+          <p>
+            「辞めたいわけじゃないけど、このままでもない」と感じている人に、
+            <strong>辞める前に、世界を広げる体験を</strong>。それがKOKOROMiを始めた理由です。
+          </p>
+          <p>
+            転職エージェントでも、副業マッチングでもない。もっと手前の、
+            「まず試してみる」「外の人と話してみる」——そういう小さな一歩を、
+            気軽に踏み出せる場所をつくりたいと思っています。
+          </p>
+        </div>
+        <div class="founder-profile">
+          <p class="founder-profile-name">浅野 紘毅</p>
+          <p class="founder-profile-title">KOKOROMi 代表 / 株式会社Fluminal</p>
+          <ul class="founder-profile-history">
+            <li>愛知教育大学卒業</li>
+            <li>高校教師として5年間勤務</li>
+            <li>27歳で退職・上京、教育ベンチャーへ</li>
+            <li>KOKOROMi 創設</li>
+          </ul>
+        </div>
+        <blockquote class="founder-quote">
+          「気づいたら、少し違う自分になっている」——
+          そんな体験ができる居場所を、30代になる前のあなたにも届けたい。
+          大人の挑戦が当たり前になる社会を、一緒につくっていきましょう。
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 3: POSITIONING MAP ===== -->
+  <section class="section map-section">
+    <div class="section-inner">
+      <p class="section-eyebrow">Market Map</p>
+      <h2 class="section-title">この象限に、KOKOROMiしかいない</h2>
+      <div class="map-wrapper">
+        <svg viewBox="0 0 1100 640" xmlns="http://www.w3.org/2000/svg" style="font-family:'Hiragino Sans','Hiragino Kaku Gothic ProN',Meiryo,sans-serif;">
+
+          <!-- ===== 象限背景 ===== -->
+          <!-- 左上: KOKOROMiゾーン（薄オレンジ） -->
+          <rect x="60" y="50" width="480" height="265" fill="#fff5ee" rx="8"/>
+          <!-- 右上 -->
+          <rect x="560" y="50" width="480" height="265" fill="#f7f7f7" rx="8"/>
+          <!-- 左下 -->
+          <rect x="60" y="335" width="480" height="250" fill="#f7f7f7" rx="8"/>
+          <!-- 右下 -->
+          <rect x="560" y="335" width="480" height="250" fill="#f7f7f7" rx="8"/>
+
+          <!-- ===== 軸線 ===== -->
+          <!-- 横軸 -->
+          <line x1="40" y1="335" x2="1060" y2="335" stroke="#ccc" stroke-width="2"/>
+          <polygon points="1065,335 1050,328 1050,342" fill="#bbb"/>
+          <!-- 縦軸 -->
+          <line x1="560" y1="30" x2="560" y2="600" stroke="#ccc" stroke-width="2"/>
+          <polygon points="560,25 553,40 567,40" fill="#bbb"/>
+
+          <!-- ===== 軸ラベル ===== -->
+          <!-- 横軸：左端 -->
+          <text x="65" y="620" fill="#888" font-size="15">← 副業・転職 不要</text>
+          <!-- 横軸：右端 -->
+          <text x="830" y="620" fill="#888" font-size="15">副業・転職 前提 →</text>
+          <!-- 縦軸：上 -->
+          <text x="575" y="46" fill="#888" font-size="15">実践・体験あり</text>
+          <!-- 縦軸：下 -->
+          <text x="575" y="596" fill="#888" font-size="15">インプットのみ</text>
+
+          <!-- ===== 象限タイトル ===== -->
+          <text x="80" y="76" fill="#e07b39" font-size="13" font-weight="bold" opacity="0.7">▶ ここにKOKOROMiしかいない</text>
+
+          <!-- ===== 各サービスのドット ===== -->
+
+          <!-- KOKOROMi -->
+          <circle cx="200" cy="170" r="48" fill="#e07b39" opacity="0.95"/>
+          <circle cx="200" cy="170" r="54" fill="none" stroke="#e07b39" stroke-width="2.5" opacity="0.4"/>
+          <text x="200" y="163" text-anchor="middle" fill="white" font-size="16" font-weight="bold">KOKORO</text>
+          <text x="200" y="182" text-anchor="middle" fill="white" font-size="16" font-weight="bold">Mi</text>
+
+          <!-- サービスグラント（副業不要×実践あり、スキル要件高） -->
+          <circle cx="430" cy="195" r="32" fill="#90a4ae" opacity="0.85"/>
+          <text x="430" y="188" text-anchor="middle" fill="white" font-size="13" font-weight="bold">サービス</text>
+          <text x="430" y="204" text-anchor="middle" fill="white" font-size="13" font-weight="bold">グラント</text>
+          <text x="430" y="240" text-anchor="middle" fill="#888" font-size="12">スキル要件高め</text>
+
+          <!-- ETIC Beyonders（副業不要×実践あり、社会課題特化） -->
+          <circle cx="320" cy="245" r="28" fill="#aaa" opacity="0.8"/>
+          <text x="320" y="239" text-anchor="middle" fill="white" font-size="12" font-weight="bold">ETIC</text>
+          <text x="320" y="254" text-anchor="middle" fill="white" font-size="12" font-weight="bold">Beyonders</text>
+          <text x="320" y="285" text-anchor="middle" fill="#888" font-size="12">社会課題特化</text>
+
+          <!-- サンカク（副業前提×実践あり） -->
+          <circle cx="730" cy="155" r="32" fill="#90a4ae" opacity="0.85"/>
+          <text x="730" y="148" text-anchor="middle" fill="white" font-size="13" font-weight="bold">サンカク</text>
+          <text x="730" y="163" text-anchor="middle" fill="white" font-size="12">（リクルート）</text>
+          <text x="730" y="200" text-anchor="middle" fill="#888" font-size="12">副業・報酬あり</text>
+
+          <!-- 転職エージェント（転職前提×実践△） -->
+          <circle cx="940" cy="230" r="32" fill="#b0bec5" opacity="0.8"/>
+          <text x="940" y="223" text-anchor="middle" fill="white" font-size="13" font-weight="bold">転職</text>
+          <text x="940" y="239" text-anchor="middle" fill="white" font-size="13" font-weight="bold">エージェント</text>
+          <text x="940" y="273" text-anchor="middle" fill="#888" font-size="12">転職前提</text>
+
+          <!-- 採用スクール（転職前提×インプット寄り） -->
+          <circle cx="860" cy="430" r="28" fill="#cfd8dc" opacity="0.85"/>
+          <text x="860" y="424" text-anchor="middle" fill="#555" font-size="12" font-weight="bold">採用</text>
+          <text x="860" y="438" text-anchor="middle" fill="#555" font-size="12" font-weight="bold">スクール</text>
+          <text x="860" y="472" text-anchor="middle" fill="#888" font-size="12">学習特化</text>
+
+          <!-- オンラインコミュニティ（副業不要×インプット寄り） -->
+          <circle cx="230" cy="440" r="28" fill="#cfd8dc" opacity="0.85"/>
+          <text x="230" y="433" text-anchor="middle" fill="#555" font-size="12" font-weight="bold">オンライン</text>
+          <text x="230" y="447" text-anchor="middle" fill="#555" font-size="12" font-weight="bold">サロン</text>
+          <text x="230" y="481" text-anchor="middle" fill="#888" font-size="12">交流・情報収集</text>
+
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 4: COMPARISON TABLE ===== -->
+  <section class="section table-section">
+    <div class="section-inner">
+      <p class="section-eyebrow">Comparison</p>
+      <h2 class="section-title">4サービスと比べてみると</h2>
+      <div class="table-scroll">
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>比較項目</th>
+              <th class="col-kokoromi">KOKOROMi</th>
+              <th>転職エージェント</th>
+              <th>サービスグラント</th>
+              <th>サンカク<br><span style="font-size:11px;font-weight:400;">（リクルート）</span></th>
+              <th>ETICプロボノ</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>副業禁止でも参加できる</td>
+              <td class="col-kokoromi"><span class="val-great">◎</span></td>
+              <td><span class="val-no">×</span></td>
+              <td><span class="val-ok">○</span></td>
+              <td><span class="val-no">×</span></td>
+              <td><span class="val-ok">○</span></td>
+            </tr>
+            <tr>
+              <td>転職しなくていい</td>
+              <td class="col-kokoromi"><span class="val-great">◎</span></td>
+              <td><span class="val-no">×</span></td>
+              <td><span class="val-ok">○</span></td>
+              <td><span class="val-ok">○</span></td>
+              <td><span class="val-ok">○</span></td>
+            </tr>
+            <tr>
+              <td>実践・体験ができる</td>
+              <td class="col-kokoromi"><span class="val-great">◎</span></td>
+              <td><span class="val-fair">△</span></td>
+              <td><span class="val-great">◎</span></td>
+              <td><span class="val-great">◎</span></td>
+              <td><span class="val-great">◎</span></td>
+            </tr>
+            <tr>
+              <td>スキル要件</td>
+              <td class="col-kokoromi" style="font-weight:700; color:var(--orange);">不問</td>
+              <td style="color:#888;">職歴必要</td>
+              <td style="color:#888;">高い</td>
+              <td style="color:#888;">中〜高</td>
+              <td style="color:#888;">高い</td>
+            </tr>
+            <tr>
+              <td>コスト（個人）</td>
+              <td class="col-kokoromi" style="font-weight:700; color:var(--orange);">月500円</td>
+              <td style="color:#555;">無料</td>
+              <td style="color:#555;">無料</td>
+              <td style="color:#555;">無料</td>
+              <td style="color:#555;">無料</td>
+            </tr>
+            <tr>
+              <td>伴走・サポートあり</td>
+              <td class="col-kokoromi"><span class="val-great">◎</span></td>
+              <td><span class="val-fair">△</span></td>
+              <td><span class="val-fair">△</span></td>
+              <td><span class="val-fair">△</span></td>
+              <td><span class="val-fair">△</span></td>
+            </tr>
+            <tr>
+              <td>参加後のコミュニティ</td>
+              <td class="col-kokoromi"><span class="val-great">◎</span></td>
+              <td><span class="val-no">×</span></td>
+              <td><span class="val-fair">△</span></td>
+              <td><span class="val-no">×</span></td>
+              <td><span class="val-ok">○</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 5: WHY CARDS ===== -->
+  <section class="section why-section">
+    <div class="section-inner">
+      <p class="section-eyebrow">Why KOKOROMi</p>
+      <h2 class="section-title">なぜここにしかいないのか</h2>
+      <div class="why-grid">
+        <div class="why-card">
+          <div class="why-num">01</div>
+          <h3 class="why-title">副業禁止層への唯一の出口</h3>
+          <p class="why-desc">教員・公務員・医療職・大企業勤務。副業・兼業規制のある人たちに、既存のどのサービスも届いていない。KOKOROMiは無償参加設計だから、規制を気にせず動ける。</p>
+        </div>
+        <div class="why-card">
+          <div class="why-num">02</div>
+          <h3 class="why-title">インプットではなく、本物の体験</h3>
+          <p class="why-desc">動画を見ても、コーチングを受けても、「外の世界で通用するか試す」体験はできない。KOKOROMiは企業・自治体のリアルな現場に入れるから、体験が変わる。</p>
+        </div>
+        <div class="why-card">
+          <div class="why-num">03</div>
+          <h3 class="why-title">送り込んで終わりにしない</h3>
+          <p class="why-desc">マッチングプラットフォームは人を送ったら終わり。KOKOROMiはプロジェクトの前・中・後に伴走する。だから参加者が成長できる環境になる。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 6: PERSONA ===== -->
+  <section class="section persona-section">
+    <div class="section-inner">
+      <p class="section-eyebrow">For You</p>
+      <h2 class="section-title">こんな気持ち、ありませんか</h2>
+      <div class="persona-grid">
+        <div class="persona-card">
+          <div class="persona-icon">💼</div>
+          <p class="persona-text">今の仕事は続けたい。<br>でも、<em>もっと新しいことに挑戦したい</em>という気持ちが消えない。</p>
+        </div>
+        <div class="persona-card">
+          <div class="persona-icon">🔭</div>
+          <p class="persona-text">いまの職場や業界だけじゃなく、<br><em>もっと視野を広げたい</em>と思っている。</p>
+        </div>
+        <div class="persona-card">
+          <div class="persona-icon">🤝</div>
+          <p class="persona-text">自分とは違う選択をしている人、<br><em>挑戦し続けている人たちと関わりたい</em>。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 8: CTA ===== -->
+  <section class="cta-section">
+    <div style="max-width:1140px; margin:0 auto;">
+      <h2>まず、プロジェクトを見てみる。</h2>
+      <a href="projects.html" class="cta-btn-large">プロジェクト一覧へ &rarr;</a>
+      <p class="cta-sub">副業しなくても、挑戦できる。</p>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <div class="footer-logo">KOKORO<span>Mi</span></div>
+    <p class="footer-tagline">副業しなくても、挑戦できる。</p>
+    <div class="footer-links">
+      <a href="projects.html">プロジェクト一覧</a>
+      <a href="#">コミュニティとは</a>
+      <a href="#">応募の流れ</a>
+      <a href="#">企業の方へ</a>
+      <a href="#">プライバシーポリシー</a>
+      <a href="#">お問い合わせ</a>
+    </div>
+    <p class="footer-copy">&copy; 2026 KOKOROMi. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>

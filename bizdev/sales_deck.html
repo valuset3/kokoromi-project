@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KOKOROMi 法人向けご提案資料</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Hiragino Sans', 'Meiryo', sans-serif;
+  background: #f0f0ee;
+  color: #333;
+}
+
+:root {
+  --orange: #e07b39;
+  --dark: #1a1a1a;
+  --gray: #666;
+  --light: #f8f7f5;
+  --blue: #3a7bd5;
+  --green: #2e7d5e;
+}
+
+.slide {
+  width: 960px;
+  min-height: 540px;
+  margin: 32px auto;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.slide-num {
+  position: absolute;
+  bottom: 14px;
+  right: 20px;
+  font-size: 11px;
+  color: #bbb;
+  letter-spacing: 1px;
+}
+
+/* ===== 共通ヘッダー ===== */
+.slide-header {
+  background: var(--orange);
+  padding: 18px 48px;
+}
+.slide-header h2 {
+  font-size: 19px;
+  color: white;
+  font-weight: bold;
+  letter-spacing: 0.02em;
+}
+.slide-header .sub {
+  font-size: 12px;
+  color: rgba(255,255,255,0.78);
+  margin-top: 4px;
+}
+.slide-body {
+  padding: 32px 48px 44px;
+  flex: 1;
+}
+
+/* ===== スライド1：表紙 ===== */
+.cover {
+  background: var(--dark);
+  justify-content: center;
+  align-items: flex-start;
+  padding: 64px 72px;
+  min-height: 540px;
+}
+.cover .label {
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: var(--orange);
+  margin-bottom: 28px;
+  text-transform: uppercase;
+}
+.cover h1 {
+  font-size: 34px;
+  color: white;
+  line-height: 1.55;
+  margin-bottom: 22px;
+  letter-spacing: 0.01em;
+}
+.cover .sub {
+  font-size: 14px;
+  color: #999;
+  line-height: 1.9;
+  max-width: 500px;
+}
+.cover .cover-rule {
+  width: 40px;
+  height: 3px;
+  background: var(--orange);
+  margin: 28px 0;
+}
+.cover .logo {
+  font-size: 13px;
+  color: #555;
+}
+
+/* ===== スライド2：課題提起 ===== */
+.pain-headline {
+  font-size: 22px;
+  font-weight: bold;
+  color: var(--dark);
+  line-height: 1.5;
+  margin-bottom: 28px;
+}
+.pain-headline span { color: var(--orange); }
+.pain-row {
+  display: flex;
+  gap: 16px;
+}
+.pain-card {
+  flex: 1;
+  background: var(--light);
+  border-radius: 8px;
+  padding: 22px 20px;
+  border-top: 3px solid var(--dark);
+}
+.pain-card .pain-title {
+  font-size: 13px;
+  font-weight: bold;
+  color: var(--dark);
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+.pain-card p {
+  font-size: 12px;
+  color: var(--gray);
+  line-height: 1.8;
+}
+.pain-answer {
+  margin-top: 24px;
+  border-left: 4px solid var(--orange);
+  padding: 14px 20px;
+  background: #fff8f3;
+  font-size: 15px;
+  font-weight: bold;
+  color: var(--dark);
+  line-height: 1.6;
+  border-radius: 0 6px 6px 0;
+}
+
+/* ===== スライド3：解答 ===== */
+.stat-lead {
+  font-size: 14px;
+  color: var(--gray);
+  line-height: 1.8;
+  margin-bottom: 20px;
+}
+.stat-row {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+.stat-box {
+  flex: 1;
+  background: var(--light);
+  border-radius: 8px;
+  padding: 24px 20px;
+  text-align: center;
+}
+.stat-box .num {
+  font-size: 44px;
+  font-weight: bold;
+  color: var(--orange);
+  line-height: 1;
+}
+.stat-box .unit {
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--orange);
+}
+.stat-box .label {
+  font-size: 12px;
+  color: var(--gray);
+  margin-top: 8px;
+  line-height: 1.6;
+}
+.stat-box .label strong {
+  display: block;
+  font-size: 13px;
+  color: var(--dark);
+  margin-bottom: 2px;
+}
+.stat-insight {
+  background: var(--dark);
+  border-radius: 8px;
+  padding: 18px 28px;
+  color: white;
+  font-size: 14px;
+  line-height: 1.9;
+  text-align: center;
+}
+.stat-insight strong { color: var(--orange); }
+
+/* ===== スライド4：KOKOROMiとは ===== */
+.model-diagram {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin: 8px 0 24px;
+}
+.model-node {
+  text-align: center;
+  width: 180px;
+}
+.model-node .node-box {
+  border: 2px solid var(--dark);
+  border-radius: 8px;
+  padding: 18px 12px;
+  background: var(--light);
+}
+.model-node.center .node-box {
+  border-color: var(--orange);
+  background: #fff8f3;
+}
+.model-node .node-title {
+  font-size: 13px;
+  font-weight: bold;
+  color: var(--dark);
+  margin-bottom: 6px;
+}
+.model-node.center .node-title { color: var(--orange); }
+.model-node .node-desc {
+  font-size: 11px;
+  color: var(--gray);
+  line-height: 1.6;
+}
+.model-arrow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 16px;
+  flex-shrink: 0;
+}
+.model-arrow .arrow-line {
+  width: 64px;
+  height: 2px;
+  background: var(--orange);
+  position: relative;
+}
+.model-arrow .arrow-line::after {
+  content: '';
+  position: absolute;
+  right: -1px;
+  top: -4px;
+  border: 5px solid transparent;
+  border-left-color: var(--orange);
+}
+.model-arrow .arrow-label {
+  font-size: 10px;
+  color: var(--orange);
+  margin-top: 6px;
+  text-align: center;
+  line-height: 1.4;
+}
+.model-arrow.both {
+  position: relative;
+}
+.model-arrow.both .arrow-line2 {
+  width: 64px;
+  height: 2px;
+  background: var(--orange);
+  position: relative;
+  margin-top: 6px;
+}
+.model-arrow.both .arrow-line2::before {
+  content: '';
+  position: absolute;
+  left: -1px;
+  top: -4px;
+  border: 5px solid transparent;
+  border-right-color: var(--orange);
+}
+.model-tagline {
+  font-size: 16px;
+  font-weight: bold;
+  color: var(--dark);
+  text-align: center;
+  line-height: 1.8;
+  padding: 16px 0 4px;
+  border-top: 1px solid #eee;
+}
+.model-tagline span { color: var(--orange); }
+
+.what-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 20px;
+}
+.what-item {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  background: var(--light);
+  border-radius: 6px;
+  padding: 12px 14px;
+}
+.what-item .wi-num {
+  font-size: 11px;
+  font-weight: bold;
+  color: var(--orange);
+  background: #fff;
+  border: 1px solid var(--orange);
+  border-radius: 3px;
+  padding: 1px 5px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.what-item p {
+  font-size: 12px;
+  color: var(--dark);
+  line-height: 1.7;
+}
+
+/* ===== スライド5：参加者プロフィール ===== */
+.persona-wrap {
+  display: flex;
+  gap: 28px;
+  align-items: flex-start;
+}
+.persona-card {
+  width: 220px;
+  flex-shrink: 0;
+  background: var(--light);
+  border-radius: 8px;
+  padding: 24px 20px;
+  text-align: center;
+}
+.persona-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--dark);
+  margin: 0 auto 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  color: white;
+}
+.persona-name {
+  font-size: 15px;
+  font-weight: bold;
+  color: var(--dark);
+  margin-bottom: 4px;
+}
+.persona-attr {
+  font-size: 11px;
+  color: var(--orange);
+  margin-bottom: 14px;
+}
+.persona-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  justify-content: center;
+}
+.persona-tags span {
+  background: white;
+  border: 1px solid #ddd;
+  font-size: 10px;
+  color: var(--gray);
+  padding: 2px 7px;
+  border-radius: 3px;
+}
+.persona-quote {
+  flex: 1;
+}
+.persona-quote blockquote {
+  font-size: 17px;
+  font-weight: bold;
+  color: var(--dark);
+  line-height: 1.7;
+  border-left: 4px solid var(--orange);
+  padding-left: 18px;
+  margin-bottom: 20px;
+}
+.persona-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.persona-detail-item {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+.persona-detail-item .pd-label {
+  font-size: 11px;
+  font-weight: bold;
+  color: var(--orange);
+  background: #fff8f3;
+  padding: 2px 7px;
+  border-radius: 3px;
+  flex-shrink: 0;
+  margin-top: 2px;
+  white-space: nowrap;
+}
+.persona-detail-item p {
+  font-size: 12px;
+  color: var(--dark);
+  line-height: 1.7;
+}
+
+/* ===== スライド6：企業価値 ===== */
+.value-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 4px;
+}
+.value-item {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  padding: 20px 24px;
+  border-radius: 8px;
+  background: var(--light);
+  border-left: 4px solid transparent;
+}
+.value-item:nth-child(1) { border-left-color: var(--dark); }
+.value-item:nth-child(2) { border-left-color: var(--orange); }
+.value-item:nth-child(3) { border-left-color: var(--blue); }
+.value-num {
+  font-size: 32px;
+  font-weight: bold;
+  color: #ddd;
+  line-height: 1;
+  flex-shrink: 0;
+  width: 40px;
+}
+.value-content h3 {
+  font-size: 15px;
+  font-weight: bold;
+  color: var(--dark);
+  margin-bottom: 6px;
+}
+.value-content p {
+  font-size: 12px;
+  color: var(--gray);
+  line-height: 1.8;
+}
+.value-core {
+  margin-top: 18px;
+  padding: 14px 20px;
+  background: var(--dark);
+  border-radius: 6px;
+  font-size: 13px;
+  color: white;
+  line-height: 1.7;
+  text-align: center;
+}
+.value-core span { color: var(--orange); font-weight: bold; }
+
+/* ===== スライド7：3つの関わり方 ===== */
+.format-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 8px;
+  font-size: 13px;
+}
+.format-table thead tr th {
+  padding: 12px 16px;
+  text-align: left;
+  font-size: 12px;
+  background: var(--dark);
+  color: white;
+  font-weight: bold;
+}
+.format-table thead tr th:first-child {
+  width: 200px;
+}
+.format-table tbody tr td {
+  padding: 14px 16px;
+  border-bottom: 1px solid #eee;
+  color: var(--dark);
+  vertical-align: top;
+  line-height: 1.7;
+  font-size: 12px;
+}
+.format-table tbody tr:last-child td { border-bottom: none; }
+.format-table tbody tr td:first-child {
+  font-weight: bold;
+  font-size: 13px;
+  color: var(--orange);
+  white-space: nowrap;
+}
+.format-table tbody tr:nth-child(odd) td {
+  background: var(--light);
+}
+.format-name {
+  font-size: 13px;
+  font-weight: bold;
+  color: var(--dark);
+  display: block;
+  margin-bottom: 2px;
+}
+.format-duration {
+  font-size: 11px;
+  color: var(--orange);
+  display: block;
+  font-weight: bold;
+}
+
+/* ===== スライド8：伴走プロセス ===== */
+.process-wrap {
+  display: flex;
+  gap: 0;
+  align-items: stretch;
+  margin-top: 8px;
+}
+.process-phase {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.process-phase-head {
+  padding: 12px 16px;
+  font-size: 13px;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+}
+.process-phase-head.before { background: var(--dark); }
+.process-phase-head.during { background: var(--orange); }
+.process-phase-head.after  { background: var(--blue); }
+.process-phase-body {
+  background: var(--light);
+  padding: 18px 16px;
+  flex: 1;
+}
+.process-phase-body li {
+  list-style: none;
+  font-size: 12px;
+  color: #444;
+  line-height: 1.9;
+  padding-left: 14px;
+  position: relative;
+}
+.process-phase-body li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--orange);
+}
+.process-arrow {
+  display: flex;
+  align-items: center;
+  padding: 0 6px;
+  flex-shrink: 0;
+  color: var(--orange);
+  font-size: 20px;
+  padding-top: 42px;
+}
+.process-note {
+  margin-top: 22px;
+  padding: 14px 20px;
+  background: var(--dark);
+  border-radius: 6px;
+  color: white;
+  font-size: 13px;
+  line-height: 1.7;
+  text-align: center;
+}
+.process-note span { color: var(--orange); font-weight: bold; }
+
+/* ===== スライド9：CTA ===== */
+.cta-slide {
+  background: var(--dark);
+  justify-content: center;
+  align-items: center;
+  padding: 56px 72px;
+  text-align: center;
+}
+.cta-slide .cta-label {
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: var(--orange);
+  margin-bottom: 22px;
+  text-transform: uppercase;
+}
+.cta-slide h2 {
+  font-size: 28px;
+  color: white;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  letter-spacing: 0.01em;
+}
+.cta-slide .cta-body {
+  font-size: 14px;
+  color: #999;
+  line-height: 1.9;
+  margin-bottom: 32px;
+}
+.cta-slide .cta-rule {
+  width: 40px;
+  height: 2px;
+  background: var(--orange);
+  margin: 0 auto 24px;
+}
+.cta-badge {
+  display: inline-block;
+  border: 2px solid var(--orange);
+  color: var(--orange);
+  font-size: 13px;
+  font-weight: bold;
+  padding: 10px 32px;
+  border-radius: 4px;
+  letter-spacing: 0.05em;
+  margin-bottom: 28px;
+}
+.cta-contact {
+  font-size: 13px;
+  color: #666;
+  line-height: 1.8;
+}
+.cta-contact strong {
+  display: block;
+  font-size: 14px;
+  color: #aaa;
+  margin-bottom: 4px;
+}
+</style>
+</head>
+<body>
+
+<!-- ===== スライド1：表紙 ===== -->
+<div class="slide cover">
+  <div class="label">Corporate Proposal — MVP</div>
+  <h1>熱意ある大人が、<br>あなたの事業に本気で関わる。</h1>
+  <div class="cover-rule"></div>
+  <p class="sub">副業ができない30代前後の社会人を<br>企業のプロジェクトにつなぐ、コーディネートサービス</p>
+  <div class="logo" style="margin-top:40px;"><img src="../assets/ご決定デザイン_横組み_PNG.png" alt="KOKOROMi" style="height:32px;width:auto;"></div>
+  <div class="slide-num">1 / 9</div>
+</div>
+
+<!-- ===== スライド2：課題提起 ===== -->
+<div class="slide">
+  <div class="slide-header">
+    <h2>「いつか採用したい人」と、今から関係を作れていますか？</h2>
+  </div>
+  <div class="slide-body">
+    <div class="pain-row">
+      <div class="pain-card">
+        <div class="pain-title">採用してからしかわからない</div>
+        <p>面接だけではわからない。一緒に働いて初めてわかることがある。ミスマッチは入社後3ヶ月で起きる。</p>
+      </div>
+      <div class="pain-card">
+        <div class="pain-title">「まだ転職しない」優秀な人と今出会えていない</div>
+        <p>転職市場に出てくるのは動いている人だけ。今は動いていないが3〜5年後に動く人材と、今から接点を持てていない。</p>
+      </div>
+      <div class="pain-card">
+        <div class="pain-title">採用広報のコストが上がり続けている</div>
+        <p>求人媒体・SNS広告・エージェントフィー。いい人に見つけてもらうコストが増え続けている。</p>
+      </div>
+    </div>
+    <div class="pain-answer">
+      体験ベースで関係を作る。でも、採用でも業務委託でもない。<br>
+      それが、KOKOROMiです。
+    </div>
+  </div>
+  <div class="slide-num">2 / 9</div>
+</div>
+
+<!-- ===== スライド3：解答 ===== -->
+<div class="slide">
+  <div class="slide-header">
+    <h2>副業できない30代前後の社会人が、日本に数百万人いる</h2>
+    <p class="sub">教員・公務員・医療職・大企業勤務。社会人5年以上。学生ではない。金銭的動機ゼロ。</p>
+  </div>
+  <div class="slide-body">
+    <div class="stat-row">
+      <div class="stat-box">
+        <div class="num">92<span class="unit">万人</span></div>
+        <div class="label"><strong>教員</strong>副業原則禁止。社会経験を渇望している。</div>
+      </div>
+      <div class="stat-box">
+        <div class="num">280<span class="unit">万人</span></div>
+        <div class="label"><strong>公務員</strong>副業禁止。真面目・誠実な社会人経験者。</div>
+      </div>
+      <div class="stat-box">
+        <div class="num">数百<span class="unit">万人</span></div>
+        <div class="label"><strong>医療職・大企業</strong>副業制限あり。現場経験豊富な層。</div>
+      </div>
+    </div>
+    <div class="stat-insight">
+      「辞めたいわけじゃない。でも、もっと広い世界を知りたい。」<br>
+      30代前後・社会人経験5年以上・<strong>金銭的動機がゼロ</strong>だから、成長できる場所にこそ本気で関わる。
+    </div>
+  </div>
+  <div class="slide-num">3 / 9</div>
+</div>
+
+<!-- ===== スライド4：KOKOROMiとは ===== -->
+<div class="slide">
+  <div class="slide-header">
+    <h2>KOKOROMiとは — コーディネートモデル</h2>
+    <p class="sub">ただ人を送るのではなく、前後のケアまで含めて設計する</p>
+  </div>
+  <div class="slide-body">
+    <div class="model-diagram">
+      <div class="model-node">
+        <div class="node-box">
+          <div class="node-title">企業</div>
+          <div class="node-desc">プロジェクトを<br>開放する</div>
+        </div>
+      </div>
+      <div class="model-arrow both">
+        <div class="arrow-line"></div>
+        <div class="arrow-line2"></div>
+        <div class="arrow-label">設計・伴走<br>フィードバック</div>
+      </div>
+      <div class="model-node center">
+        <div class="node-box">
+          <div class="node-title">KOKOROMi</div>
+          <div class="node-desc">選定・マッチング<br>前中後すべてを担う</div>
+        </div>
+      </div>
+      <div class="model-arrow both">
+        <div class="arrow-line"></div>
+        <div class="arrow-line2"></div>
+        <div class="arrow-label">選定・伴走<br>振り返り</div>
+      </div>
+      <div class="model-node">
+        <div class="node-box">
+          <div class="node-title">参加者</div>
+          <div class="node-desc">副業禁止の<br>社会人が無償で参加</div>
+        </div>
+      </div>
+    </div>
+    <div class="what-list">
+      <div class="what-item">
+        <div class="wi-num">01</div>
+        <p>参加者の選定・マッチング ― 企業の工数はゼロ</p>
+      </div>
+      <div class="what-item">
+        <div class="wi-num">02</div>
+        <p>プロジェクト前の設計支援 ― どう関わるかを一緒に考える</p>
+      </div>
+      <div class="what-item">
+        <div class="wi-num">03</div>
+        <p>プロジェクト中の伴走・ケア ― 参加者と企業の橋渡し</p>
+      </div>
+      <div class="what-item">
+        <div class="wi-num">04</div>
+        <p>終了後の振り返り・フォローアップ ― 関係を継続させる</p>
+      </div>
+    </div>
+  </div>
+  <div class="slide-num">4 / 9</div>
+</div>
+
+<!-- ===== スライド5：参加者プロフィール ===== -->
+<div class="slide">
+  <div class="slide-header">
+    <h2>参加者はどんな人か</h2>
+    <p class="sub">安い労働力じゃない。コマとして使うのではない。</p>
+  </div>
+  <div class="slide-body">
+    <div class="persona-wrap">
+      <div class="persona-card">
+        <div class="persona-avatar">M</div>
+        <div class="persona-name">みほさん（仮）</div>
+        <div class="persona-attr">副業できない社会人 / 30代前後</div>
+        <div class="persona-tags">
+          <span>副業禁止</span>
+          <span>社会人5年以上</span>
+          <span>学生ではない</span>
+          <span>真面目・誠実</span>
+          <span>向上心あり</span>
+        </div>
+      </div>
+      <div class="persona-quote">
+        <blockquote>
+          「辞めたいわけじゃない。<br>でも、もっと広い世界を知りたい。<br>ちゃんと成長できる場所で<br>本気で関わりたい。」
+        </blockquote>
+        <div class="persona-detail">
+          <div class="persona-detail-item">
+            <div class="pd-label">属性</div>
+            <p>30代前後。副業ができない職種（教員・公務員・医療職・大企業等）。社会人経験5年以上。学生ではない。</p>
+          </div>
+          <div class="persona-detail-item">
+            <div class="pd-label">動機</div>
+            <p>金銭的報酬ゼロ。「外の世界で通用するか試したい」という純粋な成長意欲。</p>
+          </div>
+          <div class="persona-detail-item">
+            <div class="pd-label">特徴</div>
+            <p>忖度なしのフィードバックができる。社内の常識に染まっていない。真剣に取り組む。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-num">5 / 9</div>
+</div>
+
+<!-- ===== スライド6：企業にとっての価値 ===== -->
+<div class="slide">
+  <div class="slide-header">
+    <h2>企業にとっての3つの価値</h2>
+  </div>
+  <div class="slide-body">
+    <div class="value-list">
+      <div class="value-item">
+        <div class="value-num">01</div>
+        <div class="value-content">
+          <h3>外部の目線 ― 忖度ゼロのフィードバックが入る</h3>
+          <p>社内が煮詰まった新規事業に、利害関係のない外部の目線が入る。「なぜその仕様なのか」という当たり前の問いを、外の人間が初めて投げられる。</p>
+        </div>
+      </div>
+      <div class="value-item">
+        <div class="value-num">02</div>
+        <div class="value-content">
+          <h3>採用ブランディング ― 「関わりたい会社」として自然に拡散する</h3>
+          <p>参加者のSNS・noteに「この会社面白い」と自発的に書かれる。広告ではなく、体験した人の言葉で認知が広がる。</p>
+        </div>
+      </div>
+      <div class="value-item">
+        <div class="value-num">03</div>
+        <div class="value-content">
+          <h3>将来の採用パイプライン ― 転職を考え始めたとき最初に思い出す会社になる</h3>
+          <p>今は転職しない。でも3年後・5年後に動くとき、体験した会社を真っ先に思い出す。関係を今から積み上げておく。</p>
+        </div>
+      </div>
+    </div>
+    <div class="value-core">
+      関わった大人がその企業の<span>ファン</span>になる。それがKOKOROMiの成果です。
+    </div>
+  </div>
+  <div class="slide-num">6 / 9</div>
+</div>
+
+<!-- ===== スライド7：3つの関わり方 ===== -->
+<div class="slide">
+  <div class="slide-header">
+    <h2>3つの関わり方フォーマット</h2>
+    <p class="sub">企業のフェーズや目的に合わせて選べる</p>
+  </div>
+  <div class="slide-body">
+    <table class="format-table">
+      <thead>
+        <tr>
+          <th>フォーマット</th>
+          <th>概要・目的</th>
+          <th>期間</th>
+          <th>向いているケース</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <span class="format-name">1日単発型</span>
+            <span class="format-duration">1日</span>
+          </td>
+          <td>会社に1日お邪魔して、現場を体験・観察・フィードバック。まず試してみたい企業の入り口。</td>
+          <td>1日</td>
+          <td>気軽に試したい。最初の一歩を踏み出したい。</td>
+        </tr>
+        <tr>
+          <td>
+            <span class="format-name">プロジェクト型</span>
+            <span class="format-duration">4〜8週間</span>
+          </td>
+          <td>新規事業の壁打ち・ユーザーリサーチ等に継続的に参加する。深い関与。</td>
+          <td>4〜8週間</td>
+          <td>特定テーマを深掘りしたい。忖度なし視点で事業を磨きたい。</td>
+        </tr>
+        <tr>
+          <td>
+            <span class="format-name">ワークショップ型</span>
+            <span class="format-duration">2〜3日集中</span>
+          </td>
+          <td>特定テーマで企業メンバーと参加者が集中して共同作業・ブレスト。</td>
+          <td>2〜3日（集中）</td>
+          <td>合宿・イベント形式で外部の熱量を一気に取り込みたい。</td>
+        </tr>
+      </tbody>
+    </table>
+    <div style="margin-top:18px; padding:12px 20px; background:var(--light); border-radius:6px; font-size:12px; color:var(--gray); line-height:1.7;">
+      どのフォーマットも、KOKOROMiが選定・設計・伴走を担います。企業側の工数は最小限です。
+    </div>
+  </div>
+  <div class="slide-num">7 / 9</div>
+</div>
+
+<!-- ===== スライド8：KOKOROMiが伴走する ===== -->
+<div class="slide">
+  <div class="slide-header">
+    <h2>KOKOROMiが伴走する ― 前・中・後</h2>
+    <p class="sub">企業がやることは「開放して、一緒に考えること」だけ</p>
+  </div>
+  <div class="slide-body">
+    <div class="process-wrap">
+      <div class="process-phase">
+        <div class="process-phase-head before">プロジェクト前</div>
+        <div class="process-phase-body">
+          <ul>
+            <li>事業・課題のヒアリング</li>
+            <li>どんな人が合うかの整理</li>
+            <li>参加者の選定・提案</li>
+            <li>事前ブリーフィング</li>
+          </ul>
+        </div>
+      </div>
+      <div class="process-arrow">→</div>
+      <div class="process-phase">
+        <div class="process-phase-head during">プロジェクト中</div>
+        <div class="process-phase-body">
+          <ul>
+            <li>参加者のフォロー</li>
+            <li>企業との橋渡し</li>
+            <li>軌道修正サポート</li>
+            <li>つまずき時の相談対応</li>
+          </ul>
+        </div>
+      </div>
+      <div class="process-arrow">→</div>
+      <div class="process-phase">
+        <div class="process-phase-head after">プロジェクト後</div>
+        <div class="process-phase-body">
+          <ul>
+            <li>双方へのフィードバック</li>
+            <li>体験の言語化・共有</li>
+            <li>次の関わり方への提案</li>
+            <li>採用パイプラインの設計</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="process-note">
+      ただ人を送り込んで終わりにしない。<span>ちゃんと成長できる環境を一緒に作る</span>から、関わった大人がファンになる。
+    </div>
+  </div>
+  <div class="slide-num">8 / 9</div>
+</div>
+
+<!-- ===== スライド9：CTA ===== -->
+<div class="slide cta-slide">
+  <div class="cta-label">Next Step</div>
+  <h2>まず、話しませんか。</h2>
+  <div class="cta-rule"></div>
+  <p class="cta-body">
+    MVP段階のいま、最初の数社は完全無料でお受けしています。<br>
+    「こんなことを頼めるのかな？」という段階でも大歓迎です。<br>
+    プロジェクトの大小は問いません。30分だけ時間をください。
+  </p>
+  <div class="cta-badge">カジュアル面談を申し込む（無料）</div>
+  <div class="cta-contact">
+    <strong>浅野 紘毅｜KOKOROMi / 株式会社 Fluminal</strong>
+    ご連絡はDM・メール、どちらでも
+  </div>
+  <div class="slide-num">9 / 9</div>
+</div>
+
+</body>
+</html>

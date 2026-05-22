@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KOKOROMi プロジェクト設計ヒアリングシート</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --orange: #e07b39;
+  --dark: #1a1a1a;
+  --gray: #666;
+  --light: #f8f7f5;
+  --border: #e0e0e0;
+}
+
+body {
+  font-family: 'Hiragino Sans', 'Meiryo', sans-serif;
+  background: #f0f0ee;
+  color: var(--dark);
+  padding: 40px 20px;
+}
+
+.sheet {
+  width: 760px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+  overflow: hidden;
+}
+
+/* ヘッダー */
+.sheet-header {
+  background: var(--dark);
+  padding: 32px 48px 28px;
+}
+.sheet-header .label {
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--orange);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.sheet-header h1 {
+  font-size: 20px;
+  color: white;
+  font-weight: bold;
+  line-height: 1.5;
+  letter-spacing: 0.03em;
+}
+.sheet-header .note {
+  font-size: 11px;
+  color: #888;
+  margin-top: 8px;
+  line-height: 1.7;
+}
+
+/* 基本情報バー */
+.info-bar {
+  background: var(--light);
+  padding: 18px 48px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  gap: 32px;
+}
+.info-field {
+  flex: 1;
+}
+.info-field label {
+  font-size: 10px;
+  font-weight: bold;
+  color: var(--orange);
+  letter-spacing: 1px;
+  display: block;
+  margin-bottom: 5px;
+}
+.info-field .line {
+  border-bottom: 1px solid #ccc;
+  height: 22px;
+  width: 100%;
+}
+
+/* 本文 */
+.sheet-body {
+  padding: 36px 48px 48px;
+}
+
+/* セクション */
+.section {
+  margin-bottom: 36px;
+}
+.section-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--dark);
+}
+.section-num {
+  font-size: 11px;
+  font-weight: bold;
+  color: white;
+  background: var(--dark);
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.section-head h2 {
+  font-size: 14px;
+  font-weight: bold;
+  color: var(--dark);
+}
+.section-head .section-sub {
+  font-size: 11px;
+  color: var(--gray);
+  margin-left: auto;
+}
+
+/* 質問 */
+.q-block {
+  margin-bottom: 20px;
+}
+.q-label {
+  font-size: 12px;
+  font-weight: bold;
+  color: var(--dark);
+  margin-bottom: 6px;
+  line-height: 1.6;
+}
+.q-hint {
+  font-size: 11px;
+  color: var(--gray);
+  margin-bottom: 8px;
+  line-height: 1.6;
+}
+.write-area {
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  background: var(--light);
+  padding: 10px 14px;
+  min-height: 52px;
+  width: 100%;
+}
+.write-area-lg {
+  min-height: 76px;
+}
+
+/* チェックボックス */
+.check-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.check-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--light);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: 9px 12px;
+  font-size: 12px;
+  color: var(--dark);
+}
+.check-box {
+  width: 15px;
+  height: 15px;
+  border: 1.5px solid #bbb;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+/* ラジオ風 */
+.radio-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.radio-item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: var(--light);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: 8px 14px;
+  font-size: 12px;
+  color: var(--dark);
+}
+.radio-circle {
+  width: 14px;
+  height: 14px;
+  border: 1.5px solid #bbb;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* 人数・テキスト短 */
+.inline-fields {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+.inline-field {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.inline-field label {
+  font-size: 12px;
+  color: var(--dark);
+  white-space: nowrap;
+}
+.inline-field .short-line {
+  border-bottom: 1px solid #ccc;
+  width: 64px;
+  height: 22px;
+}
+
+/* 優先度 */
+.priority-row {
+  display: flex;
+  gap: 8px;
+}
+.priority-item {
+  flex: 1;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  background: var(--light);
+  padding: 10px 12px;
+  text-align: center;
+}
+.priority-item .p-label {
+  font-size: 11px;
+  color: var(--gray);
+  margin-bottom: 6px;
+}
+.priority-item .p-line {
+  border-bottom: 1px solid #ccc;
+  height: 20px;
+}
+
+/* フッター */
+.sheet-footer {
+  background: var(--light);
+  border-top: 1px solid var(--border);
+  padding: 20px 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.sheet-footer .footer-note {
+  font-size: 11px;
+  color: var(--gray);
+  line-height: 1.7;
+}
+.sheet-footer .logo {
+  font-size: 11px;
+  color: var(--orange);
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+/* 区切り */
+.divider {
+  border: none;
+  border-top: 1px dashed var(--border);
+  margin: 20px 0;
+}
+
+/* 重要メモ枠 */
+.memo-box {
+  border: 1.5px solid var(--orange);
+  border-radius: 6px;
+  padding: 14px 18px;
+  background: #fff8f3;
+}
+.memo-box .memo-label {
+  font-size: 10px;
+  font-weight: bold;
+  color: var(--orange);
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+}
+.memo-box .memo-content {
+  font-size: 11px;
+  color: var(--gray);
+  line-height: 1.8;
+}
+
+/* 印刷用 */
+@media print {
+  body { background: white; padding: 0; }
+  .sheet { box-shadow: none; border-radius: 0; width: 100%; }
+}
+</style>
+</head>
+<body>
+
+<div class="sheet">
+
+  <!-- ヘッダー -->
+  <div class="sheet-header">
+    <div class="label">KOKOROMi — Project Design</div>
+    <h1>プロジェクト設計ヒアリングシート</h1>
+    <p class="note">面談中に記入 / 所要時間：30〜45分 ／ この内容をもとにKOKOROMiがプロジェクトを設計します</p>
+  </div>
+
+  <!-- 基本情報 -->
+  <div class="info-bar">
+    <div class="info-field">
+      <label>DATE</label>
+      <div class="line"></div>
+    </div>
+    <div class="info-field" style="flex:2">
+      <label>COMPANY</label>
+      <div class="line"></div>
+    </div>
+    <div class="info-field" style="flex:2">
+      <label>CONTACT</label>
+      <div class="line"></div>
+    </div>
+  </div>
+
+  <div class="sheet-body">
+
+    <!-- Section 1: 背景 -->
+    <div class="section">
+      <div class="section-head">
+        <div class="section-num">1</div>
+        <h2>背景・きっかけ</h2>
+        <span class="section-sub">まず話を聞く</span>
+      </div>
+
+      <div class="q-block">
+        <div class="q-label">今、外の視点や人を入れてみようと思った背景は？</div>
+        <div class="q-hint">「なんとなく気になった」でも全然OK。理由を深掘りしない。まず聞く。</div>
+        <div class="write-area write-area-lg"></div>
+      </div>
+
+      <div class="q-block">
+        <div class="q-label">今、社内で「ここが煮詰まってる」「ここに課題がある」と感じていることは？</div>
+        <div class="write-area write-area-lg"></div>
+      </div>
+    </div>
+
+    <!-- Section 2: プロジェクトのイメージ -->
+    <div class="section">
+      <div class="section-head">
+        <div class="section-num">2</div>
+        <h2>プロジェクトのイメージ</h2>
+        <span class="section-sub">一緒に決める</span>
+      </div>
+
+      <div class="q-block">
+        <div class="q-label">参加者にやってもらいたいこと（あてはまるものすべて）</div>
+        <div class="q-hint">「決まっていない」でもOK。興味あるものを選んでもらうだけでいい。</div>
+        <div class="check-grid">
+          <div class="check-item"><div class="check-box"></div>新規事業・サービスへのフィードバック</div>
+          <div class="check-item"><div class="check-box"></div>ユーザーインタビュー・リサーチ協力</div>
+          <div class="check-item"><div class="check-box"></div>ブレスト・アイデア出し</div>
+          <div class="check-item"><div class="check-box"></div>会社・現場の1日体験（見学・観察）</div>
+          <div class="check-item"><div class="check-box"></div>SNS・noteでの発信・体験シェア</div>
+          <div class="check-item"><div class="check-box"></div>採用広報コンテンツへの協力</div>
+          <div class="check-item" style="grid-column:span 2"><div class="check-box"></div>その他：</div>
+        </div>
+      </div>
+
+      <div class="q-block">
+        <div class="q-label">希望する形式・期間</div>
+        <div class="radio-row">
+          <div class="radio-item"><div class="radio-circle"></div>1日単発（オフライン）</div>
+          <div class="radio-item"><div class="radio-circle"></div>1日単発（オンライン）</div>
+          <div class="radio-item"><div class="radio-circle"></div>2〜3日集中ワークショップ</div>
+          <div class="radio-item"><div class="radio-circle"></div>4〜8週間継続プロジェクト</div>
+          <div class="radio-item"><div class="radio-circle"></div>まだ決めたくない</div>
+        </div>
+      </div>
+
+      <div class="q-block">
+        <div class="q-label">受け入れ可能な人数・開始希望時期</div>
+        <div class="inline-fields">
+          <div class="inline-field">
+            <label>人数：</label>
+            <div class="short-line"></div>
+            <label>人</label>
+          </div>
+          <div class="inline-field">
+            <label>開始希望：</label>
+            <div class="short-line" style="width:120px"></div>
+          </div>
+          <div class="inline-field">
+            <label>オンライン可：</label>
+            <div class="radio-item" style="padding:4px 10px"><div class="radio-circle"></div>Yes</div>
+            <div class="radio-item" style="padding:4px 10px"><div class="radio-circle"></div>No</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 3: 参加者に求めること -->
+    <div class="section">
+      <div class="section-head">
+        <div class="section-num">3</div>
+        <h2>来てほしい人のイメージ</h2>
+        <span class="section-sub">なければ「なんでもOK」でいい</span>
+      </div>
+
+      <div class="q-block">
+        <div class="q-label">「こういう人が来てほしい」があれば（職種・経験・特性など）</div>
+        <div class="q-hint">例：教育現場の経験者、消費者目線で話せる人、率直に意見を言える人</div>
+        <div class="write-area"></div>
+      </div>
+
+      <div class="q-block">
+        <div class="q-label">「これだけは困る」という制約・NGはあるか</div>
+        <div class="q-hint">例：競合他社の方はNG、守秘義務のサインが必要 など</div>
+        <div class="write-area"></div>
+      </div>
+    </div>
+
+    <!-- Section 4: 成果・期待 -->
+    <div class="section">
+      <div class="section-head">
+        <div class="section-num">4</div>
+        <h2>成功のイメージ</h2>
+        <span class="section-sub">ここが一番大事</span>
+      </div>
+
+      <div class="q-block">
+        <div class="q-label">このプロジェクトが終わったとき「よかった」と感じる状態は？</div>
+        <div class="q-hint">「何が得られたら満足か」を具体的に。難しければ一緒に考える。</div>
+        <div class="write-area write-area-lg"></div>
+      </div>
+
+      <div class="q-block">
+        <div class="q-label">期待するアウトプットはありますか？（複数OK）</div>
+        <div class="check-grid">
+          <div class="check-item"><div class="check-box"></div>フィードバックレポート・まとめ</div>
+          <div class="check-item"><div class="check-box"></div>SNS・noteへの体験投稿</div>
+          <div class="check-item"><div class="check-box"></div>参加者との関係継続・採用検討</div>
+          <div class="check-item"><div class="check-box"></div>特にない（体験だけでいい）</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 5: 懸念・不安 -->
+    <div class="section">
+      <div class="section-head">
+        <div class="section-num">5</div>
+        <h2>懸念・不安・確認したいこと</h2>
+        <span class="section-sub">正直に聞く</span>
+      </div>
+
+      <div class="q-block">
+        <div class="q-label">今の段階で気になること、不安なことは？</div>
+        <div class="q-hint">例：管理工数が増えるのが不安、情報漏洩が心配、本当に使えるか疑問 など</div>
+        <div class="write-area write-area-lg"></div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- まとめ・次のアクション -->
+    <div class="section" style="margin-bottom:0">
+      <div class="section-head">
+        <div class="section-num" style="background:var(--orange)">→</div>
+        <h2>この面談の次のステップ</h2>
+      </div>
+
+      <div class="priority-row">
+        <div class="priority-item">
+          <div class="p-label">KOKOROMiが用意するもの</div>
+          <div class="write-area" style="min-height:56px; border:none; background:white; padding:4px 0;"></div>
+        </div>
+        <div class="priority-item">
+          <div class="p-label">企業側が確認すること</div>
+          <div class="write-area" style="min-height:56px; border:none; background:white; padding:4px 0;"></div>
+        </div>
+        <div class="priority-item">
+          <div class="p-label">次回連絡の目安</div>
+          <div class="write-area" style="min-height:56px; border:none; background:white; padding:4px 0;"></div>
+        </div>
+      </div>
+
+      <div style="margin-top:16px">
+        <div class="memo-box">
+          <div class="memo-label">MEMO — KOKOROMiから企業へ伝えること（面談終わりに必ず言う）</div>
+          <div class="memo-content">
+            ・参加者は<strong>副業ができない30代前後の社会人</strong>です。学生ではありません。<br>
+            ・参加者への報酬はゼロ。成長のために来ています。コマとして使わない設計にします。<br>
+            ・KOKOROMiがすべての調整・伴走を担います。企業側の工数は最小限です。<br>
+            ・MVP段階のいまは完全無料です。一緒に良い事例を作りましょう。
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- フッター -->
+  <div class="sheet-footer">
+    <div class="footer-note">
+      記入内容はプロジェクト設計に使用します。企業様の同意のうえで参加者選定に活用します。<br>
+      ご不明な点は浅野（KOKOROMi）まで：
+    </div>
+    <div class="logo"><img src="../assets/ご決定デザイン_横組み_PNG.png" alt="KOKOROMi" style="height:28px;width:auto;"></div>
+  </div>
+
+</div>
+
+</body>
+</html>
