@@ -342,7 +342,12 @@ header .badge {
 <!-- HEADER -->
 <header>
   <img src="assets/ご決定デザイン_横組み_PNG.png" alt="KOKOROMi">
-  <span class="badge">運営メンバー向け｜内部資料</span>
+  <nav style="display:flex; align-items:center; gap:8px;">
+    <a href="projects.html" style="color:rgba(255,255,255,0.55); font-size:12px; text-decoration:none; padding:6px 14px; border-radius:100px; border:1px solid rgba(255,255,255,0.15);">プロジェクト一覧</a>
+    <a href="for-organizations.html" style="color:rgba(255,255,255,0.55); font-size:12px; text-decoration:none; padding:6px 14px; border-radius:100px; border:1px solid rgba(255,255,255,0.15);">団体向けLP</a>
+    <a href="bizdev/sales_deck.html" style="color:rgba(255,255,255,0.55); font-size:12px; text-decoration:none; padding:6px 14px; border-radius:100px; border:1px solid rgba(255,255,255,0.15);">営業資料</a>
+    <span class="badge" style="margin-left:4px;">運営メンバー向け｜内部資料</span>
+  </nav>
 </header>
 
 <!-- HERO -->
@@ -358,6 +363,28 @@ header .badge {
 </div>
 
 <div class="main">
+
+  <!-- ページハブ -->
+  <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-bottom:48px;">
+    <a href="projects.html" style="background:white; border-radius:12px; padding:20px 22px; text-decoration:none; box-shadow:0 2px 10px rgba(0,0,0,0.06); border-left:4px solid var(--orange); display:block;">
+      <div style="font-size:10px; font-weight:bold; color:var(--orange); letter-spacing:0.1em; margin-bottom:8px;">PARTICIPANT PAGE</div>
+      <div style="font-size:15px; font-weight:bold; color:var(--dark); margin-bottom:6px;">プロジェクト一覧</div>
+      <div style="font-size:11px; color:var(--gray);">参加希望者向けの公開ページ。プロジェクトカードとLINE登録ボタン。</div>
+      <div style="font-size:11px; color:var(--orange); margin-top:10px; font-weight:bold;">開く →</div>
+    </a>
+    <a href="for-organizations.html" style="background:white; border-radius:12px; padding:20px 22px; text-decoration:none; box-shadow:0 2px 10px rgba(0,0,0,0.06); border-left:4px solid var(--blue); display:block;">
+      <div style="font-size:10px; font-weight:bold; color:var(--blue); letter-spacing:0.1em; margin-bottom:8px;">ORGANIZATION PAGE</div>
+      <div style="font-size:15px; font-weight:bold; color:var(--dark); margin-bottom:6px;">団体・企業向けLP</div>
+      <div style="font-size:11px; color:var(--gray);">掲載を検討している団体への紹介ページ。申し込みフォームへの導線。</div>
+      <div style="font-size:11px; color:var(--blue); margin-top:10px; font-weight:bold;">開く →</div>
+    </a>
+    <a href="bizdev/sales_deck.html" style="background:white; border-radius:12px; padding:20px 22px; text-decoration:none; box-shadow:0 2px 10px rgba(0,0,0,0.06); border-left:4px solid var(--green); display:block;">
+      <div style="font-size:10px; font-weight:bold; color:var(--green); letter-spacing:0.1em; margin-bottom:8px;">BIZ DEV</div>
+      <div style="font-size:15px; font-weight:bold; color:var(--dark); margin-bottom:6px;">営業資料（スライド）</div>
+      <div style="font-size:11px; color:var(--gray);">商談・説明会で使うプレゼン資料。GRANTスタイル11スライド。</div>
+      <div style="font-size:11px; color:var(--green); margin-top:10px; font-weight:bold;">開く →</div>
+    </a>
+  </div>
 
   <!-- 2軸の説明 -->
   <div class="axes">
@@ -665,129 +692,132 @@ header .badge {
     </div>
   </div>
 
-  <!-- 募集ポジション -->
+  <!-- 募集ポジション（タブ形式） -->
   <div style="margin-top: 56px; margin-bottom: 8px;">
     <div style="display:flex; align-items:center; gap:16px; margin-bottom:20px;">
       <span class="phase-badge" style="background:#9b59b6;">RECRUIT</span>
       <div class="phase-title">現在募集中のポジション</div>
     </div>
 
-    <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+    <!-- タブボタン -->
+    <div style="display:flex; gap:4px; margin-bottom:0;">
+      <button id="tab-btn-1" onclick="switchTab(1)"
+        style="padding:10px 22px; font-size:13px; font-weight:bold; cursor:pointer; border:none; border-radius:10px 10px 0 0; background:#9b59b6; color:white; letter-spacing:0.03em;">
+        ① 企業・団体開拓サポート
+      </button>
+      <button id="tab-btn-2" onclick="switchTab(2)"
+        style="padding:10px 22px; font-size:13px; font-weight:bold; cursor:pointer; border:none; border-radius:10px 10px 0 0; background:#e0e0e0; color:#999; letter-spacing:0.03em;">
+        ② SNS・コンテンツ発信
+      </button>
+    </div>
 
-      <!-- ポジション1 -->
-      <div style="background:white; border-radius:12px; overflow:hidden; box-shadow:0 2px 10px rgba(0,0,0,0.06);">
-        <div style="background:#9b59b6; padding:10px 18px;">
-          <span style="color:white; font-size:11px; font-weight:bold; letter-spacing:0.05em;">POSITION 01</span>
-        </div>
-        <div style="padding:20px 22px;">
-          <h3 style="font-size:16px; font-weight:bold; color:var(--dark); margin-bottom:8px; line-height:1.4;">
-            企業・団体開拓サポート
-          </h3>
-          <p style="font-size:12px; color:var(--gray); line-height:1.75; margin-bottom:14px;">
-            KOKOROMiのプロジェクトに協力してもらえる企業・NPO・地域団体を一緒に探し、つないでいくポジション。
-            営業経験がなくてもOK。一緒にやり方を作っていきます。
-          </p>
+    <div style="background:white; border-radius:0 10px 10px 10px; box-shadow:0 2px 10px rgba(0,0,0,0.06); overflow:hidden;">
+
+      <!-- パネル1 -->
+      <div id="tab-panel-1" style="display:grid; grid-template-columns:1fr 1fr;">
+        <div style="padding:24px 28px; border-right:1px solid #f0f0f0;">
+          <h3 style="font-size:16px; font-weight:bold; color:var(--dark); margin-bottom:8px;">企業・団体開拓サポート</h3>
+          <p style="font-size:12px; color:var(--gray); line-height:1.75; margin-bottom:14px;">KOKOROMiのプロジェクトに協力してもらえる企業・NPO・地域団体を一緒に探し、つないでいくポジション。営業経験がなくてもOK。一緒にやり方を作っていきます。</p>
           <div style="font-size:11px; font-weight:bold; color:var(--gray); margin-bottom:8px;">主な業務</div>
-          <ul style="list-style:none; display:flex; flex-direction:column; gap:6px;">
-            <li style="display:flex; gap:8px; font-size:12px; color:var(--dark); align-items:flex-start;">
-              <span style="color:#9b59b6; margin-top:1px;">▸</span>掲載候補のリストアップ（NPO・スタートアップ・地域団体など）
-            </li>
-            <li style="display:flex; gap:8px; font-size:12px; color:var(--dark); align-items:flex-start;">
-              <span style="color:#9b59b6; margin-top:1px;">▸</span>営業メールの作成・送付
-            </li>
-            <li style="display:flex; gap:8px; font-size:12px; color:var(--dark); align-items:flex-start;">
-              <span style="color:#9b59b6; margin-top:1px;">▸</span>スライド資料（提案用）の作成補助
-            </li>
-            <li style="display:flex; gap:8px; font-size:12px; color:var(--dark); align-items:flex-start;">
-              <span style="color:#9b59b6; margin-top:1px;">▸</span>ヒアリング同席・議事録まとめ
-            </li>
+          <ul style="list-style:none; display:flex; flex-direction:column; gap:6px; margin-bottom:16px;">
+            <li style="display:flex; gap:8px; font-size:12px; color:var(--dark);"><span style="color:#9b59b6;">▸</span>掲載候補のリストアップ（NPO・スタートアップ・地域団体など）</li>
+            <li style="display:flex; gap:8px; font-size:12px; color:var(--dark);"><span style="color:#9b59b6;">▸</span>営業メールの作成・送付</li>
+            <li style="display:flex; gap:8px; font-size:12px; color:var(--dark);"><span style="color:#9b59b6;">▸</span>スライド資料（提案用）の作成補助</li>
+            <li style="display:flex; gap:8px; font-size:12px; color:var(--dark);"><span style="color:#9b59b6;">▸</span>ヒアリング同席・議事録まとめ</li>
           </ul>
-          <div style="margin-top:14px; display:flex; gap:6px; flex-wrap:wrap;">
+          <div style="display:flex; gap:6px; flex-wrap:wrap;">
             <span style="font-size:10px; background:#f3e8fd; color:#9b59b6; padding:2px 10px; border-radius:100px; font-weight:bold;">週2〜3時間〜</span>
             <span style="font-size:10px; background:#f3e8fd; color:#9b59b6; padding:2px 10px; border-radius:100px; font-weight:bold;">リモートOK</span>
             <span style="font-size:10px; background:#f3e8fd; color:#9b59b6; padding:2px 10px; border-radius:100px; font-weight:bold;">無償・副業届不要</span>
           </div>
         </div>
+        <div style="padding:24px 28px; background:#fffdf9;">
+          <div style="font-size:11px; font-weight:bold; color:var(--orange); letter-spacing:0.08em; margin-bottom:12px;">📋 Activo 掲載文（クリックで全選択）</div>
+          <pre onclick="this.parentNode.querySelector('pre').focus(); document.execCommand('selectAll')" style="font-size:11px; color:var(--dark); line-height:1.9; white-space:pre-wrap; font-family:inherit; cursor:pointer; background:#fff8f0; border-radius:8px; padding:14px; border:1px solid #f0d5c0;">【KOKOROMi｜企業・団体開拓サポートスタッフ募集】
+
+KOKOROMiは「やりたいことがあるのに動けていない」30代前後の社会人と、一緒に動いてくれる仲間を求めるNPO・企業・地域団体をつなぐプロジェクトマッチングサービスです。
+
+現在、プロジェクトを掲載してもらえる企業・団体を開拓するポジションを募集しています。
+
+▸ 主な業務
+• 掲載候補のリストアップ（NPO・スタートアップ・地域団体など20件〜）
+• 営業メールの作成・送付
+• スライド資料（提案用）の作成補助
+• ヒアリング同席・議事録まとめ
+
+▸ こんな方に向いています
+• 社会課題や地域活性化に関心がある
+• 文章を書くのが好き・得意
+• 営業経験は不問。一緒にやり方を作っていきます
+
+稼働：週2〜3時間〜 ／ リモートOK ／ 無償・副業届出不要</pre>
+        </div>
       </div>
 
-      <!-- ポジション2 -->
-      <div style="background:white; border-radius:12px; overflow:hidden; box-shadow:0 2px 10px rgba(0,0,0,0.06);">
-        <div style="background:#9b59b6; padding:10px 18px;">
-          <span style="color:white; font-size:11px; font-weight:bold; letter-spacing:0.05em;">POSITION 02</span>
-        </div>
-        <div style="padding:20px 22px;">
-          <h3 style="font-size:16px; font-weight:bold; color:var(--dark); margin-bottom:8px; line-height:1.4;">
-            SNS・コンテンツ発信
-          </h3>
-          <p style="font-size:12px; color:var(--gray); line-height:1.75; margin-bottom:14px;">
-            KOKOROMiのInstagram・X（Twitter）・LINEを運用し、参加者と団体の双方への認知を広げるポジション。
-            フォロワー数より「共感される発信」を重視。「なぜKOKOROMiなのか」を言葉にするのが得意な人を歓迎。
-          </p>
+      <!-- パネル2 -->
+      <div id="tab-panel-2" style="display:none; grid-template-columns:1fr 1fr;">
+        <div style="padding:24px 28px; border-right:1px solid #f0f0f0;">
+          <h3 style="font-size:16px; font-weight:bold; color:var(--dark); margin-bottom:8px;">SNS・コンテンツ発信</h3>
+          <p style="font-size:12px; color:var(--gray); line-height:1.75; margin-bottom:14px;">KOKOROMiのInstagram・X・LINEを運用し、参加者と団体の双方への認知を広げるポジション。フォロワー数より「共感される発信」を重視。「なぜKOKOROMiなのか」を言葉にするのが得意な人を歓迎。</p>
           <div style="font-size:11px; font-weight:bold; color:var(--gray); margin-bottom:8px;">主な業務</div>
-          <ul style="list-style:none; display:flex; flex-direction:column; gap:6px;">
-            <li style="display:flex; gap:8px; font-size:12px; color:var(--dark); align-items:flex-start;">
-              <span style="color:#9b59b6; margin-top:1px;">▸</span>週2〜3回のSNS投稿（文章・画像デザイン）
-            </li>
-            <li style="display:flex; gap:8px; font-size:12px; color:var(--dark); align-items:flex-start;">
-              <span style="color:#9b59b6; margin-top:1px;">▸</span>LINE公式アカウントの配信文の作成・送信
-            </li>
-            <li style="display:flex; gap:8px; font-size:12px; color:var(--dark); align-items:flex-start;">
-              <span style="color:#9b59b6; margin-top:1px;">▸</span>参加者の声・活動レポートのまとめと発信
-            </li>
-            <li style="display:flex; gap:8px; font-size:12px; color:var(--dark); align-items:flex-start;">
-              <span style="color:#9b59b6; margin-top:1px;">▸</span>「団体募集」「参加者募集」の呼びかけ投稿を定期発信
-            </li>
-            <li style="display:flex; gap:8px; font-size:12px; color:var(--dark); align-items:flex-start;">
-              <span style="color:#9b59b6; margin-top:1px;">▸</span>KOKOROMiの理念・想いを言語化してコンテンツ化
-            </li>
+          <ul style="list-style:none; display:flex; flex-direction:column; gap:6px; margin-bottom:16px;">
+            <li style="display:flex; gap:8px; font-size:12px; color:var(--dark);"><span style="color:#9b59b6;">▸</span>週2〜3回のSNS投稿（文章・画像デザイン）</li>
+            <li style="display:flex; gap:8px; font-size:12px; color:var(--dark);"><span style="color:#9b59b6;">▸</span>LINE公式アカウントの配信文の作成・送信</li>
+            <li style="display:flex; gap:8px; font-size:12px; color:var(--dark);"><span style="color:#9b59b6;">▸</span>参加者の声・活動レポートのまとめと発信</li>
+            <li style="display:flex; gap:8px; font-size:12px; color:var(--dark);"><span style="color:#9b59b6;">▸</span>「団体募集」「参加者募集」の呼びかけ投稿を定期発信</li>
+            <li style="display:flex; gap:8px; font-size:12px; color:var(--dark);"><span style="color:#9b59b6;">▸</span>KOKOROMiの理念・想いを言語化してコンテンツ化</li>
           </ul>
-          <div style="margin-top:14px; display:flex; gap:6px; flex-wrap:wrap;">
+          <div style="display:flex; gap:6px; flex-wrap:wrap;">
             <span style="font-size:10px; background:#f3e8fd; color:#9b59b6; padding:2px 10px; border-radius:100px; font-weight:bold;">週2〜3時間〜</span>
             <span style="font-size:10px; background:#f3e8fd; color:#9b59b6; padding:2px 10px; border-radius:100px; font-weight:bold;">リモートOK</span>
             <span style="font-size:10px; background:#f3e8fd; color:#9b59b6; padding:2px 10px; border-radius:100px; font-weight:bold;">無償・副業届不要</span>
           </div>
         </div>
+        <div style="padding:24px 28px; background:#fffdf9;">
+          <div style="font-size:11px; font-weight:bold; color:var(--orange); letter-spacing:0.08em; margin-bottom:12px;">📋 Activo 掲載文（クリックで全選択）</div>
+          <pre onclick="this.parentNode.querySelector('pre').focus(); document.execCommand('selectAll')" style="font-size:11px; color:var(--dark); line-height:1.9; white-space:pre-wrap; font-family:inherit; cursor:pointer; background:#fff8f0; border-radius:8px; padding:14px; border:1px solid #f0d5c0;">【KOKOROMi｜SNS・コンテンツ発信スタッフ募集】
+
+KOKOROMiは「やりたいことがあるのに動けていない」30代前後の社会人と、一緒に動いてくれる仲間を求めるNPO・企業・地域団体をつなぐプロジェクトマッチングサービスです。
+
+現在、SNS・LINE公式アカウントの運用・発信を担うポジションを募集しています。
+
+▸ 主な業務
+• 週2〜3回のSNS投稿（文章・画像デザイン）
+• LINE公式アカウントの配信文の作成・送信
+• 参加者の声・活動レポートのまとめと発信
+• 「団体募集」「参加者募集」の呼びかけ投稿を定期発信
+• KOKOROMiの理念・想いを言語化してコンテンツ化
+
+▸ こんな方に向いています
+• 社会課題や人のチャレンジに共感できる
+• 「伝わる文章」を書くのが好き
+• SNS運用経験は不問。一緒にやり方を作っていきます
+
+稼働：週2〜3時間〜 ／ リモートOK ／ 無償・副業届出不要</pre>
+        </div>
       </div>
 
-    </div>
+    </div><!-- /タブコンテンツ -->
 
-    <!-- Activo用コピー -->
-    <div style="margin-top:20px; background:#fffdf9; border:1.5px dashed var(--orange); border-radius:10px; padding:20px 22px;">
-      <div style="font-size:11px; font-weight:bold; color:var(--orange); letter-spacing:0.08em; margin-bottom:10px;">📋 ACTIVO 掲載文（コピー用）</div>
-      <p style="font-size:12px; color:var(--dark); line-height:1.9;">
-        <strong>【KOKOROMi｜企業・団体開拓サポートスタッフ募集】</strong><br><br>
-        KOKOROMiは「やりたいことがあるのに動けていない」30代前後の社会人と、一緒に動いてくれる仲間を求めるNPO・企業・地域団体をつなぐプロジェクトマッチングサービスです。<br><br>
-        現在、プロジェクトを掲載してもらえる企業・団体を開拓するポジションを募集しています。<br><br>
-        <strong>▸ 主な業務</strong><br>
-        • 掲載候補のリストアップ（NPO・スタートアップ・地域団体など20件〜）<br>
-        • 営業メールの作成・送付<br>
-        • スライド資料（提案用）の作成補助<br>
-        • ヒアリング同席・議事録まとめ<br><br>
-        <strong>▸ こんな方に向いています</strong><br>
-        • 社会課題や地域活性化に関心がある<br>
-        • 文章を書くのが好き・得意<br>
-        • 営業経験は不問。一緒にやり方を作っていきます<br><br>
-        稼働：週2〜3時間〜 ／ リモートOK ／ 無償・副業届出不要
-      </p>
+    <script>
+    function switchTab(n) {
+      var p1 = document.getElementById('tab-panel-1');
+      var p2 = document.getElementById('tab-panel-2');
+      var b1 = document.getElementById('tab-btn-1');
+      var b2 = document.getElementById('tab-btn-2');
+      p1.style.display = n === 1 ? 'grid' : 'none';
+      p2.style.display = n === 2 ? 'grid' : 'none';
+      b1.style.background = n === 1 ? '#9b59b6' : '#e0e0e0';
+      b1.style.color = n === 1 ? 'white' : '#999';
+      b2.style.background = n === 2 ? '#9b59b6' : '#e0e0e0';
+      b2.style.color = n === 2 ? 'white' : '#999';
+    }
+    </script>
 
-      <div style="height:16px;"></div>
+  </div><!-- /募集ポジション -->
 
-      <strong>【KOKOROMi｜SNS・コンテンツ発信スタッフ募集】</strong><br><br>
-        KOKOROMiは「やりたいことがあるのに動けていない」30代前後の社会人と、一緒に動いてくれる仲間を求めるNPO・企業・地域団体をつなぐプロジェクトマッチングサービスです。<br><br>
-        現在、SNS・LINE公式アカウントの運用・発信を担うポジションを募集しています。<br><br>
-        <strong>▸ 主な業務</strong><br>
-        • 週2〜3回のSNS投稿（文章・画像デザイン）<br>
-        • LINE公式アカウントの配信文の作成・送信<br>
-        • 参加者の声・活動レポートのまとめと発信<br>
-        • 「団体募集」「参加者募集」の呼びかけ投稿を定期発信<br>
-        • KOKOROMiの理念・想いを言語化してコンテンツ化<br><br>
-        <strong>▸ こんな方に向いています</strong><br>
-        • 社会課題や人のチャレンジに共感できる<br>
-        • 「伝わる文章」を書くのが好き<br>
-        • SNS運用経験は不問。一緒にやり方を作っていきます<br><br>
-        稼働：週2〜3時間〜 ／ リモートOK ／ 無償・副業届出不要
-    </div>
-  </div>
+  <div style="display:none;">
+
 
   <div style="height:32px;"></div>
 
