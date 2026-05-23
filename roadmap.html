@@ -486,7 +486,9 @@ header .badge {
     <div style="font-size:11px; font-weight:bold; color:var(--gray); letter-spacing:0.1em; margin-bottom:16px;">TARGET PERSONA — 誰のためのプロジェクトか</div>
 
     <div style="background:white; border-radius:16px; box-shadow:0 2px 12px rgba(0,0,0,0.06); overflow:hidden;">
-      <div style="display:grid; grid-template-columns:220px 1fr; min-height:260px;">
+
+      <!-- 上段：基本プロフィール -->
+      <div style="display:grid; grid-template-columns:220px 1fr;">
 
         <!-- 左：プロフィール -->
         <div style="background:linear-gradient(160deg, #1a1a1a 0%, #2d2d2d 100%); padding:28px 24px; display:flex; flex-direction:column; gap:12px;">
@@ -505,47 +507,71 @@ header .badge {
           </div>
         </div>
 
-        <!-- 右：詳細 -->
-        <div style="padding:28px 32px; display:flex; flex-direction:column; gap:20px;">
-
-          <!-- 口癖 -->
+        <!-- 右：口癖＋表の顔 -->
+        <div style="padding:28px 32px; display:flex; flex-direction:column; gap:16px;">
           <div>
             <div style="font-size:10px; font-weight:bold; color:var(--gray); letter-spacing:0.1em; margin-bottom:8px;">よくある思考・口癖</div>
-            <div style="font-size:14px; font-weight:700; color:var(--dark); line-height:1.8; border-left:3px solid var(--orange); padding-left:14px;">
+            <div style="font-size:14px; font-weight:700; color:var(--dark); line-height:1.9; border-left:3px solid var(--orange); padding-left:14px;">
               「このままでいいのかな…」<br>
               「でも転職は違う気がする」<br>
-              「何かしたいけど、何をすればいいか分からない」
+              「何かしたいけど、何をすればいいか分からない」<br>
+              「もっと余裕ができたら考えよう」
             </div>
           </div>
-
-          <!-- 心理 -->
-          <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-            <div style="background:#f8f7f5; border-radius:10px; padding:14px 16px;">
-              <div style="font-size:10px; font-weight:bold; color:var(--gray); letter-spacing:0.08em; margin-bottom:8px;">😔 内面の葛藤</div>
-              <ul style="list-style:none; padding:0; margin:0; font-size:11px; color:#555; line-height:2;">
-                <li>10年後の自分が想像できてしまう</li>
-                <li>成長している実感がない</li>
-                <li>生徒は好き。でも外を知らないのが怖い</li>
-                <li>辞めたいわけじゃないけど、このままも怖い</li>
-              </ul>
-            </div>
-            <div style="background:#fff8f4; border-radius:10px; padding:14px 16px;">
-              <div style="font-size:10px; font-weight:bold; color:var(--orange); letter-spacing:0.08em; margin-bottom:8px;">🚧 行動を阻む構造的な壁</div>
-              <ul style="list-style:none; padding:0; margin:0; font-size:11px; color:#555; line-height:2;">
-                <li>時間がない（部活・授業・校務）</li>
-                <li>同じ悩みを話せる人がいない</li>
-                <li>地域的に機会が少ない</li>
-                <li>「何をすればいいか」が分からない</li>
-              </ul>
-            </div>
+          <div style="background:#f0f8ff; border-radius:10px; padding:12px 16px; font-size:12px; color:#555; line-height:1.8;">
+            👀 <strong style="color:var(--dark);">表の顔：</strong>責任感が強く生徒からの信頼も厚い「いい先生」。大きな不満は言わない安定タイプ。<strong>問題がある人には見えない。</strong>
           </div>
-
-          <!-- 一言 -->
-          <div style="background:#fffbf0; border:1px solid #f0e0c0; border-radius:10px; padding:12px 16px; font-size:12px; color:#555; line-height:1.8;">
-            💡 <strong style="color:var(--dark);">一言で言うと：</strong>「ちゃんとやれているのに、未来に納得できていない人」。意思の問題ではなく、<strong>構造的に動けない</strong>状態にある。
-          </div>
-
         </div>
+      </div>
+
+      <!-- 下段：詳細 -->
+      <div style="border-top:1px solid #f0f0f0; display:grid; grid-template-columns:1fr 1fr 1fr; gap:0;">
+
+        <!-- 内面の葛藤 -->
+        <div style="padding:20px 24px; border-right:1px solid #f0f0f0;">
+          <div style="font-size:10px; font-weight:bold; color:var(--gray); letter-spacing:0.08em; margin-bottom:12px;">😔 内面の葛藤</div>
+          <ul style="list-style:none; padding:0; margin:0; font-size:11px; color:#555; line-height:2.1;">
+            <li>「10年後の自分が想像できてしまう」</li>
+            <li>「成長している実感がない」</li>
+            <li>「他の働き方を知らないままでいいのか」</li>
+            <li>「自分の市場価値って何？」</li>
+            <li>生徒は好き。でも外を知らないのが怖い</li>
+          </ul>
+          <div style="margin-top:12px; font-size:11px; font-weight:700; color:#c0392b; background:#fdf0ef; border-radius:6px; padding:8px 10px; line-height:1.6;">
+            辞めたいわけじゃないけど、<br>このままも怖い——宙ぶらりん状態
+          </div>
+        </div>
+
+        <!-- 行動を阻む壁 -->
+        <div style="padding:20px 24px; border-right:1px solid #f0f0f0;">
+          <div style="font-size:10px; font-weight:bold; color:var(--gray); letter-spacing:0.08em; margin-bottom:12px;">🚧 行動を阻む構造的な壁</div>
+          <ul style="list-style:none; padding:0; margin:0; font-size:11px; color:#555; line-height:2.1;">
+            <li>時間がない（部活・授業・校務）</li>
+            <li>同じ悩みを話せる人がいない</li>
+            <li>地方で物理的に機会が少ない</li>
+            <li>お金をかける判断軸がない</li>
+            <li>「何をすればいいか分からない」</li>
+          </ul>
+          <div style="margin-top:12px; font-size:11px; font-weight:700; color:#666; background:#f5f5f5; border-radius:6px; padding:8px 10px; line-height:1.6;">
+            意思の問題ではなく<br>構造的に動けない状態
+          </div>
+        </div>
+
+        <!-- KOKOROMiが提供すべき価値 -->
+        <div style="padding:20px 24px;">
+          <div style="font-size:10px; font-weight:bold; color:var(--orange); letter-spacing:0.08em; margin-bottom:12px;">✨ KOKOROMiが届けるもの</div>
+          <ul style="list-style:none; padding:0; margin:0; font-size:11px; color:#555; line-height:2.1;">
+            <li>いきなり転職ではない「小さな越境」</li>
+            <li>1日〜数週間で体験できる外の世界</li>
+            <li>失敗してもリスクの少ない挑戦機会</li>
+            <li>同じ悩みを持つ人との横のつながり</li>
+            <li>「自分はこういう人間かも」と気づける場</li>
+          </ul>
+          <div style="margin-top:12px; font-size:11px; font-weight:700; color:var(--orange); background:#fff8f4; border-radius:6px; padding:8px 10px; line-height:1.6;">
+            ちゃんとやれているのに、<br>未来に納得できていない人へ
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
