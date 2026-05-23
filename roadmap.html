@@ -583,58 +583,75 @@ header .badge {
     </div>
   </div>
 
-  <!-- ===== 挑戦の先にある未来（階段図） ===== -->
+  <!-- ===== 挑戦の先にある未来（分岐図） ===== -->
   <div style="margin: 0 0 56px; padding: 36px 40px; background:white; border-radius:16px; box-shadow:0 2px 12px rgba(0,0,0,0.06);">
     <div style="font-size:11px; font-weight:bold; color:var(--gray); letter-spacing:0.1em; margin-bottom:8px;">WHAT HAPPENS NEXT</div>
-    <div style="font-size:18px; font-weight:800; color:var(--dark); margin-bottom:6px;">挑戦の先にある、それぞれの未来</div>
-    <div style="font-size:13px; color:var(--gray); margin-bottom:32px; line-height:1.8;">KOKOROMiは「転職しなきゃ」という話ではない。今の仕事を続けながら外の世界を知ることが出発点。その先は、自分で選べる。</div>
+    <div style="font-size:18px; font-weight:800; color:var(--dark); margin-bottom:6px;">参加することで、世界が広がる</div>
+    <div style="font-size:13px; color:var(--gray); margin-bottom:32px; line-height:1.8;">KOKOROMiに参加することで生まれる出会い・挑戦の機会。その先にどんな道を選ぶかは、人それぞれでいい。</div>
 
-    <!-- 階段ビジュアル -->
-    <div style="display:flex; align-items:flex-end; gap:6px; height:180px;">
-      <!-- Step 1 -->
-      <div style="flex:1; height:72px; background:#4bb4e6; border-radius:10px 10px 0 0; display:flex; align-items:center; justify-content:center;">
-        <span style="font-size:40px; font-weight:900; color:rgba(255,255,255,0.18); line-height:1; user-select:none;">1</span>
-      </div>
-      <!-- Step 2 -->
-      <div style="flex:1; height:126px; background:var(--orange); border-radius:10px 10px 0 0; display:flex; align-items:center; justify-content:center;">
-        <span style="font-size:40px; font-weight:900; color:rgba(255,255,255,0.18); line-height:1; user-select:none;">2</span>
-      </div>
-      <!-- Step 3（矢印型） -->
-      <div style="flex:1; height:180px; display:flex; flex-direction:column; align-items:stretch;">
-        <!-- 矢印の頭 -->
-        <div style="display:flex; justify-content:center; flex-shrink:0;">
-          <div style="width:0; height:0; border-left:52px solid transparent; border-right:52px solid transparent; border-bottom:30px solid #7c3aed;"></div>
-        </div>
-        <!-- 矢印の胴体 -->
-        <div style="flex:1; background:#7c3aed; border-radius:0; display:flex; align-items:center; justify-content:center;">
-          <span style="font-size:40px; font-weight:900; color:rgba(255,255,255,0.18); line-height:1; user-select:none;">3</span>
+    <!-- 分岐フロー図 -->
+    <div style="display:flex; align-items:stretch; gap:0;">
+
+      <!-- 左：参加する -->
+      <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; flex-shrink:0;">
+        <div style="background:var(--orange); color:white; border-radius:14px; padding:20px 22px; text-align:center; box-shadow:0 4px 16px rgba(224,123,57,0.25);">
+          <div style="font-size:22px; margin-bottom:6px;">🙋</div>
+          <div style="font-size:13px; font-weight:800; margin-bottom:4px;">KOKOROMiに<br>参加する</div>
+          <div style="font-size:10px; color:rgba(255,255,255,0.75); line-height:1.6;">今の仕事を続けながら<br>外の世界に触れる</div>
         </div>
       </div>
+
+      <!-- 矢印→中央 -->
+      <div style="display:flex; align-items:center; padding:0 12px; flex-shrink:0;">
+        <div style="display:flex; flex-direction:column; align-items:center; gap:2px;">
+          <div style="font-size:10px; color:#aaa; white-space:nowrap;">出会い</div>
+          <div style="font-size:10px; color:#aaa; white-space:nowrap;">挑戦の機会</div>
+          <div style="font-size:10px; color:#aaa; white-space:nowrap;">視野の広がり</div>
+          <div style="font-size:16px; color:#ddd; margin-top:4px;">→</div>
+        </div>
+      </div>
+
+      <!-- 中央：得られるもの -->
+      <div style="flex:1; background:#f8f7f5; border-radius:14px; padding:20px; display:flex; flex-direction:column; gap:8px; justify-content:center;">
+        <div style="font-size:11px; font-weight:bold; color:var(--gray); letter-spacing:0.08em; margin-bottom:4px;">参加を通じて得られるもの</div>
+        <div style="display:flex; align-items:center; gap:8px; font-size:12px; color:var(--dark);">
+          <span style="background:white; border-radius:6px; padding:4px 10px; box-shadow:0 1px 4px rgba(0,0,0,0.07);">🤝 新しいつながり</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:8px; font-size:12px; color:var(--dark);">
+          <span style="background:white; border-radius:6px; padding:4px 10px; box-shadow:0 1px 4px rgba(0,0,0,0.07);">💪 実績・自信</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:8px; font-size:12px; color:var(--dark);">
+          <span style="background:white; border-radius:6px; padding:4px 10px; box-shadow:0 1px 4px rgba(0,0,0,0.07);">🌍 視野・気づき</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:8px; font-size:12px; color:var(--dark);">
+          <span style="background:white; border-radius:6px; padding:4px 10px; box-shadow:0 1px 4px rgba(0,0,0,0.07);">✨ 挑戦の機会</span>
+        </div>
+      </div>
+
+      <!-- 矢印→右 -->
+      <div style="display:flex; align-items:center; padding:0 12px; flex-shrink:0;">
+        <div style="font-size:16px; color:#ddd;">→</div>
+      </div>
+
+      <!-- 右：それぞれの道（分岐） -->
+      <div style="flex:1; display:flex; flex-direction:column; gap:8px; justify-content:center;">
+        <div style="font-size:11px; font-weight:bold; color:var(--gray); letter-spacing:0.08em; margin-bottom:4px;">その先は、自分で選ぶ</div>
+        <div style="background:#fff8f4; border:1.5px solid var(--orange); border-radius:10px; padding:10px 14px; font-size:12px; color:var(--dark); font-weight:600;">
+          🏢 今の仕事を続ける<br><span style="font-size:10px; font-weight:400; color:var(--gray);">視野が広がった状態で、現職をより深める</span>
+        </div>
+        <div style="background:#f0fff4; border:1.5px solid var(--green); border-radius:10px; padding:10px 14px; font-size:12px; color:var(--dark); font-weight:600;">
+          🚀 転職・起業に踏み出す<br><span style="font-size:10px; font-weight:400; color:var(--gray);">実績と縁を手に、新しいキャリアへ</span>
+        </div>
+        <div style="background:#f5f3ff; border:1.5px solid #9b59b6; border-radius:10px; padding:10px 14px; font-size:12px; color:var(--dark); font-weight:600;">
+          🌱 また別の挑戦をする<br><span style="font-size:10px; font-weight:400; color:var(--gray);">次のプロジェクトへ、コミュニティに残る</span>
+        </div>
+      </div>
+
     </div>
 
-    <!-- ラベル -->
-    <div style="display:flex; gap:6px; margin-top:12px; margin-bottom:28px;">
-      <div style="flex:1; text-align:center;">
-        <div style="font-size:13px; font-weight:800; color:#4bb4e6; margin-bottom:3px;">プロボノ参加</div>
-        <div style="font-size:10px; color:var(--gray); line-height:1.6;">面白そうな事業を<br>手伝ってみる・触れてみる</div>
-      </div>
-      <div style="flex:1; text-align:center;">
-        <div style="font-size:13px; font-weight:800; color:var(--orange); margin-bottom:3px;">副業・兼業</div>
-        <div style="font-size:10px; color:var(--gray); line-height:1.6;">事業を担ってみる<br>スキルを磨く</div>
-      </div>
-      <div style="flex:1; text-align:center;">
-        <div style="font-size:13px; font-weight:800; color:#7c3aed; margin-bottom:3px;">転職・起業</div>
-        <div style="font-size:10px; color:var(--gray); line-height:1.6;">つくりたい未来の<br>つくり手になる</div>
-      </div>
-    </div>
-
-    <!-- KOKOROMiの独自性 -->
-    <div style="padding:18px 22px; background:#fff8f4; border-radius:10px; border-left:4px solid var(--orange); display:flex; align-items:flex-start; gap:14px;">
-      <span style="font-size:22px; flex-shrink:0; margin-top:1px;">💡</span>
-      <div>
-        <div style="font-size:14px; font-weight:800; color:var(--dark); margin-bottom:6px;">今の仕事を続ける、という選択もOK。</div>
-        <div style="font-size:12px; color:#555; line-height:1.9;">副業・転職をゴールにしなくていい。KOKOROMiは「挑戦したことがある大人になる」こと自体に価値を置く。一度外の世界に触れることで、視野が広がり、自信が生まれる。それだけで十分。<br>参照: <a href="https://drivecareer.etic.or.jp/guide/social_career" target="_blank" style="color:var(--orange); font-size:11px;">ETIC. ソーシャルキャリアガイド ↗</a></div>
-      </div>
+    <!-- メッセージ -->
+    <div style="margin-top:24px; padding:14px 20px; background:#fff8f4; border-radius:10px; border-left:4px solid var(--orange); font-size:12px; color:#555; line-height:1.9;">
+      💡 <strong style="color:var(--dark);">どの道を選んでもいい。</strong>転職や起業がゴールではなく、「挑戦したことがある大人になる」こと自体がKOKOROMiの価値。参照: <a href="https://drivecareer.etic.or.jp/guide/social_career" target="_blank" style="color:var(--orange);">ETIC. ソーシャルキャリアガイド ↗</a>
     </div>
   </div>
 
