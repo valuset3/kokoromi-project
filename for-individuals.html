@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>個人の方へ | KOKOROMi</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Hiragino Sans', 'Meiryo', sans-serif;
+  background: #f5f5f3;
+  color: #1a1a1a;
+  line-height: 1.7;
+}
+:root {
+  --orange: #e07b39;
+  --dark: #1a1a1a;
+  --gray: #666;
+  --light: #f8f7f5;
+  --green: #2e7d5e;
+  --blue: #3a7bd5;
+}
+
+/* ===== HEADER ===== */
+header {
+  background: var(--dark);
+  padding: 16px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+header img { height: 28px; width: auto; }
+header nav { display: flex; gap: 10px; align-items: center; }
+header nav a {
+  font-size: 12px;
+  color: rgba(255,255,255,0.6);
+  text-decoration: none;
+  border: 1px solid rgba(255,255,255,0.15);
+  padding: 5px 14px;
+  border-radius: 100px;
+  transition: all 0.15s;
+}
+header nav a:hover { color: white; border-color: rgba(255,255,255,0.4); }
+.header-cta {
+  background: var(--orange);
+  color: white !important;
+  border-color: transparent !important;
+  font-weight: bold;
+}
+.header-cta:hover { opacity: 0.88; }
+
+/* ===== HERO ===== */
+.hero {
+  background: var(--dark);
+  padding: 80px 48px 72px;
+  border-bottom: 4px solid var(--orange);
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -60px; right: -60px;
+  width: 320px; height: 320px;
+  background: radial-gradient(circle, rgba(224,123,57,0.12) 0%, transparent 70%);
+  border-radius: 50%;
+}
+.hero-eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: var(--orange);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+.hero h1 {
+  font-size: 40px;
+  color: white;
+  font-weight: bold;
+  line-height: 1.45;
+  margin-bottom: 24px;
+  max-width: 720px;
+}
+.hero h1 em {
+  font-style: normal;
+  color: var(--orange);
+}
+.hero-sub {
+  font-size: 15px;
+  color: rgba(255,255,255,0.65);
+  max-width: 560px;
+  line-height: 2;
+  margin-bottom: 36px;
+}
+.hero-badges {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.hero-badge {
+  font-size: 12px;
+  padding: 6px 16px;
+  border-radius: 100px;
+  font-weight: bold;
+}
+.hero-badge.free {
+  background: rgba(224,123,57,0.18);
+  color: var(--orange);
+  border: 1px solid rgba(224,123,57,0.35);
+}
+.hero-badge.real {
+  background: rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.7);
+  border: 1px solid rgba(255,255,255,0.15);
+}
+
+/* ===== MAIN ===== */
+.main {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 56px 48px 100px;
+}
+
+/* ===== SECTION LABEL ===== */
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  color: var(--gray);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+/* ===== FOR WHO ===== */
+.forwho-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 56px;
+}
+.forwho-card {
+  background: white;
+  border-radius: 14px;
+  padding: 26px 22px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+  border-top: 4px solid var(--orange);
+  position: relative;
+}
+.forwho-check {
+  position: absolute;
+  top: -12px; left: 20px;
+  background: var(--orange);
+  color: white;
+  font-size: 11px;
+  font-weight: bold;
+  padding: 3px 12px;
+  border-radius: 100px;
+  letter-spacing: 0.05em;
+}
+.forwho-card p {
+  font-size: 13px;
+  color: var(--dark);
+  line-height: 1.8;
+  margin-top: 8px;
+}
+
+/* ===== WHAT IS IT ===== */
+.what-block {
+  background: white;
+  border-radius: 16px;
+  padding: 40px 44px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  margin-bottom: 56px;
+  border-left: 6px solid var(--orange);
+}
+.what-block h2 {
+  font-size: 22px;
+  font-weight: bold;
+  color: var(--dark);
+  line-height: 1.55;
+  margin-bottom: 16px;
+}
+.what-block h2 em { font-style: normal; color: var(--orange); }
+.what-block p {
+  font-size: 14px;
+  color: var(--gray);
+  line-height: 2;
+  max-width: 680px;
+}
+.what-tags {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 24px;
+}
+.what-tag {
+  font-size: 12px;
+  padding: 5px 14px;
+  border-radius: 100px;
+  background: #fff8f3;
+  color: var(--orange);
+  border: 1px solid rgba(224,123,57,0.3);
+  font-weight: bold;
+}
+
+/* ===== HOW IT WORKS ===== */
+.steps {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-bottom: 56px;
+  position: relative;
+}
+.steps::before {
+  content: '';
+  position: absolute;
+  left: 28px;
+  top: 40px;
+  bottom: 40px;
+  width: 2px;
+  background: repeating-linear-gradient(to bottom, var(--orange) 0, var(--orange) 6px, transparent 6px, transparent 14px);
+}
+.step {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  background: white;
+  border-radius: 14px;
+  padding: 24px 28px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  margin-bottom: 12px;
+  position: relative;
+}
+.step-num {
+  width: 36px;
+  height: 36px;
+  background: var(--orange);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: bold;
+  flex-shrink: 0;
+  z-index: 1;
+}
+.step-body { flex: 1; }
+.step-body h3 {
+  font-size: 15px;
+  font-weight: bold;
+  color: var(--dark);
+  margin-bottom: 6px;
+}
+.step-body p {
+  font-size: 13px;
+  color: var(--gray);
+  line-height: 1.8;
+}
+.step-note {
+  font-size: 11px;
+  background: #f5f5f3;
+  border-radius: 6px;
+  padding: 4px 10px;
+  color: var(--gray);
+  display: inline-block;
+  margin-top: 8px;
+}
+
+/* ===== EXPERIENCE PEEK ===== */
+.peek-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+.peek-card {
+  background: white;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.peek-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+}
+.peek-thumb {
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+}
+.peek-thumb.c1 { background: linear-gradient(135deg, #4a9e6b, #2e7d5e); }
+.peek-thumb.c2 { background: linear-gradient(135deg, #e07b39, #c45e22); }
+.peek-thumb.c3 { background: linear-gradient(135deg, #3a7bd5, #2560b0); }
+.peek-body { padding: 14px 16px; }
+.peek-tag {
+  font-size: 10px;
+  font-weight: bold;
+  color: var(--gray);
+  letter-spacing: 0.08em;
+  margin-bottom: 6px;
+}
+.peek-body h3 {
+  font-size: 13px;
+  font-weight: bold;
+  color: var(--dark);
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+.peek-meta { font-size: 11px; color: var(--gray); }
+.peek-more {
+  text-align: center;
+  margin-bottom: 56px;
+}
+.peek-more a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: bold;
+  color: var(--orange);
+  text-decoration: none;
+  border: 2px solid var(--orange);
+  padding: 10px 28px;
+  border-radius: 100px;
+  transition: all 0.15s;
+}
+.peek-more a:hover { background: var(--orange); color: white; }
+
+/* ===== PROMISE ===== */
+.promise-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 56px;
+}
+.promise-card {
+  background: white;
+  border-radius: 14px;
+  padding: 24px 22px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+.promise-icon { font-size: 28px; margin-bottom: 10px; }
+.promise-card h3 {
+  font-size: 14px;
+  font-weight: bold;
+  color: var(--dark);
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+.promise-card p { font-size: 12px; color: var(--gray); line-height: 1.8; }
+
+/* ===== BETA NOTICE ===== */
+.beta-notice {
+  background: var(--dark);
+  border-radius: 16px;
+  padding: 32px 36px;
+  margin-bottom: 56px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 24px;
+  align-items: center;
+}
+.beta-notice h2 {
+  font-size: 20px;
+  color: white;
+  font-weight: bold;
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+.beta-notice h2 em { font-style: normal; color: var(--orange); }
+.beta-notice p { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.85; }
+.beta-badge {
+  background: rgba(224,123,57,0.18);
+  border: 1px solid rgba(224,123,57,0.4);
+  border-radius: 10px;
+  padding: 16px 20px;
+  text-align: center;
+  white-space: nowrap;
+}
+.beta-badge .price {
+  font-size: 28px;
+  font-weight: bold;
+  color: var(--orange);
+}
+.beta-badge .price-label {
+  font-size: 11px;
+  color: rgba(255,255,255,0.55);
+  margin-top: 4px;
+}
+
+/* ===== CTA ===== */
+.cta-section {
+  background: var(--orange);
+  border-radius: 20px;
+  padding: 52px 48px;
+  text-align: center;
+  margin-bottom: 56px;
+}
+.cta-section h2 {
+  font-size: 26px;
+  color: white;
+  font-weight: bold;
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+.cta-section p {
+  font-size: 14px;
+  color: rgba(255,255,255,0.8);
+  margin-bottom: 32px;
+  line-height: 1.9;
+}
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: white;
+  color: var(--orange);
+  font-size: 16px;
+  font-weight: bold;
+  padding: 16px 40px;
+  border-radius: 100px;
+  text-decoration: none;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.cta-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+}
+.cta-note {
+  font-size: 11px;
+  color: rgba(255,255,255,0.6);
+  margin-top: 16px;
+}
+
+/* ===== FAQ ===== */
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 56px;
+}
+.faq-item {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+.faq-q {
+  padding: 18px 22px;
+  font-size: 14px;
+  font-weight: bold;
+  color: var(--dark);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  user-select: none;
+}
+.faq-q::after { content: '＋'; color: var(--orange); flex-shrink: 0; font-size: 16px; }
+.faq-item.open .faq-q::after { content: '－'; }
+.faq-a {
+  display: none;
+  padding: 0 22px 18px;
+  font-size: 13px;
+  color: var(--gray);
+  line-height: 1.85;
+  border-top: 1px solid #f0f0f0;
+  padding-top: 14px;
+}
+.faq-item.open .faq-a { display: block; }
+
+/* ===== FOOTER ===== */
+footer {
+  background: var(--dark);
+  padding: 32px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+footer img { height: 22px; opacity: 0.7; }
+footer p { font-size: 11px; color: rgba(255,255,255,0.3); }
+
+@media (max-width: 768px) {
+  header { padding: 14px 20px; }
+  .hero { padding: 56px 20px 48px; }
+  .hero h1 { font-size: 28px; }
+  .main { padding: 40px 20px 80px; }
+  .forwho-grid, .peek-grid, .promise-grid { grid-template-columns: 1fr; }
+  .beta-notice { grid-template-columns: 1fr; }
+  .what-block { padding: 28px 24px; }
+  .cta-section { padding: 40px 24px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header>
+  <img src="assets/ご決定デザイン_横組み_PNG.png" alt="KOKOROMi">
+  <nav>
+    <a href="projects-v2.html">体験一覧</a>
+    <a href="for-organizations.html">団体の方へ</a>
+    <a href="roadmap-v2.html">内部資料</a>
+    <a class="header-cta" href="#cta">参加を申し込む</a>
+  </nav>
+</header>
+
+<!-- ===== HERO ===== -->
+<div class="hero">
+  <div class="hero-eyebrow">For Individuals — 個人の方へ</div>
+  <h1>「こういう生き方が<br>あるんだ」と<em>思いたい</em>、<br>あなたへ。</h1>
+  <p class="hero-sub">
+    ロールモデルになりうる大人に、<strong style="color:white;">実際に会えて、話を聞けて、現場を体験できる</strong>。<br>
+    仕事の話だけじゃなく——なぜそれを選んだのか、<br>迷いはなかったか、その人の"WHY"に触れる体験。
+  </p>
+  <div class="hero-badges">
+    <span class="hero-badge free">⚡ 今は無料で参加できます</span>
+    <span class="hero-badge real">🤝 実際に会える・現場に入れる</span>
+    <span class="hero-badge real">🗓 1対1でマッチング</span>
+  </div>
+</div>
+
+<!-- ===== MAIN ===== -->
+<div class="main">
+
+  <!-- ===== こんな人に ===== -->
+  <div class="section-label">FOR WHO — こんな人に</div>
+  <div class="forwho-grid" style="margin-top: 24px;">
+    <div class="forwho-card">
+      <span class="forwho-check">✓ こんな人に</span>
+      <p>「なんのために働いているんだろう」と感じる、社会人1〜3年目</p>
+    </div>
+    <div class="forwho-card">
+      <span class="forwho-check">✓ こんな人に</span>
+      <p>「このまま今の会社にいていいのか」と迷っている、20代前半</p>
+    </div>
+    <div class="forwho-card">
+      <span class="forwho-check">✓ こんな人に</span>
+      <p>「自分が知らないような生き方をしている大人に会ってみたい」</p>
+    </div>
+  </div>
+
+  <!-- ===== KOKOROMi とは ===== -->
+  <div class="section-label">WHAT IS KOKOROMi — KOKOROMiってなに？</div>
+
+  <div class="what-block">
+    <h2>「面白い選択をした大人」の<em>現場に入れる</em>体験サービスです。</h2>
+    <p>
+      会社を辞めて子どもの居場所を作った人、教員を辞めて限界集落に飛び込んだ人、ダンサーから40代で起業した人——<br>
+      そういう人たちに、<strong>実際に会えて、話を聞けて、現場を一緒に体験できる</strong>場をつくっています。<br><br>
+      「しごとリーチ」みたいな動画で見て感動するだけじゃなく、<strong>リアルに会える・参加できる</strong>のがKOKOROMiです。
+      半日〜1日、その人の場所にお邪魔して、話して、動いて、自分の中で何かが動く体験をする。
+    </p>
+    <div class="what-tags">
+      <span class="what-tag">話を聞く</span>
+      <span class="what-tag">現場に入る</span>
+      <span class="what-tag">一緒に動く</span>
+      <span class="what-tag">振り返る</span>
+    </div>
+  </div>
+
+  <!-- ===== 参加の流れ ===== -->
+  <div class="section-label">HOW IT WORKS — 参加の流れ</div>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-body">
+        <h3>LINEで登録 or サイトから申し込む</h3>
+        <p>「会ってみたい」と思ったプロジェクトページから申し込み。またはLINEで興味を伝えてください。</p>
+        <span class="step-note">📱 LINEで気軽に相談もOK</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-body">
+        <h3>まず運営（302）と30分話す</h3>
+        <p>どんな体験をしたいか、今どんなことを考えているかを簡単にヒアリング。希望の日時も確認します。</p>
+        <span class="step-note">💬 Zoom or 電話でOK</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-body">
+        <h3>ホストと日程調整 → 体験当日</h3>
+        <p>マッチングしたホストと直接日程を決めて、その人の現場へ。対話＋現場体験で半日〜1日。</p>
+        <span class="step-note">📍 現地訪問（東京近郊が多め）</span>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">04</div>
+      <div class="step-body">
+        <h3>体験後に振り返りインタビュー</h3>
+        <p>「何が刺さったか」「何が変わったか」を一緒に言語化。参加者の変化を追いながら、次の体験につなげます。</p>
+        <span class="step-note">🔄 継続して参加もできます</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 体験プロジェクトのチラ見せ ===== -->
+  <div class="section-label">EXPERIENCES — こんな体験があります</div>
+
+  <div class="peek-grid">
+    <div class="peek-card" onclick="location.href='projects-v2.html'">
+      <div class="peek-thumb c1">🌱</div>
+      <div class="peek-body">
+        <div class="peek-tag">学童・子どもの居場所</div>
+        <h3>18年の保育現場を辞め、「主体性を育てる居場所」をつくった人の学童に入る</h3>
+        <div class="peek-meta">📍 東京都小金井市 ／ 約5時間</div>
+      </div>
+    </div>
+    <div class="peek-card" onclick="location.href='projects-v2.html'">
+      <div class="peek-thumb c2">🏔</div>
+      <div class="peek-body">
+        <div class="peek-tag">限界集落・地域づくり</div>
+        <h3>高校教員をやめ、NZへ。帰国後に限界集落へ飛び込んだ人の「場」に入る</h3>
+        <div class="peek-meta">📍 長野県南木曽町 ／ 約7時間</div>
+      </div>
+    </div>
+    <div class="peek-card" onclick="location.href='projects-v2.html'">
+      <div class="peek-thumb c3">💃</div>
+      <div class="peek-body">
+        <div class="peek-tag">アート・起業</div>
+        <h3>ダンサーから教員15年、40代で起業した人の「なぜ」を聞きに行く</h3>
+        <div class="peek-meta">📍 東京都 ／ 約3時間</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="peek-more">
+    <a href="projects-v2.html">すべての体験を見る →</a>
+  </div>
+
+  <!-- ===== KOKOROMiが大事にすること ===== -->
+  <div class="section-label">OUR PROMISE — KOKOROMiが大事にすること</div>
+
+  <div class="promise-grid">
+    <div class="promise-card">
+      <div class="promise-icon">👀</div>
+      <h3>「見るだけ」で終わらせない</h3>
+      <p>動画や本で感動するだけじゃなく、実際に会って、話して、現場で動く体験を届けます。「やった」という実感が残るように設計します。</p>
+    </div>
+    <div class="promise-card">
+      <div class="promise-icon">🧭</div>
+      <h3>「正解」は押し付けない</h3>
+      <p>「こういう生き方が正解」ではなく、「こういう生き方もある」という出会いをつくります。参加者が自分自身に問いを持ち帰れる体験を目指します。</p>
+    </div>
+    <div class="promise-card">
+      <div class="promise-icon">🔁</div>
+      <h3>体験後の変化まで追う</h3>
+      <p>参加して終わりではなく、その後どう変わったかを一緒に振り返ります。KOKOROMiは体験のきっかけ。その先の変化も大事にします。</p>
+    </div>
+    <div class="promise-card">
+      <div class="promise-icon">🤝</div>
+      <h3>1対1で丁寧にマッチングする</h3>
+      <p>参加者一人ひとりの状況・関心に合わせて、運営がマッチングします。「誰でもいい」ではなく、「あなたに合いそうなこの人」を届けます。</p>
+    </div>
+  </div>
+
+  <!-- ===== 現在の参加費について ===== -->
+  <div class="beta-notice">
+    <div>
+      <h2>今は<em>無料</em>で参加できます</h2>
+      <p>
+        KOKOROMiは現在、最初の体験を一緒に設計している段階です。<br>
+        参加費はまだかかりません。まずは「気になる」で申し込んでみてください。<br>
+        体験後のフィードバックが、これからのKOKOROMiをつくります。
+      </p>
+    </div>
+    <div class="beta-badge">
+      <div class="price">¥0</div>
+      <div class="price-label">現在の参加費</div>
+    </div>
+  </div>
+
+  <!-- ===== CTA ===== -->
+  <div class="cta-section" id="cta">
+    <h2>まず、気になる体験に<br>申し込んでみてください。</h2>
+    <p>
+      「まだよくわからない」でも大丈夫。<br>
+      申し込み後、まず運営（302）と30分話します。<br>
+      それから一緒に考えましょう。
+    </p>
+    <a class="cta-btn" href="projects-v2.html">
+      <span>体験プロジェクトを見てみる</span>
+      <span>→</span>
+    </a>
+    <div class="cta-note">個人情報は運営（KOKOROMi）が管理します。第三者への無断提供はしません。</div>
+  </div>
+
+  <!-- ===== FAQ ===== -->
+  <div class="section-label">FAQ — よくある質問</div>
+
+  <div class="faq-list">
+    <div class="faq-item">
+      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+        どんな人が参加していますか？
+      </div>
+      <div class="faq-a">
+        社会人1〜5年目、大学4年生など、20代前半の方が多いです。「今の仕事でいいのか悩んでいる」「キャリアのヒントが欲しい」「面白い生き方をしている人に会ってみたい」という動機で来る方がほとんどです。
+      </div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+        一人でも参加できますか？
+      </div>
+      <div class="faq-a">
+        はい、むしろ基本的に1対1（あなたとホスト）です。まずはあなたの状況をヒアリングして、合いそうなホストとマッチングします。
+      </div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+        当日、何をするんですか？
+      </div>
+      <div class="faq-a">
+        体験によって異なりますが、基本的には「対話（その人のWHYを聞く）」＋「現場体験（実際に手を動かす）」がセットです。タイムスケジュールは各プロジェクトページに記載しています。
+      </div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+        現地までの交通費は自己負担ですか？
+      </div>
+      <div class="faq-a">
+        はい、現地までの交通費は参加者ご自身の負担になります。首都圏・東京近郊の体験が多いです。
+      </div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+        複数の体験に参加できますか？
+      </div>
+      <div class="faq-a">
+        もちろんです。体験後に「次はこういう人に会いたい」という希望があれば、引き続き運営がマッチングします。
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <img src="assets/ご決定デザイン_横組み_PNG.png" alt="KOKOROMi">
+  <p>© 2026 KOKOROMi. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
