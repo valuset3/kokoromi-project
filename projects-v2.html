@@ -290,6 +290,196 @@ header nav a:hover { color: white; border-color: rgba(255,255,255,0.4); }
   gap: 4px;
 }
 
+/* ===== MODAL ===== */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.65);
+  z-index: 2000;
+  overflow-y: auto;
+  padding: 32px 20px 60px;
+}
+.modal-overlay.open { display: block; }
+.modal-box {
+  max-width: 640px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+}
+.modal-close {
+  position: absolute;
+  top: 14px; right: 16px;
+  width: 32px; height: 32px;
+  background: rgba(255,255,255,0.15);
+  border: none; border-radius: 50%;
+  color: white; font-size: 18px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  z-index: 10;
+  line-height: 1;
+}
+.modal-close:hover { background: rgba(255,255,255,0.3); }
+.modal-header {
+  height: 130px;
+  display: flex;
+  align-items: flex-end;
+  padding: 20px 24px;
+  position: relative;
+  overflow: hidden;
+}
+.modal-header-emoji {
+  font-size: 80px;
+  position: absolute;
+  top: 0; right: 12px;
+  opacity: 0.22;
+  line-height: 1;
+}
+.modal-host-name {
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  line-height: 1.4;
+  z-index: 1;
+}
+.modal-host-role {
+  font-size: 11px;
+  color: rgba(255,255,255,0.6);
+  margin-top: 3px;
+  z-index: 1;
+}
+.modal-body { padding: 24px 26px 32px; }
+.modal-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
+.modal-tag {
+  font-size: 10px; font-weight: bold;
+  padding: 3px 10px; border-radius: 100px;
+}
+.modal-tag.t { background: #fff8f3; color: var(--orange); }
+.modal-tag.d { background: #f0f5ff; color: var(--blue); }
+.modal-tag.f { background: #f0fff4; color: var(--green); }
+.modal-quote {
+  background: #f8f7f5;
+  border-left: 3px solid var(--orange);
+  border-radius: 0 8px 8px 0;
+  padding: 12px 16px;
+  font-size: 13px;
+  color: var(--dark);
+  line-height: 1.8;
+  margin-bottom: 22px;
+  font-style: italic;
+}
+.modal-section-title {
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #aaa;
+  margin-bottom: 12px;
+}
+.modal-schedule { margin-bottom: 22px; }
+.sched-item {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 14px;
+  align-items: flex-start;
+}
+.sched-time {
+  font-size: 11px;
+  font-weight: bold;
+  color: var(--orange);
+  min-width: 54px;
+  padding-top: 1px;
+  flex-shrink: 0;
+}
+.sched-content { flex: 1; }
+.sched-label {
+  font-size: 13px;
+  font-weight: bold;
+  color: var(--dark);
+  margin-bottom: 3px;
+  line-height: 1.5;
+}
+.sched-detail {
+  font-size: 12px;
+  color: var(--gray);
+  line-height: 1.8;
+}
+.sched-dot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  flex-shrink: 0;
+  padding-top: 4px;
+}
+.sched-dot-circle {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--orange);
+  flex-shrink: 0;
+}
+.sched-dot-line {
+  width: 2px;
+  height: 30px;
+  background: #f0eeea;
+  margin-top: 2px;
+}
+.sched-item:last-child .sched-dot-line { display: none; }
+.modal-takeaways {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 22px;
+}
+.modal-takeaway {
+  background: #f8f7f5;
+  border-radius: 10px;
+  padding: 12px 12px;
+  font-size: 11px;
+  color: var(--dark);
+  line-height: 1.7;
+  text-align: center;
+}
+.modal-takeaway::before { content: '✓ '; color: var(--orange); font-weight: bold; }
+.modal-meta {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  padding: 14px 16px;
+  background: #f8f7f5;
+  border-radius: 10px;
+  margin-bottom: 18px;
+  font-size: 12px;
+  color: var(--gray);
+}
+.modal-meta-item strong { color: var(--dark); }
+.modal-cta-row { display: flex; gap: 10px; align-items: center; }
+.modal-line-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #06C755;
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 14px 20px;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: opacity 0.15s;
+}
+.modal-line-btn:hover { opacity: 0.85; }
+.modal-note-link {
+  font-size: 11px;
+  color: var(--gray);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.modal-note-link:hover { color: var(--dark); text-decoration: underline; }
+
 /* ===== VOICE ===== */
 .voice-section {
   background: white;
@@ -478,7 +668,7 @@ header nav a:hover { color: white; border-color: rgba(255,255,255,0.4); }
     <div class="proj-grid">
 
       <!-- ① 生田あゆみ -->
-      <div class="proj-card">
+      <div class="proj-card" onclick="openModal('ikuta')" style="cursor:pointer">
         <div class="proj-host-area color-1">
           <div class="proj-host-emoji">🌍</div>
           <div>
@@ -498,13 +688,13 @@ header nav a:hover { color: white; border-color: rgba(255,255,255,0.4); }
           </div>
           <div class="proj-footer">
             <div class="proj-loc">📍 詳細はLINEでご案内</div>
-            <a class="proj-cta" href="https://lin.ee/XOFzUEb" target="_blank">参加を申し込む →</a>
+            <a class="proj-cta" href="javascript:void(0)">詳細・参加申込 →</a>
           </div>
         </div>
       </div>
 
       <!-- ② 新津圭司（ニコラスさん） -->
-      <div class="proj-card">
+      <div class="proj-card" onclick="openModal('niitsu')" style="cursor:pointer">
         <div class="proj-host-area color-2">
           <div class="proj-host-emoji">🔬</div>
           <div>
@@ -524,13 +714,13 @@ header nav a:hover { color: white; border-color: rgba(255,255,255,0.4); }
           </div>
           <div class="proj-footer">
             <div class="proj-loc">📍 東京都内</div>
-            <a class="proj-cta" href="https://lin.ee/XOFzUEb" target="_blank">参加を申し込む →</a>
+            <a class="proj-cta" href="javascript:void(0)">詳細・参加申込 →</a>
           </div>
         </div>
       </div>
 
       <!-- ③ 藤森光一 -->
-      <div class="proj-card">
+      <div class="proj-card" onclick="openModal('fujimori')" style="cursor:pointer">
         <div class="proj-host-area color-3">
           <div class="proj-host-emoji">🌱</div>
           <div>
@@ -550,13 +740,13 @@ header nav a:hover { color: white; border-color: rgba(255,255,255,0.4); }
           </div>
           <div class="proj-footer">
             <div class="proj-loc">📍 詳細はLINEでご案内</div>
-            <a class="proj-cta" href="https://lin.ee/XOFzUEb" target="_blank">参加を申し込む →</a>
+            <a class="proj-cta" href="javascript:void(0)">詳細・参加申込 →</a>
           </div>
         </div>
       </div>
 
       <!-- ④ 佐藤健友（探球さん） -->
-      <div class="proj-card">
+      <div class="proj-card" onclick="openModal('sato')" style="cursor:pointer">
         <div class="proj-host-area color-4">
           <div class="proj-host-emoji">⚽</div>
           <div>
@@ -576,13 +766,13 @@ header nav a:hover { color: white; border-color: rgba(255,255,255,0.4); }
           </div>
           <div class="proj-footer">
             <div class="proj-loc">📍 東京都品川区</div>
-            <a class="proj-cta" href="https://lin.ee/XOFzUEb" target="_blank">参加を申し込む →</a>
+            <a class="proj-cta" href="javascript:void(0)">詳細・参加申込 →</a>
           </div>
         </div>
       </div>
 
       <!-- ⑤ 森勇斗 -->
-      <div class="proj-card">
+      <div class="proj-card" onclick="openModal('mori')" style="cursor:pointer">
         <div class="proj-host-area color-5">
           <div class="proj-host-emoji">✈️</div>
           <div>
@@ -602,13 +792,13 @@ header nav a:hover { color: white; border-color: rgba(255,255,255,0.4); }
           </div>
           <div class="proj-footer">
             <div class="proj-loc">📍 愛知県一宮市</div>
-            <a class="proj-cta" href="https://lin.ee/XOFzUEb" target="_blank">参加を申し込む →</a>
+            <a class="proj-cta" href="javascript:void(0)">詳細・参加申込 →</a>
           </div>
         </div>
       </div>
 
       <!-- ⑥ 鈴木優太朗（たろ） -->
-      <div class="proj-card">
+      <div class="proj-card" onclick="openModal('suzuki')" style="cursor:pointer">
         <div class="proj-host-area color-6">
           <div class="proj-host-emoji">✏️</div>
           <div>
@@ -628,13 +818,13 @@ header nav a:hover { color: white; border-color: rgba(255,255,255,0.4); }
           </div>
           <div class="proj-footer">
             <div class="proj-loc">📍 東京都内</div>
-            <a class="proj-cta" href="https://lin.ee/XOFzUEb" target="_blank">参加を申し込む →</a>
+            <a class="proj-cta" href="javascript:void(0)">詳細・参加申込 →</a>
           </div>
         </div>
       </div>
 
       <!-- ⑦ 山川直美 -->
-      <div class="proj-card">
+      <div class="proj-card" onclick="openModal('yamakawa')" style="cursor:pointer">
         <div class="proj-host-area color-7">
           <div class="proj-host-emoji">💃</div>
           <div>
@@ -654,13 +844,13 @@ header nav a:hover { color: white; border-color: rgba(255,255,255,0.4); }
           </div>
           <div class="proj-footer">
             <div class="proj-loc">📍 詳細はLINEでご案内</div>
-            <a class="proj-cta" href="https://lin.ee/XOFzUEb" target="_blank">参加を申し込む →</a>
+            <a class="proj-cta" href="javascript:void(0)">詳細・参加申込 →</a>
           </div>
         </div>
       </div>
 
       <!-- ⑧ 糟谷さん（き～ちゃん先生） -->
-      <div class="proj-card">
+      <div class="proj-card" onclick="openModal('kasuya')" style="cursor:pointer">
         <div class="proj-host-area color-8">
           <div class="proj-host-emoji">🇩🇪</div>
           <div>
@@ -680,13 +870,13 @@ header nav a:hover { color: white; border-color: rgba(255,255,255,0.4); }
           </div>
           <div class="proj-footer">
             <div class="proj-loc">📍 オンライン開催（ドイツと接続）</div>
-            <a class="proj-cta" href="https://lin.ee/XOFzUEb" target="_blank">参加を申し込む →</a>
+            <a class="proj-cta" href="javascript:void(0)">詳細・参加申込 →</a>
           </div>
         </div>
       </div>
 
       <!-- ⑨ 中出さん・北岡さん（CLASH） -->
-      <div class="proj-card">
+      <div class="proj-card" onclick="openModal('clash')" style="cursor:pointer">
         <div class="proj-host-area color-9">
           <div class="proj-host-emoji">👊</div>
           <div>
@@ -706,7 +896,7 @@ header nav a:hover { color: white; border-color: rgba(255,255,255,0.4); }
           </div>
           <div class="proj-footer">
             <div class="proj-loc">📍 詳細はLINEでご案内</div>
-            <a class="proj-cta" href="https://lin.ee/XOFzUEb" target="_blank">参加を申し込む →</a>
+            <a class="proj-cta" href="javascript:void(0)">詳細・参加申込 →</a>
           </div>
         </div>
       </div>
@@ -782,6 +972,285 @@ header nav a:hover { color: white; border-color: rgba(255,255,255,0.4); }
   </div>
 
 </div><!-- /main -->
+
+<!-- ===== MODAL ===== -->
+<div id="modal-overlay" class="modal-overlay" onclick="closeModal()">
+  <div class="modal-box" onclick="event.stopPropagation()">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div id="modal-header" class="modal-header">
+      <div id="modal-emoji" class="modal-header-emoji"></div>
+      <div>
+        <div id="modal-name" class="modal-host-name"></div>
+        <div id="modal-role" class="modal-host-role"></div>
+      </div>
+    </div>
+    <div class="modal-body">
+      <div id="modal-tags" class="modal-tags"></div>
+      <div id="modal-quote" class="modal-quote"></div>
+      <div class="modal-section-title">プログラムの流れ</div>
+      <div id="modal-schedule" class="modal-schedule"></div>
+      <div class="modal-section-title">この体験で持ち帰れること</div>
+      <div id="modal-takeaways" class="modal-takeaways"></div>
+      <div id="modal-meta" class="modal-meta"></div>
+      <div class="modal-cta-row">
+        <a class="modal-line-btn" href="https://lin.ee/XOFzUEb" target="_blank">
+          <span style="font-size:18px;">💬</span> LINEで参加を申し込む
+        </a>
+        <a id="modal-note" class="modal-note-link" href="https://note.com/kokoromi_jp/m/m2fd2bec650b1" target="_blank">📝 noteで読む</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const COLORS = {
+  'color-1': 'linear-gradient(135deg,#2c3e50,#3a5068)',
+  'color-2': 'linear-gradient(135deg,#2e4a3e,#3d6b59)',
+  'color-3': 'linear-gradient(135deg,#4a2c2c,#6b3d3d)',
+  'color-4': 'linear-gradient(135deg,#2c3a4a,#3d5268)',
+  'color-5': 'linear-gradient(135deg,#1a3a3a,#2a5050)',
+  'color-6': 'linear-gradient(135deg,#3a2e1a,#5a4228)',
+  'color-7': 'linear-gradient(135deg,#2a1a4a,#3d2a6b)',
+  'color-8': 'linear-gradient(135deg,#1a3a2e,#22503d)',
+  'color-9': 'linear-gradient(135deg,#3a3020,#504030)',
+};
+
+const PROGRAMS = {
+  ikuta: {
+    name: '生田 あゆみ',
+    role: '教育プロポーザー・独立',
+    emoji: '🌍',
+    color: 'color-1',
+    tags: [{t:'t',l:'教育・地域'},{t:'d',l:'約5時間'},{t:'f',l:'対話 + 仕事体験'}],
+    quote: '「タグの掛け合わせで唯一無二になれる」——高校教員を辞め、NZ移住、限界集落、そして独立。なぜそんな選択ができたのかを聞きに行く。',
+    schedule: [
+      {time:'10:00', label:'集合・現場案内', detail:'生田さんが活動している場所に集合。どんな環境でどんな人たちと関わっているかを最初に肌で感じる。'},
+      {time:'10:30', label:'対話「なぜ教員を辞め、移住したのか」', detail:'高校教員だった頃のこと、NZ移住の決め手、限界集落で感じたこと。その選択の裏にあった感情と覚悟をじっくり聞く（約1.5時間）。'},
+      {time:'12:00', label:'ランチ（一緒に食べながら深掘り）', detail:'食べながらリラックスした時間に。「あの時、本当は何を考えていたか」が引き出されやすい。'},
+      {time:'13:30', label:'仕事体験「教育コンテンツを一緒に設計する」', detail:'生田さんが実際に取り組んでいる教育プロポーザルや企画の作業に、横から参加。「考える仕事」の現場を手を動かしながら体験する（約2時間）。'},
+      {time:'15:30', label:'振り返り・自分への問いを言語化', detail:'「今日、何が刺さったか」「自分に何が重なったか」をあのっちと一緒に言語化して終わる。'},
+    ],
+    takeaways: ['枠に収まらない生き方のリアル', '「設計する仕事」の現場感覚', '自分の「タグ」を見直すきっかけ'],
+    fee: '2,000円',
+    loc: '詳細はLINEでご案内',
+    note: 'https://note.com/kokoromi_jp/m/m2fd2bec650b1',
+  },
+  niitsu: {
+    name: '新津 圭司（ニコラスさん）',
+    role: '合同会社探究BASE 代表',
+    emoji: '🔬',
+    color: 'color-2',
+    tags: [{t:'t',l:'教育・探究学習'},{t:'d',l:'約5時間'},{t:'f',l:'対話 + 探究ワーク'}],
+    quote: '「キャリアは線じゃなくていい」——18年間教員を務めた後、休職を経て起業。その選択の葛藤と覚悟を聞き、実際の探究プログラムを体験する。',
+    schedule: [
+      {time:'10:00', label:'探究BASEに集合・施設案内', detail:'ニコラスさんが運営している探究の場所を一緒に見て回る。どんな子どもたちが来ているか、どんな空間かを最初に感じる。'},
+      {time:'10:30', label:'対話「18年教えてから、なぜ起業したのか」', detail:'教員時代に感じた違和感、休職という決断、起業への道のり。「なぜ既存の枠ではダメだと思ったのか」をじっくり聞く。'},
+      {time:'12:00', label:'ランチ（現場のスタッフとも話す）', detail:'探究BASEのメンバーも交えて昼食。現場の雰囲気を感じる時間。'},
+      {time:'13:00', label:'探究学習ワークショップを実際に体験', detail:'参加者自身が「生徒」として探究プログラムに参加。何かテーマを決めて、探究BASE流の問いの立て方・深め方を本物のワークショップとして体験（約2.5時間）。'},
+      {time:'15:30', label:'振り返り・「自分の探究テーマ」を言語化', detail:'体験を経て「自分は何に興味があるのか」「何が気になっているのか」を言語化する時間。'},
+    ],
+    takeaways: ['既存の枠を出る理由と覚悟', '探究学習の本物の体験', '「問いを立てる」感覚'],
+    fee: '2,000円',
+    loc: '東京都内',
+    note: 'https://note.com/kokoromi_jp/m/m2fd2bec650b1',
+  },
+  fujimori: {
+    name: '藤森 光一',
+    role: 'ノーススター合同会社 代表',
+    emoji: '🌱',
+    color: 'color-3',
+    tags: [{t:'t',l:'保育・子ども'},{t:'d',l:'約5時間'},{t:'f',l:'対話 + 保育現場体験'}],
+    quote: '「靴が合わないなら自分で作ればいい」——保育士から園長、そして独立。「誰かの作った枠に自分を合わせるのではなく、自分の理想の保育をつくりたかった」。その現場を訪れる。',
+    schedule: [
+      {time:'09:30', label:'保育現場に集合・施設見学', detail:'藤森さんが運営している場所を見学。「どんな思いでこの空間を作ったのか」を場所から感じる。'},
+      {time:'10:00', label:'対話「なぜ独立したのか」', detail:'保育士として働いた頃の話、園長経験、独立を決めた日のこと。「自分でやるしかない」と思った瞬間を語ってもらう（約1時間）。'},
+      {time:'11:00', label:'子どもたちの活動時間にスタッフとして参加', detail:'実際の保育・学童の現場に入る。ただ見学するのではなく、子どもたちと一緒に遊んだり、スタッフとして動く体験（約2.5時間）。'},
+      {time:'13:30', label:'現場スタッフとの座談会', detail:'ここで働いているスタッフとも話す。「なぜここで働いているのか」「どんな価値観で動いているのか」を聞く。'},
+      {time:'14:30', label:'振り返り・「自分のいる現場」を問い直す', detail:'保育の現場を体験した後に、「自分の職場・日常」と何が違うか、何が重なるかを言語化。'},
+    ],
+    takeaways: ['「自分で場を作る」という選択肢', '保育現場でのリアルな体験', '今いる職場・環境を問い直す視点'],
+    fee: '1,500円',
+    loc: '詳細はLINEでご案内',
+    note: 'https://note.com/kokoromi_jp/m/m2fd2bec650b1',
+  },
+  sato: {
+    name: '佐藤 健友（探球さん）',
+    role: '教育コミュニティ「探球横丁」代表',
+    emoji: '⚽',
+    color: 'color-4',
+    tags: [{t:'t',l:'教育・地域'},{t:'d',l:'約5時間'},{t:'f',l:'対話 + ワークショップ参加'}],
+    quote: '「挑戦は伝染する」——品川・青物横丁で、子どもたちが挑戦できる場を作り続けている。「挑戦する大人を見せることが一番の教育」という信念の現場へ。',
+    schedule: [
+      {time:'10:00', label:'探球横丁に集合', detail:'品川・青物横丁にある「探球横丁」の場所に集合。まず探球さんに場所と活動の説明をしてもらう。'},
+      {time:'10:30', label:'対話「挑戦が伝染するとはどういうことか」', detail:'なぜここに場を作ったのか、どんな失敗があったか、子どもたちに何を見せたいのか。「挑戦する大人がいることの意味」を語ってもらう（約1時間）。'},
+      {time:'11:30', label:'ランチ（子どもたちのリアルな話を聞く）', detail:''},
+      {time:'12:30', label:'探球横丁のワークショップにスタッフ側で参加', detail:'実際のワークショップを参加者として体験するのではなく、ファシリテーター・スタッフ側として一緒に動く。「場を作る側」の視点を体験（約2.5時間）。'},
+      {time:'15:00', label:'振り返り「自分が伝染させたいものは何か」', detail:'体験後に「自分は誰かに何を伝染させたいか」「自分の挑戦は何か」を言語化するワーク。'},
+    ],
+    takeaways: ['「場を作る側」の視点と体験', 'ファシリテーターとして動く感覚', '「自分の挑戦」を言語化するきっかけ'],
+    fee: '2,000円',
+    loc: '東京都品川区',
+    note: 'https://note.com/kokoromi_jp/m/m2fd2bec650b1',
+  },
+  mori: {
+    name: '森 勇斗',
+    role: '社会人大学院生・民間学童スタッフ',
+    emoji: '✈️',
+    color: 'color-5',
+    tags: [{t:'t',l:'子ども・地域'},{t:'d',l:'約5時間'},{t:'f',l:'対話 + 学童現場体験'}],
+    quote: '「ワークライフブレンド」——旅しながら学び、愛知に民間学童を立ち上げた。仕事・生活・学びをひとつにまとめて生きている人の現場へ。',
+    schedule: [
+      {time:'10:00', label:'愛知県一宮市の民間学童に集合', detail:'森さんが運営に関わっている民間学童・フリースクールに集合。施設と子どもたちの様子を最初に見せてもらう。'},
+      {time:'10:30', label:'対話「旅しながら学童を作った経緯」', detail:'なぜ大学院に行きながら学童を立ち上げたのか、「旅」が持つ意味、ワークライフブレンドという生き方をどう実践しているか（約1時間）。'},
+      {time:'11:30', label:'ランチ（地域の人たちとの食卓）', detail:''},
+      {time:'12:30', label:'放課後の学童活動にスタッフとして参加', detail:'子どもたちが帰ってくる時間に合わせて、スタッフとして一緒に動く。遊び・宿題・対話。「子どもの居場所」の現場をリアルに体験（約2時間）。'},
+      {time:'14:30', label:'振り返り「自分の地域でできることを考える」', detail:'「愛知に来てまで感じたこと」を言語化し、「自分の場所に持ち帰れるもの」を考える時間。'},
+    ],
+    takeaways: ['仕事と生活を分けない生き方のリアル', '子どもの居場所をつくる現場体験', '地域で何かを始めるためのヒント'],
+    fee: '2,000円（交通費別途）',
+    loc: '愛知県一宮市',
+    note: 'https://note.com/kokoromi_jp/m/m2fd2bec650b1',
+  },
+  suzuki: {
+    name: '鈴木 優太朗（たろ）',
+    role: '図解デザイナー・リスキリング支援',
+    emoji: '✏️',
+    color: 'color-6',
+    tags: [{t:'t',l:'デザイン・キャリア'},{t:'d',l:'約5時間'},{t:'f',l:'対話 + 図解ワーク'}],
+    quote: '「やめることは選び直すこと」——高校教員を辞め、図解デザイナーとして独立。「やめる」を肯定してくれる人の話を聞き、自分のキャリアを図解するワークをやってみる。',
+    schedule: [
+      {time:'10:00', label:'集合（東京）', detail:'たろさんの活動拠点または都内カフェ等に集合。'},
+      {time:'10:30', label:'対話「教員を辞めた日のリアルな話」', detail:'「なぜ辞めたのか」だけでなく、「辞める前に何があったか」「辞めた後に何が起きたか」。ポジティブな話だけじゃない、等身大の話を聞く（約1.5時間）。'},
+      {time:'12:00', label:'ランチ（リラックスして深掘り）', detail:''},
+      {time:'13:00', label:'図解ワーク「自分のキャリアを図解する」', detail:'たろさんにファシリテートしてもらいながら、参加者自身のキャリアや価値観を「図解」する実践ワーク。文字じゃなくて絵と矢印で自分を表現してみる体験（約2時間）。'},
+      {time:'15:00', label:'振り返り・図解を眺めながら次のアクションを考える', detail:'自分の図解を見ながら「次に何をしたいか」を言語化。たろさんにフィードバックをもらう時間。'},
+    ],
+    takeaways: ['「やめる」を肯定する視点', '図解で自己表現する感覚', '自分のキャリア地図（図解）'],
+    fee: '2,000円',
+    loc: '東京都内',
+    note: 'https://note.com/kokoromi_jp/m/m2fd2bec650b1',
+  },
+  yamakawa: {
+    name: '山川 直美',
+    role: 'ESデザイン株式会社 代表',
+    emoji: '💃',
+    color: 'color-7',
+    tags: [{t:'t',l:'ダンス・起業'},{t:'d',l:'約5時間'},{t:'f',l:'対話 + ビジョンワーク'}],
+    quote: '「全部つながっていた」——ダンサーから専門学校教員15年、そして40代で起業。遠回りに見えた道がすべて必要だったという話を聞きに行く。',
+    schedule: [
+      {time:'10:00', label:'集合・山川さんの活動拠点を見学', detail:'ESデザインの活動現場を見て回る。「どんな空間でどんな人たちと仕事しているか」を最初に感じる。'},
+      {time:'10:30', label:'対話「ダンサーから教員、そして起業へ」', detail:'ダンサー時代のこと、教員として15年過ごした日々、40代で起業することを決めた瞬間。「全部つながっていた」とはどういうことか（約1.5時間）。'},
+      {time:'12:00', label:'ランチ（一緒に食べながら）', detail:''},
+      {time:'13:00', label:'ビジョン・デザインワーク', detail:'山川さんの専門領域「ES（Employee Satisfaction＝働く人の幸せ）デザイン」の考え方を使い、参加者自身の「自分にとっての理想の働き方」をデザインするワーク（約2時間）。'},
+      {time:'15:00', label:'振り返り・自分のビジョンを言語化する', detail:'「今日感じたこと」「自分の中にある、まだ言葉になっていないもの」をアウトプット。'},
+    ],
+    takeaways: ['遠回りを肯定できる視点', '「ES（働く幸せ）」を考える体験', '自分の理想の働き方のヒント'],
+    fee: '2,500円',
+    loc: '詳細はLINEでご案内',
+    note: 'https://note.com/kokoromi_jp/m/m2fd2bec650b1',
+  },
+  kasuya: {
+    name: '糟谷 さん（き～ちゃん先生）',
+    role: '現役教師・ドイツ在住',
+    emoji: '🇩🇪',
+    color: 'color-8',
+    tags: [{t:'t',l:'教育・海外'},{t:'d',l:'約3時間'},{t:'f',l:'オンライン対話'}],
+    quote: '「できない理由を作っていたのは自分だった」——日本の現役教師のまま、ドイツに住み続けている。その選択の話を聞き、自分の「できない理由」を問い直す。',
+    schedule: [
+      {time:'19:00', label:'オンライン接続・自己紹介', detail:'ドイツと日本をビデオ通話でつなぐ。参加者はそれぞれの自己紹介を短く。'},
+      {time:'19:15', label:'対話「日本の教師のままドイツに住む理由」', detail:'なぜドイツなのか、日本の学校とのやりとりはどうしているのか、ドイツで感じた「日本と違うこと」。「そんなことできるの？」を全部聞く（約1時間）。'},
+      {time:'20:15', label:'参加者との対話・Q&A', detail:'「自分がやりたいけどできないと思っていること」をざっくばらんに話す。き～ちゃん先生にぶつけてみる時間（約45分）。'},
+      {time:'21:00', label:'振り返り「自分の「できない理由」を書き出す」', detail:'今日の話を受けて、「自分が「できない」と思っていることのリスト」を書き出し、一つずつ「本当にできないのか？」を問い直すワーク。'},
+      {time:'21:30', label:'解散', detail:''},
+    ],
+    takeaways: ['「できない」を問い直す視点', '海外在住×現役教師というリアル', '自分の「言い訳リスト」の解体'],
+    fee: '1,500円',
+    loc: 'オンライン開催（Zoom等）',
+    note: 'https://note.com/kokoromi_jp/m/m2fd2bec650b1',
+  },
+  clash: {
+    name: '中出さん・北岡さん（CLASH）',
+    role: '現役教員2人 / 主体性を育む活動',
+    emoji: '👊',
+    color: 'color-9',
+    tags: [{t:'t',l:'教育・学校改革'},{t:'d',l:'約5時間'},{t:'f',l:'対話 + ワークショップ'}],
+    quote: '「子どもの主体性を潰しているのは大人だった」——現役教員でありながら、学校の外でCLASHを立ち上げた2人。その現場でワークショップを体験する。',
+    schedule: [
+      {time:'10:00', label:'集合・CLASHの活動紹介', detail:'中出さん・北岡さんから「CLASHとは何か」「なぜ始めたのか」を聞く。まず文脈を知る時間（約30分）。'},
+      {time:'10:30', label:'対話「現役教員が学校の外で動き始めた理由」', detail:'学校の中で何が起きているのか、何が嫌で外に出ようと思ったのか。「子どもの主体性を潰しているのは大人」と気づいた瞬間を語ってもらう（約1時間）。'},
+      {time:'11:30', label:'ランチ（学校のリアルをもっと深掘り）', detail:''},
+      {time:'12:30', label:'CLASHのワークショップに参加', detail:'「子どもの主体性を育てるワークショップ」を、参加者自身が受ける体験。どんな問いかけをすると人は動き出すのかを、自分の体で感じる（約2.5時間）。'},
+      {time:'15:00', label:'振り返り「大人として自分は何ができるか」', detail:'ワークショップを体験した後に「自分の職場・家庭・地域で、誰かの主体性を潰していないか」を問い直す。そして「自分にできることは何か」を言語化。'},
+    ],
+    takeaways: ['学校現場のリアルな内側の話', 'CLASHの主体性ワークを直接体験', '「子どもと関わる大人」としての自分を見直す視点'],
+    fee: '2,000円',
+    loc: '詳細はLINEでご案内',
+    note: 'https://note.com/kokoromi_jp/m/m2fd2bec650b1',
+  },
+};
+
+function openModal(key) {
+  const p = PROGRAMS[key];
+  if (!p) return;
+
+  // Header
+  const header = document.getElementById('modal-header');
+  header.style.background = COLORS[p.color] || '#2c3e50';
+  document.getElementById('modal-emoji').textContent = p.emoji;
+  document.getElementById('modal-name').textContent = p.name;
+  document.getElementById('modal-role').textContent = p.role;
+
+  // Tags
+  document.getElementById('modal-tags').innerHTML = p.tags.map(
+    t => `<span class="modal-tag ${t.t}">${t.l}</span>`
+  ).join('');
+
+  // Quote
+  document.getElementById('modal-quote').textContent = p.quote;
+
+  // Schedule
+  document.getElementById('modal-schedule').innerHTML = p.schedule.map((s, i) => `
+    <div class="sched-item">
+      <div class="sched-time">${s.time}</div>
+      <div class="sched-dot">
+        <div class="sched-dot-circle"></div>
+        ${i < p.schedule.length - 1 ? '<div class="sched-dot-line"></div>' : ''}
+      </div>
+      <div class="sched-content">
+        <div class="sched-label">${s.label}</div>
+        ${s.detail ? `<div class="sched-detail">${s.detail}</div>` : ''}
+      </div>
+    </div>
+  `).join('');
+
+  // Takeaways
+  document.getElementById('modal-takeaways').innerHTML = p.takeaways.map(
+    t => `<div class="modal-takeaway">${t}</div>`
+  ).join('');
+
+  // Meta
+  document.getElementById('modal-meta').innerHTML = `
+    <div class="modal-meta-item">⏱ <strong>${p.fee}</strong>（参加費）</div>
+    <div class="modal-meta-item">📍 <strong>${p.loc}</strong></div>
+  `;
+
+  // Note link
+  document.getElementById('modal-note').href = p.note;
+
+  // Show
+  document.getElementById('modal-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('modal-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeModal();
+});
+</script>
 
 <!-- FOOTER -->
 <div style="background:var(--dark); padding:24px 48px; display:flex; justify-content:space-between; align-items:center;">
