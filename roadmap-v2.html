@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ロードマップ v2 | KOKOROMi 運営メンバー向け</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Hiragino Sans', 'Meiryo', sans-serif;
+  background: #f5f5f3;
+  color: #1a1a1a;
+  line-height: 1.7;
+}
+:root {
+  --orange: #e07b39;
+  --dark: #1a1a1a;
+  --gray: #666;
+  --light: #f8f7f5;
+  --green: #2e7d5e;
+  --blue: #3a7bd5;
+  --purple: #7b59d5;
+}
+
+/* ===== HEADER ===== */
+header {
+  background: var(--dark);
+  padding: 16px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+header img { height: 28px; width: auto; }
+header nav { display: flex; gap: 10px; align-items: center; }
+header nav a {
+  font-size: 12px;
+  color: rgba(255,255,255,0.6);
+  text-decoration: none;
+  border: 1px solid rgba(255,255,255,0.15);
+  padding: 5px 14px;
+  border-radius: 100px;
+  transition: all 0.15s;
+}
+header nav a:hover { color: white; border-color: rgba(255,255,255,0.4); }
+.badge-internal {
+  font-size: 10px;
+  color: var(--orange);
+  border: 1px solid var(--orange);
+  padding: 4px 12px;
+  border-radius: 100px;
+  letter-spacing: 0.05em;
+}
+
+/* ===== UPDATE BANNER ===== */
+.update-banner {
+  background: var(--orange);
+  padding: 10px 48px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 12px;
+  color: white;
+}
+.update-banner strong { font-size: 13px; }
+
+/* ===== HERO ===== */
+.hero {
+  background: var(--dark);
+  padding: 60px 48px 52px;
+  border-bottom: 3px solid var(--orange);
+}
+.hero-label {
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  color: var(--orange);
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+.hero h1 {
+  font-size: 34px;
+  color: white;
+  font-weight: bold;
+  line-height: 1.4;
+  margin-bottom: 16px;
+}
+.hero h1 em {
+  font-style: normal;
+  color: var(--orange);
+}
+.hero p {
+  font-size: 14px;
+  color: rgba(255,255,255,0.6);
+  max-width: 620px;
+  line-height: 2;
+}
+.hero-meta {
+  margin-top: 24px;
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+.hero-meta-item { font-size: 12px; color: rgba(255,255,255,0.4); }
+.hero-meta-item strong { color: rgba(255,255,255,0.75); margin-right: 6px; }
+
+/* ===== MAIN ===== */
+.main {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 48px 48px 100px;
+}
+
+/* ===== SECTION LABEL ===== */
+.section-label {
+  font-size: 11px;
+  font-weight: bold;
+  color: var(--gray);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+
+/* ===== PIVOT BANNER ===== */
+.pivot-banner {
+  background: white;
+  border-radius: 16px;
+  border-left: 6px solid var(--orange);
+  padding: 28px 32px;
+  margin-bottom: 40px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+.pivot-banner h2 {
+  font-size: 22px;
+  color: var(--dark);
+  font-weight: bold;
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+.pivot-banner h2 em { font-style: normal; color: var(--orange); }
+.pivot-banner p {
+  font-size: 13px;
+  color: var(--gray);
+  line-height: 1.9;
+  max-width: 680px;
+}
+
+/* ===== BEFORE / AFTER ===== */
+.before-after {
+  display: grid;
+  grid-template-columns: 1fr 48px 1fr;
+  gap: 0;
+  margin-bottom: 48px;
+  align-items: center;
+}
+.ba-col {
+  background: white;
+  border-radius: 12px;
+  padding: 24px 26px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+.ba-col.before { opacity: 0.55; border: 1px solid #ddd; }
+.ba-col.after { border: 2px solid var(--orange); }
+.ba-label {
+  font-size: 10px;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  margin-bottom: 14px;
+}
+.ba-col.before .ba-label { color: #aaa; }
+.ba-col.after .ba-label { color: var(--orange); }
+.ba-item {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  margin-bottom: 10px;
+  font-size: 13px;
+  color: var(--dark);
+  line-height: 1.6;
+}
+.ba-item:last-child { margin-bottom: 0; }
+.ba-arrow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 22px;
+  color: var(--orange);
+}
+
+/* ===== CONCEPT CARDS ===== */
+.concept-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 48px;
+}
+.concept-card {
+  background: white;
+  border-radius: 14px;
+  padding: 24px 22px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  border-top: 4px solid var(--orange);
+}
+.concept-card.blue { border-top-color: var(--blue); }
+.concept-card.green { border-top-color: var(--green); }
+.concept-card.purple { border-top-color: var(--purple); }
+.concept-icon { font-size: 26px; margin-bottom: 10px; }
+.concept-card h3 { font-size: 15px; font-weight: bold; color: var(--dark); margin-bottom: 8px; line-height: 1.5; }
+.concept-card p { font-size: 12px; color: var(--gray); line-height: 1.8; }
+
+/* ===== HOST SECTION ===== */
+.host-section {
+  background: white;
+  border-radius: 16px;
+  padding: 32px 36px;
+  margin-bottom: 48px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+.host-section h2 { font-size: 18px; font-weight: bold; margin-bottom: 8px; }
+.host-section .lead { font-size: 13px; color: var(--gray); margin-bottom: 24px; line-height: 1.8; }
+.host-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.host-card {
+  border-radius: 10px;
+  padding: 16px 18px;
+}
+.host-card.ok { background: #fff8f3; border-left: 4px solid var(--orange); }
+.host-card.ng { background: #f8f8f8; border-left: 4px solid #ccc; opacity: 0.7; }
+.host-card-label {
+  font-size: 10px;
+  font-weight: bold;
+  letter-spacing: 0.08em;
+  margin-bottom: 6px;
+}
+.host-card.ok .host-card-label { color: var(--orange); }
+.host-card.ng .host-card-label { color: #aaa; }
+.host-card p { font-size: 12px; color: var(--dark); line-height: 1.7; }
+.host-card.ng p { text-decoration: line-through; color: #aaa; }
+.host-criteria {
+  background: var(--dark);
+  border-radius: 10px;
+  padding: 18px 22px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+}
+.host-criterion {
+  font-size: 12px;
+  color: rgba(255,255,255,0.8);
+  line-height: 1.7;
+}
+.host-criterion strong { display: block; color: var(--orange); font-size: 13px; margin-bottom: 4px; }
+
+/* ===== ACTIVITIES ===== */
+.activity-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 48px;
+}
+.activity-card {
+  background: white;
+  border-radius: 14px;
+  padding: 24px 22px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  position: relative;
+}
+.activity-num {
+  position: absolute;
+  top: 16px; right: 18px;
+  font-size: 28px;
+  font-weight: bold;
+  color: #f0eeea;
+  line-height: 1;
+}
+.activity-icon { font-size: 24px; margin-bottom: 10px; }
+.activity-card h3 { font-size: 15px; font-weight: bold; color: var(--dark); margin-bottom: 8px; }
+.activity-card p { font-size: 12px; color: var(--gray); line-height: 1.8; }
+.activity-tag {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 10px;
+  background: #f0eeea;
+  color: var(--gray);
+  padding: 2px 10px;
+  border-radius: 100px;
+}
+
+/* ===== BIZ MODEL ===== */
+.biz-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 48px;
+}
+.biz-card {
+  background: white;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+.biz-card.now { border: 2.5px solid var(--orange); }
+.biz-card.later { border: 1.5px solid #ddd; opacity: 0.65; }
+.biz-head {
+  padding: 14px 22px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.biz-card.now .biz-head { background: var(--orange); }
+.biz-card.later .biz-head { background: #999; }
+.biz-head-title { font-size: 13px; font-weight: bold; color: white; }
+.biz-head-sub { font-size: 11px; color: rgba(255,255,255,0.8); margin-top: 2px; }
+.biz-badge {
+  margin-left: auto;
+  font-size: 10px;
+  font-weight: bold;
+  padding: 3px 10px;
+  border-radius: 100px;
+}
+.biz-card.now .biz-badge { background: white; color: var(--orange); }
+.biz-card.later .biz-badge { background: rgba(255,255,255,0.2); color: white; }
+.biz-body { padding: 20px 22px; }
+.biz-body p { font-size: 12px; color: var(--gray); line-height: 1.9; }
+.biz-price {
+  margin-top: 12px;
+  display: inline-block;
+  background: #fff8f3;
+  border: 1px solid #f0c9a0;
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: bold;
+  color: var(--orange);
+}
+
+/* ===== NOTE CONNECTION ===== */
+.note-box {
+  background: white;
+  border-radius: 16px;
+  padding: 28px 32px;
+  margin-bottom: 48px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  border: 1.5px solid #e8e8e8;
+}
+.note-box h2 { font-size: 17px; font-weight: bold; margin-bottom: 6px; }
+.note-box .note-lead { font-size: 13px; color: var(--gray); margin-bottom: 20px; line-height: 1.8; }
+.note-flow {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  flex-wrap: wrap;
+}
+.note-step {
+  background: #f8f7f5;
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-size: 12px;
+  color: var(--dark);
+  line-height: 1.6;
+  flex: 1;
+  min-width: 160px;
+}
+.note-step strong { display: block; font-size: 13px; color: var(--orange); margin-bottom: 3px; }
+.note-arrow {
+  font-size: 18px;
+  color: #ccc;
+  padding: 0 10px;
+  flex-shrink: 0;
+}
+.note-examples {
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.note-example {
+  background: #f8f7f5;
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-size: 12px;
+  color: var(--dark);
+  line-height: 1.7;
+  border-left: 3px solid var(--orange);
+}
+.note-example .arrow { color: var(--orange); font-weight: bold; }
+
+/* ===== PHASE SECTION ===== */
+.phase-block {
+  margin-bottom: 40px;
+}
+.phase-header {
+  background: var(--dark);
+  border-radius: 12px 12px 0 0;
+  padding: 18px 28px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.phase-badge {
+  background: var(--orange);
+  color: white;
+  font-size: 11px;
+  font-weight: bold;
+  padding: 4px 12px;
+  border-radius: 100px;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+.phase-title { font-size: 17px; font-weight: bold; color: white; }
+.phase-period { font-size: 12px; color: rgba(255,255,255,0.45); margin-left: auto; }
+.phase-body {
+  background: white;
+  border-radius: 0 0 12px 12px;
+  padding: 28px 28px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+}
+.axis-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+.axis-block { }
+.axis-tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: bold;
+  letter-spacing: 0.08em;
+  padding: 3px 10px;
+  border-radius: 100px;
+  margin-bottom: 12px;
+}
+.axis-tag.a { background: #fff8f3; color: var(--orange); border: 1px solid var(--orange); }
+.axis-tag.b { background: #f0f5ff; color: var(--blue); border: 1px solid var(--blue); }
+.task-list { display: flex; flex-direction: column; gap: 10px; }
+.task-item {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  background: #f8f7f5;
+  border-radius: 8px;
+  padding: 12px 14px;
+}
+.task-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 5px;
+}
+.task-dot.orange { background: var(--orange); }
+.task-dot.blue { background: var(--blue); }
+.task-body h4 { font-size: 13px; font-weight: bold; color: var(--dark); margin-bottom: 3px; line-height: 1.4; }
+.task-body p { font-size: 12px; color: var(--gray); line-height: 1.7; }
+.milestone-row {
+  display: flex;
+  gap: 12px;
+  margin-top: 4px;
+}
+.milestone {
+  flex: 1;
+  background: #1a1a1a;
+  border-radius: 8px;
+  padding: 12px 16px;
+}
+.m-label {
+  font-size: 9px;
+  font-weight: bold;
+  color: var(--orange);
+  letter-spacing: 0.1em;
+  margin-bottom: 5px;
+}
+.milestone p { font-size: 12px; color: rgba(255,255,255,0.85); line-height: 1.6; }
+
+/* ===== TEAM SECTION ===== */
+.team-section {
+  background: white;
+  border-radius: 14px;
+  padding: 28px 32px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  margin-bottom: 48px;
+}
+.team-grid {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+.member-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #f8f7f5;
+  border-radius: 100px;
+  padding: 8px 16px;
+  font-size: 12px;
+  color: var(--dark);
+}
+.member-chip .role { font-size: 10px; color: var(--gray); }
+
+/* ===== SNS ===== */
+.sns-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 48px;
+}
+.sns-card {
+  background: white;
+  border-radius: 12px;
+  padding: 16px 18px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  text-decoration: none;
+  color: var(--dark);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: box-shadow 0.15s;
+}
+.sns-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
+.sns-icon { width: 32px; height: 32px; }
+.sns-name { font-size: 13px; font-weight: bold; }
+.sns-desc { font-size: 10px; color: var(--gray); margin-top: 1px; }
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header>
+  <img src="assets/ご決定デザイン_横組み_PNG.png" alt="KOKOROMi">
+  <nav>
+    <a href="roadmap.html">旧ロードマップ</a>
+    <a href="for-organizations.html">団体向けLP</a>
+    <a href="bizdev/sales_deck.html">営業資料</a>
+    <span class="badge-internal">内部資料</span>
+  </nav>
+</header>
+
+<!-- ===== UPDATE BANNER ===== -->
+<div class="update-banner">
+  <span>🔄</span>
+  <strong>2026年5月 方針転換版</strong>
+  <span>—</span>
+  <span>「職業体験」から「人に会いに行く体験」へ。このページが現在の最新方針です。</span>
+</div>
+
+<!-- ===== HERO ===== -->
+<div class="hero">
+  <div class="hero-label">Roadmap 2026 — v2</div>
+  <h1>「面白い選択をした人に、<br><em>会いに行く</em>」</h1>
+  <p>
+    仕事はあくまでも手段。KOKOROMiが届けたいのは、<br>
+    「こういう生き方があるんだ」という出会いと、そこで生まれる自分への問いかけ。<br>
+    まずは1件——話を聞いて、一緒に動いて、振り返る。
+  </p>
+  <div class="hero-meta">
+    <div class="hero-meta-item"><strong>フェーズ数</strong>3フェーズ</div>
+    <div class="hero-meta-item"><strong>目標期間</strong>〜6ヶ月</div>
+    <div class="hero-meta-item"><strong>最初のゴール</strong>体験1件完走・振り返りインタビュー実施</div>
+    <div class="hero-meta-item"><strong>収益モデル</strong>個人参加費（モデルB）から先行</div>
+  </div>
+</div>
+
+<!-- ===== MAIN ===== -->
+<div class="main">
+
+  <!-- ===== 方針転換サマリー ===== -->
+  <div class="section-label">WHAT CHANGED — 何が変わったか</div>
+
+  <div class="pivot-banner">
+    <h2>「職業」ではなく<em>「人」</em>にフォーカスする</h2>
+    <p>
+      学童保育の「仕事体験」を募集するのではなく、「会社を辞めて子どもの居場所を作りたかった代表の話を聞きに行く」。
+      面白い職業に会いに行くのではなく、<strong>面白い選択をした人に会いに行く</strong>。
+      仕事・現場はその人の生き方に触れるための手段。
+    </p>
+  </div>
+
+  <div class="before-after">
+    <div class="ba-col before">
+      <div class="ba-label">BEFORE — これまでのイメージ</div>
+      <div class="ba-item">❌ 「学童保育で働いてみませんか？」</div>
+      <div class="ba-item">❌ 職業・仕事内容で参加者を集める</div>
+      <div class="ba-item">❌ スキル習得・労働体験が目的</div>
+      <div class="ba-item">❌ 企業・団体がKOKOROMiにお金を払う（先行）</div>
+    </div>
+    <div class="ba-arrow">→</div>
+    <div class="ba-col after">
+      <div class="ba-label">AFTER — 新しい方針</div>
+      <div class="ba-item">✅ 「会社を辞めて子どもの居場所を作った人の話を聞きに行く」</div>
+      <div class="ba-item">✅ その人の生き方・WHYにフォーカスして参加者を集める</div>
+      <div class="ba-item">✅ 価値観が揺さぶられる体験・出会いが目的</div>
+      <div class="ba-item">✅ 個人がKOKOROMiにお金を払う（モデルBから先行）</div>
+    </div>
+  </div>
+
+  <!-- ===== 届けたい体験 ===== -->
+  <div class="section-label">WHAT WE DELIVER — 届けたい3つの体験</div>
+
+  <div class="concept-grid" style="margin-bottom: 48px;">
+    <div class="concept-card">
+      <div class="concept-icon">🚪</div>
+      <h3>外に出る経験</h3>
+      <p>日常の職場・地域の外に一歩踏み出す。「自分の世界」の外側があることを肌で感じる体験。</p>
+    </div>
+    <div class="concept-card blue">
+      <div class="concept-icon">🗣️</div>
+      <h3>会ったことのない人の生き方・ストーリーを聞く</h3>
+      <p>「なぜこれをやっているのか」を語れる人と出会い、その言葉が参加者の価値観を揺さぶる。</p>
+    </div>
+    <div class="concept-card green">
+      <div class="concept-icon">🔥</div>
+      <h3>参加者自身が挑戦する機会</h3>
+      <p>見るだけで終わらず、関わる・つくる・やり遂げる。「自分でやった」という体験が残る。</p>
+    </div>
+  </div>
+
+  <!-- ===== 避けること ===== -->
+  <div style="background: #f8f8f8; border-radius: 12px; padding: 20px 24px; margin-bottom: 48px; border-left: 4px solid #ccc;">
+    <div style="font-size: 11px; font-weight: bold; color: #aaa; letter-spacing: 0.1em; margin-bottom: 12px;">✕ KOKOROMiが避けること</div>
+    <div style="display: flex; gap: 32px; flex-wrap: wrap;">
+      <div style="font-size: 13px; color: #aaa; text-decoration: line-through;">スキル習得だけで終わる体験（研修・勉強会的な場）</div>
+      <div style="font-size: 13px; color: #aaa; text-decoration: line-through;">労働力としての人材募集（求人・ボランティア募集的な文脈）</div>
+    </div>
+  </div>
+
+  <!-- ===== 現地でやること ===== -->
+  <div class="section-label">HOW WE DO IT — 現地でやること3つの形</div>
+
+  <div class="activity-row">
+    <div class="activity-card">
+      <div class="activity-num">01</div>
+      <div class="activity-icon">💬</div>
+      <h3>話を聞く</h3>
+      <p>代表・運営者と対話する。「なぜこれをやっているんですか？」を聞く時間。仕事の説明より、人生の選択の話を引き出す。</p>
+      <span class="activity-tag">1〜数時間</span>
+    </div>
+    <div class="activity-card">
+      <div class="activity-num">02</div>
+      <div class="activity-icon">🤝</div>
+      <h3>一緒に動く</h3>
+      <p>実際の現場で手を動かす。福祉的に働く・イベントを手伝う・広報物を一緒に作る。体験後に「自分でやった」が残る。</p>
+      <span class="activity-tag">半日〜数日</span>
+    </div>
+    <div class="activity-card">
+      <div class="activity-num">03</div>
+      <div class="activity-icon">🧩</div>
+      <h3>ワークショップ</h3>
+      <p>テーマを決めて参加者と代表が一緒に考える場。対話型で、参加者が問いを持ち帰れる設計にする。</p>
+      <span class="activity-tag">数時間〜1日</span>
+    </div>
+  </div>
+
+  <!-- ===== ホスト選定 ===== -->
+  <div class="section-label">WHO WE REACH OUT TO — 声をかけるホストの基準</div>
+
+  <div class="host-section">
+    <h2>「職業」ではなく「WHY」で選ぶ</h2>
+    <p class="lead">
+      しごと旅行は「何の職業か（珍しい・面白い）」でホストを選ぶ。KOKOROMiは「なぜそれをやっているか（WHYを語れるか）」で選ぶ。<br>
+      カフェでも、農家でも、学童でも、スタートアップでも——職業は問わない。
+    </p>
+
+    <div class="host-grid">
+      <div class="host-card ok">
+        <div class="host-card-label">✅ こういう人</div>
+        <p>「会社を辞めて、子どもの居場所を作りたかった」代表がいる学童</p>
+      </div>
+      <div class="host-card ng">
+        <div class="host-card-label">✕ こういう場所</div>
+        <p>「コーヒーの淹れ方を教えます」カフェ（スキル体験で終わる）</p>
+      </div>
+      <div class="host-card ok">
+        <div class="host-card-label">✅ こういう人</div>
+        <p>「引きこもりの子に働ける場所を作りたかった」という理念で動くカフェ経営者</p>
+      </div>
+      <div class="host-card ng">
+        <div class="host-card-label">✕ こういう場所</div>
+        <p>「収穫作業を手伝ってほしい」農家（労働力として募集している文脈）</p>
+      </div>
+    </div>
+
+    <div class="host-criteria">
+      <div class="host-criterion">
+        <strong>① WHYを語れる</strong>
+        何かを辞めた・捨てた・選んだ経験があり、「なぜこれをやっているか」を自分の言葉で語れる。
+      </div>
+      <div class="host-criterion">
+        <strong>② 任せられる余白がある</strong>
+        話を聞くだけでなく、参加者が何かを「一緒にやれる」現場・プロジェクト・対話の場がある。
+      </div>
+      <div class="host-criterion">
+        <strong>③ 人が来ることを喜ぶ</strong>
+        お金より「理念に共感してくれる人が来ること」に価値を感じてくれる。ホスト費用は無料。
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== ホスト候補 ===== -->
+  <div style="background: white; border-radius: 14px; padding: 24px 28px; margin-bottom: 48px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+    <div style="font-size: 11px; font-weight: bold; color: var(--gray); letter-spacing: 0.1em; margin-bottom: 16px;">HOST CANDIDATES — 最初に声をかける候補</div>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+      <div style="background: #fff8f3; border-radius: 10px; padding: 14px 16px; border-left: 4px solid var(--orange);">
+        <div style="font-size: 12px; font-weight: bold; color: var(--dark); margin-bottom: 4px;">🏢 渋谷QWSのベンチャー・個人PJ</div>
+        <div style="font-size: 12px; color: var(--gray); line-height: 1.7;">あのっちが現地にいる。顔見知りから声をかけられる。WHYが強い人が集まっている場所。</div>
+      </div>
+      <div style="background: #fff8f3; border-radius: 10px; padding: 14px 16px; border-left: 4px solid var(--orange);">
+        <div style="font-size: 12px; font-weight: bold; color: var(--dark); margin-bottom: 4px;">📝 MyStory YourShiftのゲスト</div>
+        <div style="font-size: 12px; color: var(--gray); line-height: 1.7;">noteですでに10人の「WHYを語れる人」とつながっている。関係がある分、話が早い。</div>
+      </div>
+      <div style="background: #f8f7f5; border-radius: 10px; padding: 14px 16px; border-left: 4px solid #bbb;">
+        <div style="font-size: 12px; font-weight: bold; color: var(--dark); margin-bottom: 4px;">🌱 社会的企業・NPO（教育・福祉・地域系）</div>
+        <div style="font-size: 12px; color: var(--gray); line-height: 1.7;">理念が明確で参加者の感情が動きやすい。創業ストーリーがあるところを優先。</div>
+      </div>
+      <div style="background: #f8f7f5; border-radius: 10px; padding: 14px 16px; border-left: 4px solid #bbb;">
+        <div style="font-size: 12px; font-weight: bold; color: var(--dark); margin-bottom: 4px;">☕ WHYがあるカフェ・個人事業主</div>
+        <div style="font-size: 12px; color: var(--gray); line-height: 1.7;">業態は問わない。「なぜこれをやっているんですか？」の答えが面白い人が基準。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== MyStory接続 ===== -->
+  <div class="section-label">NOTE CONNECTION — MyStory YourShift との接続</div>
+
+  <div class="note-box">
+    <h2>📝 「MyStory YourShift」はKOKOROMiの原型だった</h2>
+    <p class="note-lead">
+      これまでnoteで運営してきた「MyStory YourShift ―私の物語が、あなたの挑戦になる―」は、KOKOROMiの体験事業とまったく同じ設計思想を持っている。
+      noteで「その人の話を記事で届ける」ことを、KOKOROMiでは「その人の現場にリアルで連れていく」ことに変換する。
+    </p>
+    <div class="note-flow">
+      <div class="note-step">
+        <strong>MyStory YourShift（note）</strong>
+        ゲストの話を記事で読む<br>オンラインで感化される
+      </div>
+      <div class="note-arrow">→</div>
+      <div class="note-step">
+        <strong>KOKOROMi体験イベント</strong>
+        ゲストの現場に実際に行く<br>リアルで体験して変わる
+      </div>
+      <div class="note-arrow">→</div>
+      <div class="note-step">
+        <strong>KOKOROMiコミュニティ</strong>
+        体験後もつながり続ける<br>次の挑戦が生まれる
+      </div>
+    </div>
+    <div class="note-examples">
+      <div class="note-example">
+        note記事「現役教員が起業するまでの歩み」<br>
+        <span class="arrow">→</span> その人の現場に行くKOKOROMi体験を作る
+      </div>
+      <div class="note-example">
+        note記事「子どもの居場所づくりへの挑戦」<br>
+        <span class="arrow">→</span> その場所でワークショップを開く
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== ビジネスモデル ===== -->
+  <div class="section-label">BUSINESS MODEL — 収益の考え方</div>
+
+  <div class="biz-row">
+    <div class="biz-card now">
+      <div class="biz-head">
+        <div>
+          <div class="biz-head-title">🙋 モデルB — 今やっていること</div>
+          <div class="biz-head-sub">個人が参加費を払う</div>
+        </div>
+        <div class="biz-badge">▶ NOW</div>
+      </div>
+      <div class="biz-body">
+        <p>
+          参加者（個人）がKOKOROMiに参加費を払う。しごと旅行より安く、ホスト還元なしの分を参加者に還元する設計。
+          決済はPeatixまたはStripeで摩擦を最小化。
+        </p>
+        <div class="biz-price">参加費：1,500〜3,000円 / 回</div>
+        <p style="margin-top: 10px; font-size: 11px; color: #aaa;">ホスト（受入れ先）は完全無料。母数を増やすための設計。</p>
+      </div>
+    </div>
+    <div class="biz-card later">
+      <div class="biz-head">
+        <div>
+          <div class="biz-head-title">🏢 モデルA — 将来のアイデア</div>
+          <div class="biz-head-sub">企業・団体がお金を払う</div>
+        </div>
+        <div class="biz-badge">後で</div>
+      </div>
+      <div class="biz-body">
+        <p>
+          企業・団体がKOKOROMiにお金を払い、社員の越境学習プログラムとして活用する（サービスグラント型）。
+          実績ができてから本命収益として育てる。
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== PHASE 1 ===== -->
+  <div class="section-label">ROADMAP — フェーズ別アクションプラン</div>
+
+  <div class="phase-block">
+    <div class="phase-header">
+      <div class="phase-badge">Phase 1</div>
+      <div class="phase-title">最初の1件を完走する</div>
+      <div class="phase-period">今すぐ〜2ヶ月</div>
+    </div>
+    <div class="phase-body">
+      <div class="axis-pair">
+        <div class="axis-block">
+          <span class="axis-tag a">軸A：ホスト（受入先）を見つける</span>
+          <div class="task-list">
+            <div class="task-item">
+              <div class="task-dot orange"></div>
+              <div class="task-body">
+                <h4>渋谷QWSで声がけ（今週）</h4>
+                <p>「なぜこれをやっているんですか？」を聞いて、話が面白かった人にだけ次の提案をする。飛び込み営業ではなく、聞くことから始める。</p>
+              </div>
+            </div>
+            <div class="task-item">
+              <div class="task-dot orange"></div>
+              <div class="task-body">
+                <h4>MyStory YourShiftのゲストに連絡</h4>
+                <p>過去に記事にしたゲストは、すでにWHYを語れることが証明されている。「次のフェーズとして現場に人を連れていきたい」と伝える。</p>
+              </div>
+            </div>
+            <div class="task-item">
+              <div class="task-dot orange"></div>
+              <div class="task-body">
+                <h4>体験プログラムを一緒に設計する</h4>
+                <p>「何をお願いすればいいか分からない」をKOKOROMiが解決する。話を聞く・一緒に動く・ワークショップの3形式から提案する。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="axis-block">
+          <span class="axis-tag b">軸B：参加者を集める</span>
+          <div class="task-list">
+            <div class="task-item">
+              <div class="task-dot blue"></div>
+              <div class="task-body">
+                <h4>指名制で3〜5人を集める（最初）</h4>
+                <p>公募より先に指名制。「このままでいいのかな」と感じていそうな人に直接声をかける。LINEで「参加したい」と送るだけで申込完了。</p>
+              </div>
+            </div>
+            <div class="task-item">
+              <div class="task-dot blue"></div>
+              <div class="task-body">
+                <h4>面接で参加者を選ぶ</h4>
+                <p>受入れ前にKOKOROMiが参加者と面接を実施。「今の自分の状態」「なぜ参加したいか」を聞く。ミスマッチを防ぎ、受入れ先への信頼を担保する。</p>
+              </div>
+            </div>
+            <div class="task-item">
+              <div class="task-dot blue"></div>
+              <div class="task-body">
+                <h4>事前オリエンテーション（1週間前）</h4>
+                <p>30分オンラインで「何を感じに行くか」を話しておく。「その人のどんな言葉を持ち帰りたいか」を参加者が自分で決める。</p>
+              </div>
+            </div>
+            <div class="task-item">
+              <div class="task-dot blue"></div>
+              <div class="task-body">
+                <h4>SNS・noteで「人の紹介」として発信</h4>
+                <p>「こんな仕事があります」ではなく「こういう選択をしたこの人の話を聞きに行きます」という発信。MyStory YourShiftのフォーマットを活かす。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="background: #f8f7f5; border-radius: 10px; padding: 16px 18px; margin-bottom: 20px; font-size: 12px; color: var(--gray); line-height: 1.9; border-left: 4px solid var(--orange);">
+        <strong style="color: var(--dark);">体験当日の流れ（MVP）：</strong><br>
+        ① 事前オリエン（1週間前・30分） → ② 現地体験（話を聞く／一緒に動く／ワークショップ） → ③ 振り返りインタビュー（あのっちと1対1） → ④ SNS・noteで発信 → ⑤ 次の参加者が来る
+      </div>
+
+      <div class="milestone-row">
+        <div class="milestone">
+          <div class="m-label">MILESTONE A</div>
+          <p>ホスト1件と合意が取れた</p>
+        </div>
+        <div class="milestone">
+          <div class="m-label">MILESTONE B</div>
+          <p>参加者3〜5人が集まった</p>
+        </div>
+        <div class="milestone">
+          <div class="m-label">MILESTONE C ⭐</div>
+          <p>体験1件完走・振り返り実施</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="phase-block">
+    <div class="phase-header">
+      <div class="phase-badge">Phase 2</div>
+      <div class="phase-title">繰り返して、コミュニティをつくる</div>
+      <div class="phase-period">2〜4ヶ月</div>
+    </div>
+    <div class="phase-body">
+      <div class="axis-pair">
+        <div class="axis-block">
+          <span class="axis-tag a">軸A：ホストを増やす</span>
+          <div class="task-list">
+            <div class="task-item">
+              <div class="task-dot orange"></div>
+              <div class="task-body">
+                <h4>体験レポートをnoteで発信してホストを集める</h4>
+                <p>「こんな体験ができました」という記事が次のホスト候補への営業になる。</p>
+              </div>
+            </div>
+            <div class="task-item">
+              <div class="task-dot orange"></div>
+              <div class="task-body">
+                <h4>KOKOROMiのSNSで受入れ先を取り上げる</h4>
+                <p>体験実施後にX・Instagram・noteで受入れ先の生き方を紹介。「取り上げてもらえる」がホスト側のメリットになる。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="axis-block">
+          <span class="axis-tag b">軸B：参加者を増やす</span>
+          <div class="task-list">
+            <div class="task-item">
+              <div class="task-dot blue"></div>
+              <div class="task-body">
+                <h4>LINEで募集開始（公募）</h4>
+                <p>Phase 1の実績をもとにLINEで広く参加者を募る。「LINE登録→体験申込」の導線を整える。</p>
+              </div>
+            </div>
+            <div class="task-item">
+              <div class="task-dot blue"></div>
+              <div class="task-body">
+                <h4>体験後のコミュニティ入口をつくる</h4>
+                <p>体験した人同士がつながれる場（LINE・Discord等）。「次は何に行こうか」という仲間ができる。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="milestone-row">
+        <div class="milestone">
+          <div class="m-label">MILESTONE A</div>
+          <p>体験3件完走・SNS掲載3件</p>
+        </div>
+        <div class="milestone">
+          <div class="m-label">MILESTONE B</div>
+          <p>LINE登録50人超</p>
+        </div>
+        <div class="milestone">
+          <div class="m-label">MILESTONE C</div>
+          <p>コミュニティに10人以上が参加</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="phase-block">
+    <div class="phase-header">
+      <div class="phase-badge">Phase 3</div>
+      <div class="phase-title">「越境体験 × コミュニティ事業」として自走させる</div>
+      <div class="phase-period">4〜6ヶ月以降</div>
+    </div>
+    <div class="phase-body">
+      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin-bottom: 20px;">
+        <div style="background: #f8f7f5; border-radius: 10px; padding: 16px; font-size: 12px; color: var(--gray); line-height: 1.8;">
+          <strong style="display: block; color: var(--dark); margin-bottom: 4px;">Layer 1：体験</strong>
+          1日〜数日。「この人の話を聞きに行く」体験。参加費あり。
+        </div>
+        <div style="background: #f8f7f5; border-radius: 10px; padding: 16px; font-size: 12px; color: var(--gray); line-height: 1.8;">
+          <strong style="display: block; color: var(--dark); margin-bottom: 4px;">Layer 2：挑戦</strong>
+          数週間〜数ヶ月。プロジェクトに深く関わり「やり遂げた」が残る。
+        </div>
+        <div style="background: #f8f7f5; border-radius: 10px; padding: 16px; font-size: 12px; color: var(--gray); line-height: 1.8;">
+          <strong style="display: block; color: var(--dark); margin-bottom: 4px;">Layer 3：コミュニティ</strong>
+          越境した人同士が集まる場。月会費モデルへ。
+        </div>
+      </div>
+      <div class="milestone-row">
+        <div class="milestone">
+          <div class="m-label">MILESTONE A</div>
+          <p>体験5件以上・ホスト5件以上</p>
+        </div>
+        <div class="milestone">
+          <div class="m-label">MILESTONE B</div>
+          <p>LINE登録100人超</p>
+        </div>
+        <div class="milestone">
+          <div class="m-label">MILESTONE C ⭐</div>
+          <p>コミュニティ月会費・収益化</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== チームメンバー ===== -->
+  <div class="section-label" style="margin-top: 48px;">TEAM — 運営メンバー</div>
+
+  <div class="team-section">
+    <div class="team-grid">
+      <div class="member-chip">👩 あのっち <span class="role">代表・WHY語り手・元教員</span></div>
+      <div class="member-chip">🙋 ゆい <span class="role">メンバー</span></div>
+      <div class="member-chip">📊 ソブえもん <span class="role">Notion管理</span></div>
+      <div class="member-chip">🙋 とも <span class="role">メンバー</span></div>
+      <div class="member-chip">🙋 みさき <span class="role">メンバー</span></div>
+    </div>
+    <div style="margin-top: 16px; padding: 12px 16px; background: #f8f7f5; border-radius: 8px; font-size: 12px; color: var(--gray); line-height: 1.8;">
+      📋 日々のタスク・進捗管理はNotionで（担当：ソブえもん）。このロードマップは方針確認用。
+    </div>
+  </div>
+
+  <!-- ===== SNS ===== -->
+  <div class="section-label">CHANNELS — SNSチャンネル</div>
+
+  <div class="sns-row">
+    <a class="sns-card" href="https://x.com/kokoromi_base" target="_blank">
+      <img class="sns-icon" src="assets/icons/x-logo.svg" alt="X">
+      <div>
+        <div class="sns-name">X (Twitter)</div>
+        <div class="sns-desc">@kokoromi_base</div>
+      </div>
+    </a>
+    <a class="sns-card" href="https://www.instagram.com/kokoromi_base/" target="_blank">
+      <img class="sns-icon" src="assets/icons/instagram-logo.svg" alt="Instagram">
+      <div>
+        <div class="sns-name">Instagram</div>
+        <div class="sns-desc">@kokoromi_base</div>
+      </div>
+    </a>
+    <a class="sns-card" href="https://note.com/kokoromi_jp" target="_blank">
+      <img class="sns-icon" src="assets/icons/note-logo.svg" alt="note">
+      <div>
+        <div class="sns-name">note</div>
+        <div class="sns-desc">MyStory YourShift</div>
+      </div>
+    </a>
+    <a class="sns-card" href="https://lin.ee/XOFzUEb" target="_blank">
+      <div style="width:32px;height:32px;background:#06C755;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;color:white;">L</div>
+      <div>
+        <div class="sns-name">公式LINE</div>
+        <div class="sns-desc">個人参加者向け</div>
+      </div>
+    </a>
+  </div>
+
+</div><!-- /main -->
+</body>
+</html>
