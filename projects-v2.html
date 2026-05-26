@@ -278,6 +278,34 @@ header nav a:hover { color: white; border-color: rgba(255,255,255,0.4); }
   border-top: 1px solid #f0eeea;
 }
 .proj-loc { font-size: 11px; color: #aaa; }
+.proj-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  font-weight: bold;
+  background: rgba(255,255,255,0.92);
+  color: #2e7d5e;
+  padding: 3px 10px;
+  border-radius: 100px;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  letter-spacing: 0.04em;
+}
+.proj-status::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background: #2e7d5e;
+  border-radius: 50%;
+  animation: blink 1.8s ease-in-out infinite;
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+.proj-host-area { position: relative; }
 .proj-cta {
   font-size: 12px;
   font-weight: bold;
@@ -669,6 +697,7 @@ header nav a:hover { color: white; border-color: rgba(255,255,255,0.4); }
       <!-- ① -->
       <div class="proj-card" onclick="openModal('ikuta')" style="cursor:pointer">
         <div class="proj-host-area color-1">
+          <span class="proj-status">募集中</span>
           <div class="proj-host-emoji">🌍</div>
           <span class="proj-thumb-tag">教育・地域</span>
         </div>
@@ -685,6 +714,7 @@ header nav a:hover { color: white; border-color: rgba(255,255,255,0.4); }
       <!-- ② -->
       <div class="proj-card" onclick="openModal('niitsu')" style="cursor:pointer">
         <div class="proj-host-area color-2">
+          <span class="proj-status">募集中</span>
           <div class="proj-host-emoji">🔬</div>
           <span class="proj-thumb-tag">教育・探究学習</span>
         </div>
@@ -701,6 +731,7 @@ header nav a:hover { color: white; border-color: rgba(255,255,255,0.4); }
       <!-- ③ -->
       <div class="proj-card" onclick="openModal('fujimori')" style="cursor:pointer">
         <div class="proj-host-area color-3">
+          <span class="proj-status">募集中</span>
           <div class="proj-host-emoji">🌱</div>
           <span class="proj-thumb-tag">学童・子どもの居場所</span>
         </div>
@@ -717,6 +748,7 @@ header nav a:hover { color: white; border-color: rgba(255,255,255,0.4); }
       <!-- ④ -->
       <div class="proj-card" onclick="openModal('sato')" style="cursor:pointer">
         <div class="proj-host-area color-4">
+          <span class="proj-status">募集中</span>
           <div class="proj-host-emoji">⚽</div>
           <span class="proj-thumb-tag">教育・地域</span>
         </div>
@@ -733,6 +765,7 @@ header nav a:hover { color: white; border-color: rgba(255,255,255,0.4); }
       <!-- ⑤ -->
       <div class="proj-card" onclick="openModal('mori')" style="cursor:pointer">
         <div class="proj-host-area color-5">
+          <span class="proj-status">募集中</span>
           <div class="proj-host-emoji">✈️</div>
           <span class="proj-thumb-tag">子ども・地域</span>
         </div>
@@ -749,6 +782,7 @@ header nav a:hover { color: white; border-color: rgba(255,255,255,0.4); }
       <!-- ⑥ -->
       <div class="proj-card" onclick="openModal('suzuki')" style="cursor:pointer">
         <div class="proj-host-area color-6">
+          <span class="proj-status">募集中</span>
           <div class="proj-host-emoji">✏️</div>
           <span class="proj-thumb-tag">デザイン・キャリア</span>
         </div>
@@ -765,6 +799,7 @@ header nav a:hover { color: white; border-color: rgba(255,255,255,0.4); }
       <!-- ⑦ -->
       <div class="proj-card" onclick="openModal('yamakawa')" style="cursor:pointer">
         <div class="proj-host-area color-7">
+          <span class="proj-status">募集中</span>
           <div class="proj-host-emoji">💃</div>
           <span class="proj-thumb-tag">ダンス・起業</span>
         </div>
@@ -781,6 +816,7 @@ header nav a:hover { color: white; border-color: rgba(255,255,255,0.4); }
       <!-- ⑧ -->
       <div class="proj-card" onclick="openModal('kasuya')" style="cursor:pointer">
         <div class="proj-host-area color-8">
+          <span class="proj-status">募集中</span>
           <div class="proj-host-emoji">🇩🇪</div>
           <span class="proj-thumb-tag">教育・海外</span>
         </div>
@@ -797,6 +833,7 @@ header nav a:hover { color: white; border-color: rgba(255,255,255,0.4); }
       <!-- ⑨ -->
       <div class="proj-card" onclick="openModal('clash')" style="cursor:pointer">
         <div class="proj-host-area color-9">
+          <span class="proj-status">募集中</span>
           <div class="proj-host-emoji">👊</div>
           <span class="proj-thumb-tag">教育・学校改革</span>
         </div>
