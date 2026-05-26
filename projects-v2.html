@@ -481,6 +481,33 @@ header nav a:hover { color: white; border-color: rgba(255,255,255,0.4); }
   color: var(--gray);
 }
 .modal-meta-item strong { color: var(--dark); }
+.modal-availability {
+  background: #f0fff4;
+  border: 1px solid rgba(46,125,94,0.2);
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin-bottom: 18px;
+}
+.modal-availability-title {
+  font-size: 11px;
+  font-weight: bold;
+  color: var(--green);
+  letter-spacing: 0.08em;
+  margin-bottom: 8px;
+}
+.modal-availability-slots {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.modal-avail-slot {
+  font-size: 11px;
+  background: white;
+  border: 1px solid rgba(46,125,94,0.25);
+  color: var(--dark);
+  padding: 4px 12px;
+  border-radius: 100px;
+}
 .modal-cta-row { display: flex; gap: 10px; align-items: center; }
 .modal-line-btn {
   flex: 1;
@@ -938,6 +965,10 @@ header nav a:hover { color: white; border-color: rgba(255,255,255,0.4); }
       <div class="modal-section-title">この体験で持ち帰れること</div>
       <div id="modal-takeaways" class="modal-takeaways"></div>
       <div id="modal-meta" class="modal-meta"></div>
+      <div id="modal-availability" class="modal-availability" style="display:none;">
+        <div class="modal-availability-title">🗓 受け入れ可能日時</div>
+        <div id="modal-avail-slots" class="modal-availability-slots"></div>
+      </div>
       <div class="modal-cta-row">
         <a class="modal-line-btn" href="https://lin.ee/XOFzUEb" target="_blank">
           <span style="font-size:18px;">💬</span> LINEで参加を申し込む
@@ -980,6 +1011,7 @@ const PROGRAMS = {
     fee: '2,000円',
     loc: '詳細はLINEでご案内',
     note: 'https://note.com/kokoromi_jp/m/m2fd2bec650b1',
+    availability: [],
   },
   niitsu: {
     name: '新津 圭司（ニコラスさん）',
@@ -999,6 +1031,7 @@ const PROGRAMS = {
     fee: '2,000円',
     loc: '東京都内',
     note: 'https://note.com/kokoromi_jp/m/m2fd2bec650b1',
+    availability: [],
   },
   fujimori: {
     name: '藤森 光一',
@@ -1018,6 +1051,7 @@ const PROGRAMS = {
     fee: '2,000円',
     loc: '東京都小金井市',
     note: 'https://note.com/gifted_curlew235',
+    availability: ['調整中——LINEでお問い合わせください'],
   },
   sato: {
     name: '佐藤 健友（探球さん）',
@@ -1037,6 +1071,7 @@ const PROGRAMS = {
     fee: '2,000円',
     loc: '東京都品川区',
     note: 'https://note.com/kokoromi_jp/m/m2fd2bec650b1',
+    availability: [],
   },
   mori: {
     name: '森 勇斗',
@@ -1056,6 +1091,7 @@ const PROGRAMS = {
     fee: '2,000円（交通費別途）',
     loc: '愛知県一宮市',
     note: 'https://note.com/kokoromi_jp/m/m2fd2bec650b1',
+    availability: [],
   },
   suzuki: {
     name: '鈴木 優太朗（たろ）',
@@ -1075,6 +1111,7 @@ const PROGRAMS = {
     fee: '2,000円',
     loc: '東京都内',
     note: 'https://note.com/kokoromi_jp/m/m2fd2bec650b1',
+    availability: [],
   },
   yamakawa: {
     name: '山川 直美',
@@ -1094,6 +1131,7 @@ const PROGRAMS = {
     fee: '2,500円',
     loc: '詳細はLINEでご案内',
     note: 'https://note.com/kokoromi_jp/m/m2fd2bec650b1',
+    availability: [],
   },
   kasuya: {
     name: '糟谷 さん（き～ちゃん先生）',
@@ -1113,6 +1151,7 @@ const PROGRAMS = {
     fee: '1,500円',
     loc: 'オンライン開催（Zoom等）',
     note: 'https://note.com/kokoromi_jp/m/m2fd2bec650b1',
+    availability: [],
   },
   clash: {
     name: '中出さん・北岡さん（CLASH）',
@@ -1132,6 +1171,7 @@ const PROGRAMS = {
     fee: '2,000円',
     loc: '詳細はLINEでご案内',
     note: 'https://note.com/kokoromi_jp/m/m2fd2bec650b1',
+    availability: [],
   },
 };
 
@@ -1179,6 +1219,16 @@ function openModal(key) {
     <div class="modal-meta-item">⏱ <strong>${p.fee}</strong>（参加費）</div>
     <div class="modal-meta-item">📍 <strong>${p.loc}</strong></div>
   `;
+
+  // Availability
+  const availBox = document.getElementById('modal-availability');
+  const availSlots = document.getElementById('modal-avail-slots');
+  if (p.availability && p.availability.length > 0) {
+    availSlots.innerHTML = p.availability.map(s => `<span class="modal-avail-slot">${s}</span>`).join('');
+    availBox.style.display = 'block';
+  } else {
+    availBox.style.display = 'none';
+  }
 
   // Note link
   document.getElementById('modal-note').href = p.note;
