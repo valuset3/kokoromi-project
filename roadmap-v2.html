@@ -477,6 +477,108 @@ header nav a:hover { color: white; border-color: rgba(255,255,255,0.4); }
 .sns-icon { width: 32px; height: 32px; }
 .sns-name { font-size: 13px; font-weight: bold; }
 .sns-desc { font-size: 10px; color: var(--gray); margin-top: 1px; }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 680px) {
+  /* Header */
+  header {
+    padding: 12px 16px;
+  }
+  header nav a {
+    font-size: 11px;
+    padding: 4px 10px;
+  }
+
+  /* Update banner */
+  .update-banner {
+    padding: 10px 16px;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  /* Hero */
+  .hero {
+    padding: 32px 20px 28px;
+  }
+  .hero h1 {
+    font-size: 24px;
+  }
+  .hero p {
+    font-size: 13px;
+  }
+
+  /* Main container */
+  .main {
+    padding: 28px 16px 80px;
+  }
+
+  /* Pivot banner */
+  .pivot-banner {
+    padding: 20px 18px;
+  }
+  .pivot-banner h2 {
+    font-size: 18px;
+  }
+
+  /* Before / After → stack vertically */
+  .before-after {
+    grid-template-columns: 1fr;
+  }
+  .ba-arrow {
+    transform: rotate(90deg);
+    justify-content: flex-start;
+    padding: 4px 0;
+  }
+
+  /* Concept cards → 1 column */
+  .concept-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Activity cards → 1 column */
+  .activity-row {
+    grid-template-columns: 1fr;
+  }
+
+  /* Host section */
+  .host-section {
+    padding: 24px 18px;
+  }
+  .host-grid {
+    grid-template-columns: 1fr;
+  }
+  .host-criteria {
+    grid-template-columns: 1fr;
+  }
+
+  /* Biz model → 1 column */
+  .biz-row {
+    grid-template-columns: 1fr;
+  }
+
+  /* Phase / axis → 1 column */
+  .axis-pair {
+    grid-template-columns: 1fr;
+  }
+  .milestone-row {
+    flex-direction: column;
+  }
+
+  /* Team */
+  .team-section {
+    padding: 20px 18px;
+  }
+
+  /* SNS → 2 column */
+  .sns-row {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  /* Inline grid overrides (HOST CANDIDATES etc.) */
+  div[style*="grid-template-columns"] {
+    grid-template-columns: 1fr !important;
+  }
+}
 </style>
 </head>
 <body>
