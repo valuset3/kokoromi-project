@@ -479,7 +479,7 @@ header nav a:hover { color: white; border-color: rgba(255,255,255,0.4); }
 .sns-desc { font-size: 10px; color: var(--gray); margin-top: 1px; }
 
 /* ===== RESPONSIVE ===== */
-@media (max-width: 680px) {
+@media (max-width: 768px) {
   /* Header */
   header {
     padding: 12px 16px;
@@ -532,12 +532,18 @@ header nav a:hover { color: white; border-color: rgba(255,255,255,0.4); }
 
   /* Concept cards → 1 column */
   .concept-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr !important;
+  }
+  .concept-card h3 {
+    font-size: 16px;
+  }
+  .concept-card p {
+    font-size: 13px;
   }
 
   /* Activity cards → 1 column */
   .activity-row {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr !important;
   }
 
   /* Host section */
