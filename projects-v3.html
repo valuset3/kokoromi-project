@@ -1,0 +1,1697 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>体験プロジェクト | KOKOROMi</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Hiragino Sans', 'Yu Gothic', 'Meiryo', sans-serif;
+  background: #f5f4f1;
+  color: #1a1a1a;
+  line-height: 1.7;
+}
+:root {
+  --orange: #e07b39;
+  --dark: #1a2744;
+  --dark-mid: #243352;
+  --gray: #666;
+  --warm: #f5f4f1;
+  --green: #2e7d5e;
+  --blue: #3a7bd5;
+}
+img { display: block; }
+
+/* ─── HEADER ─── */
+header {
+  background: var(--dark);
+  height: 60px;
+  padding: 0 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+header img { height: 24px; }
+header nav { display: flex; gap: 8px; align-items: center; }
+header nav a {
+  font-size: 12px;
+  color: rgba(255,255,255,0.5);
+  text-decoration: none;
+  padding: 6px 14px;
+  border-radius: 100px;
+  border: 1px solid rgba(255,255,255,0.12);
+  transition: all 0.15s;
+}
+header nav a:hover { color: white; border-color: rgba(255,255,255,0.35); }
+.nav-line {
+  background: #06C755 !important;
+  border-color: #06C755 !important;
+  color: white !important;
+  font-weight: bold;
+}
+.nav-line:hover { opacity: 0.85; }
+
+/* ─── HERO ─── */
+.hero {
+  background: linear-gradient(160deg, #0f1b30 0%, var(--dark) 60%);
+  padding: 80px 64px 88px;
+  border-bottom: 3px solid var(--orange);
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -120px; right: -120px;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(224,123,57,0.12) 0%, transparent 65%);
+  pointer-events: none;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -60px; left: -60px;
+  width: 360px; height: 360px;
+  background: radial-gradient(circle, rgba(26,39,68,0.4) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 72px;
+}
+.hero-copy { flex: 1; }
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: bold;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--orange);
+  background: rgba(224,123,57,0.12);
+  padding: 5px 14px;
+  border-radius: 100px;
+  margin-bottom: 24px;
+}
+.hero h1 {
+  font-size: 46px;
+  color: white;
+  font-weight: bold;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  margin-bottom: 22px;
+}
+.hero h1 em { font-style: normal; color: var(--orange); }
+.hero-desc {
+  font-size: 15px;
+  color: rgba(255,255,255,0.5);
+  line-height: 2;
+  max-width: 480px;
+  margin-bottom: 40px;
+}
+.hero-actions { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+.btn-line-lg {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  background: #06C755;
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 14px 30px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: opacity 0.15s;
+}
+.btn-line-lg:hover { opacity: 0.85; }
+.btn-scroll {
+  color: rgba(255,255,255,0.45);
+  font-size: 13px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.15s;
+}
+.btn-scroll:hover { color: rgba(255,255,255,0.8); }
+
+/* hero photo */
+.hero-photo-frame {
+  flex-shrink: 0;
+  width: 300px;
+  position: relative;
+}
+.hero-photo-img {
+  width: 300px;
+  height: 380px;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #1e2e4a;
+  position: relative;
+}
+.hero-photo-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+.hero-photo-tag {
+  position: absolute;
+  top: 14px; right: 14px;
+  font-size: 10px;
+  font-weight: bold;
+  background: var(--orange);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 100px;
+  letter-spacing: 0.04em;
+}
+.hero-photo-deco {
+  position: absolute;
+  bottom: -16px; right: -16px;
+  width: 120px; height: 120px;
+  border-radius: 14px;
+  background: rgba(224,123,57,0.15);
+  border: 2px solid rgba(224,123,57,0.2);
+  z-index: -1;
+}
+
+/* ─── CONCEPT STRIP ─── */
+.concept-strip {
+  background: var(--orange);
+  display: flex;
+}
+.concept-item {
+  flex: 1;
+  padding: 22px 36px;
+  border-right: 1px solid rgba(255,255,255,0.18);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.concept-item:last-child { border-right: none; }
+.concept-jp {
+  font-size: 28px;
+  font-weight: bold;
+  color: white;
+  flex-shrink: 0;
+  line-height: 1;
+}
+.concept-text {}
+.concept-en {
+  font-size: 10px;
+  font-weight: bold;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 3px;
+}
+.concept-desc {
+  font-size: 12px;
+  color: rgba(255,255,255,0.88);
+  line-height: 1.65;
+}
+
+/* ─── MAIN ─── */
+.main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 72px 48px 96px;
+}
+
+/* section labels */
+.s-label {
+  font-size: 11px;
+  font-weight: bold;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 8px;
+}
+.s-title {
+  font-size: 26px;
+  font-weight: bold;
+  color: var(--dark);
+  line-height: 1.4;
+  margin-bottom: 8px;
+}
+.s-sub {
+  font-size: 14px;
+  color: var(--gray);
+  line-height: 1.9;
+  margin-bottom: 36px;
+}
+
+/* ─── FEATURED ─── */
+.featured-wrap { margin-bottom: 80px; }
+.featured-card {
+  background: linear-gradient(135deg, var(--dark) 0%, #0f1b30 100%);
+  border-radius: 22px;
+  overflow: hidden;
+  display: flex;
+  min-height: 460px;
+  cursor: pointer;
+  box-shadow: 0 10px 48px rgba(26,39,68,0.35);
+  transition: transform 0.2s, box-shadow 0.2s;
+  margin-top: 28px;
+}
+.featured-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 60px rgba(0,0,0,0.3);
+}
+.featured-img {
+  width: 400px;
+  flex-shrink: 0;
+  position: relative;
+  background: #1e2e4a;
+}
+.featured-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+.featured-img::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, transparent 55%, rgba(26,26,26,0.6));
+}
+.featured-badge {
+  position: absolute;
+  top: 16px; left: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 10px;
+  font-weight: bold;
+  background: rgba(255,255,255,0.95);
+  color: var(--green);
+  padding: 4px 12px;
+  border-radius: 100px;
+  z-index: 2;
+  letter-spacing: 0.05em;
+}
+.featured-badge::before {
+  content: '';
+  width: 6px; height: 6px;
+  background: var(--green);
+  border-radius: 50%;
+  animation: blink 1.8s ease-in-out infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+.featured-content {
+  flex: 1;
+  padding: 52px 56px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.featured-cat {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: bold;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--orange);
+  background: rgba(224,123,57,0.14);
+  padding: 4px 14px;
+  border-radius: 100px;
+  margin-bottom: 20px;
+  align-self: flex-start;
+}
+.featured-name {
+  font-size: 32px;
+  font-weight: bold;
+  color: white;
+  line-height: 1.3;
+  margin-bottom: 5px;
+}
+.featured-role {
+  font-size: 15px;
+  font-weight: bold;
+  color: rgba(255,255,255,0.75);
+  margin-bottom: 28px;
+  line-height: 1.6;
+}
+.featured-quote {
+  font-size: 16px;
+  color: rgba(255,255,255,0.82);
+  line-height: 1.85;
+  border-left: 3px solid var(--orange);
+  padding-left: 20px;
+  margin-bottom: 32px;
+  font-style: italic;
+}
+.featured-meta-row {
+  display: flex;
+  gap: 28px;
+  margin-bottom: 32px;
+}
+.featured-meta-item { }
+.featured-meta-label {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+  margin-bottom: 4px;
+}
+.featured-meta-value {
+  font-size: 13px;
+  color: rgba(255,255,255,0.8);
+  font-weight: bold;
+}
+.featured-cta-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.btn-orange {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--orange);
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 13px 26px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: opacity 0.15s;
+  cursor: pointer;
+  border: none;
+}
+.btn-orange:hover { opacity: 0.85; }
+.btn-text {
+  font-size: 13px;
+  color: rgba(255,255,255,0.4);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.btn-text:hover { color: rgba(255,255,255,0.75); }
+
+/* ─── PROJECT GRID ─── */
+.grid-wrap { margin-bottom: 80px; }
+.grid-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+.grid-head h2 { font-size: 20px; font-weight: bold; color: var(--dark); }
+.grid-head .cnt { font-size: 13px; color: var(--gray); }
+
+.proj-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+.proj-card {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 2px 14px rgba(0,0,0,0.07);
+  transition: box-shadow 0.15s, transform 0.15s;
+  display: flex;
+  flex-direction: column;
+}
+.proj-card:hover {
+  box-shadow: 0 10px 36px rgba(0,0,0,0.14);
+  transform: translateY(-3px);
+}
+.proj-card-head {
+  height: 190px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 14px 16px;
+}
+.c1 { background: linear-gradient(145deg,#2c3e50,#3e5c7a); }
+.c2 { background: linear-gradient(145deg,#1e3d2f,#2e5c44); }
+.c3 { background: linear-gradient(145deg,#3d1f1f,#5e3232); }
+.c4 { background: linear-gradient(145deg,#1e2d3d,#2e4460); }
+.c6 { background: linear-gradient(145deg,#2e2010,#4a3418); }
+.c7 { background: linear-gradient(145deg,#1f1040,#36205a); }
+.c8 { background: linear-gradient(145deg,#0f2d20,#1a4833); }
+.c9 { background: linear-gradient(145deg,#2a2215,#3e3020); }
+.card-emoji {
+  font-size: 96px;
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -58%);
+  opacity: 0.15;
+  pointer-events: none;
+  line-height: 1;
+}
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  position: relative;
+  z-index: 1;
+}
+.card-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  font-weight: bold;
+  background: rgba(255,255,255,0.92);
+  color: var(--green);
+  padding: 3px 10px;
+  border-radius: 100px;
+}
+.card-live::before {
+  content: '';
+  width: 5px; height: 5px;
+  background: var(--green);
+  border-radius: 50%;
+  animation: blink 1.8s ease-in-out infinite;
+}
+.card-type {
+  font-size: 10px;
+  font-weight: bold;
+  background: rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.7);
+  padding: 3px 10px;
+  border-radius: 100px;
+}
+.card-bottom {
+  position: relative;
+  z-index: 1;
+}
+.card-name { display: none; }
+.card-role { display: none; }
+.proj-card-body {
+  padding: 16px 18px 18px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.card-title {
+  font-size: 13px;
+  font-weight: bold;
+  color: var(--dark);
+  line-height: 1.75;
+  flex: 1;
+  margin-bottom: 14px;
+}
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid #f0eeea;
+  padding-top: 12px;
+}
+.card-loc { font-size: 11px; color: #bbb; }
+.card-arrow {
+  font-size: 12px;
+  font-weight: bold;
+  color: var(--orange);
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+/* ─── PULL QUOTE ─── */
+.pullquote-wrap {
+  background: linear-gradient(135deg, var(--dark) 0%, #0f1b30 100%);
+  border-radius: 22px;
+  padding: 72px 80px;
+  margin-bottom: 80px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.pullquote-wrap::before {
+  content: '"';
+  font-size: 320px;
+  font-weight: bold;
+  color: rgba(224,123,57,0.06);
+  position: absolute;
+  top: -80px; left: 20px;
+  line-height: 1;
+  font-family: Georgia, 'Times New Roman', serif;
+  pointer-events: none;
+}
+.pq-text {
+  font-size: 26px;
+  font-weight: bold;
+  color: white;
+  line-height: 1.65;
+  margin-bottom: 14px;
+  position: relative;
+  z-index: 1;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.pq-text em { font-style: normal; color: var(--orange); }
+.pq-sub {
+  font-size: 14px;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 40px;
+  position: relative;
+  z-index: 1;
+}
+.pq-btn {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: #06C755;
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+  padding: 16px 40px;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: opacity 0.15s;
+}
+.pq-btn:hover { opacity: 0.85; }
+.pq-note {
+  position: relative;
+  z-index: 1;
+  margin-top: 16px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.22);
+}
+
+/* ─── FLOW ─── */
+.flow-wrap { margin-bottom: 80px; }
+.flow-box {
+  background: white;
+  border-radius: 18px;
+  padding: 40px 32px;
+  box-shadow: 0 2px 14px rgba(0,0,0,0.06);
+  display: flex;
+  align-items: flex-start;
+  margin-top: 32px;
+}
+.flow-step {
+  flex: 1;
+  text-align: center;
+  padding: 0 12px;
+}
+.f-num {
+  width: 38px; height: 38px;
+  background: var(--orange);
+  color: white;
+  border-radius: 50%;
+  font-size: 15px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 14px;
+}
+.flow-step h4 {
+  font-size: 13px;
+  font-weight: bold;
+  color: var(--dark);
+  margin-bottom: 6px;
+  line-height: 1.5;
+}
+.flow-step p {
+  font-size: 11px;
+  color: var(--gray);
+  line-height: 1.75;
+}
+.f-arrow {
+  font-size: 18px;
+  color: #ddd;
+  flex-shrink: 0;
+  padding-top: 8px;
+  margin-top: 0;
+}
+
+/* ─── WHO ─── */
+.who-wrap { margin-bottom: 80px; }
+.who-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 32px;
+}
+.who-card {
+  background: white;
+  border-radius: 12px;
+  padding: 22px 24px;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+.who-icon { font-size: 24px; flex-shrink: 0; margin-top: 1px; }
+.who-text { font-size: 13px; color: var(--dark); line-height: 1.85; }
+.who-hl {
+  background: var(--dark);
+  border-radius: 12px;
+  padding: 20px 24px;
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  grid-column: 1 / -1;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+.who-hl p { font-size: 13px; color: rgba(255,255,255,0.75); line-height: 1.85; }
+.who-hl strong { color: var(--orange); }
+
+/* ─── FAQ ─── */
+.faq-wrap { margin-bottom: 80px; }
+.faq-box {
+  background: white;
+  border-radius: 18px;
+  padding: 40px 44px;
+  box-shadow: 0 2px 14px rgba(0,0,0,0.06);
+  margin-top: 32px;
+}
+.faq-item {
+  border-bottom: 1px solid #f0eeea;
+  padding: 18px 0;
+}
+.faq-item:first-child { padding-top: 0; }
+.faq-item:last-child { border-bottom: none; padding-bottom: 0; }
+.faq-q {
+  font-size: 14px;
+  font-weight: bold;
+  color: var(--dark);
+  margin-bottom: 8px;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  line-height: 1.6;
+}
+.faq-q::before {
+  content: 'Q.';
+  color: var(--orange);
+  flex-shrink: 0;
+  font-size: 14px;
+}
+.faq-a {
+  font-size: 13px;
+  color: var(--gray);
+  line-height: 1.9;
+  padding-left: 26px;
+}
+
+/* ─── LINE CTA ─── */
+.line-cta-wrap {
+  background: linear-gradient(135deg, var(--dark) 0%, #0f1b30 100%);
+  border-radius: 22px;
+  padding: 72px 80px;
+  text-align: center;
+}
+.line-cta-wrap h2 {
+  font-size: 28px;
+  font-weight: bold;
+  color: white;
+  line-height: 1.55;
+  margin-bottom: 14px;
+}
+.line-cta-wrap h2 em { font-style: normal; color: var(--orange); }
+.line-cta-wrap p {
+  font-size: 14px;
+  color: rgba(255,255,255,0.4);
+  line-height: 2;
+  max-width: 460px;
+  margin: 0 auto 38px;
+}
+.line-big {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  background: #06C755;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 18px 48px;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: opacity 0.15s;
+}
+.line-big:hover { opacity: 0.85; }
+.line-note {
+  margin-top: 18px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.22);
+}
+
+/* ─── FOOTER ─── */
+footer {
+  background: var(--dark);
+  padding: 28px 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0;
+}
+footer img { height: 20px; opacity: 0.4; }
+footer span { font-size: 11px; color: rgba(255,255,255,0.25); }
+
+/* ─── MODAL ─── */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.68);
+  z-index: 2000;
+  overflow-y: auto;
+  padding: 36px 20px 64px;
+}
+.modal-overlay.open { display: block; }
+.modal-box {
+  max-width: 660px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 22px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.4);
+}
+.modal-close {
+  position: absolute;
+  top: 14px; right: 16px;
+  width: 34px; height: 34px;
+  background: rgba(255,255,255,0.14);
+  border: none;
+  border-radius: 50%;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  line-height: 1;
+  transition: background 0.15s;
+}
+.modal-close:hover { background: rgba(255,255,255,0.28); }
+.modal-head {
+  height: 140px;
+  display: flex;
+  align-items: flex-end;
+  padding: 22px 26px;
+  position: relative;
+  overflow: hidden;
+}
+.modal-head-emoji {
+  font-size: 90px;
+  position: absolute;
+  top: 0; right: 10px;
+  opacity: 0.2;
+  line-height: 1;
+}
+.modal-host-name {
+  font-size: 22px;
+  font-weight: bold;
+  color: white;
+  line-height: 1.4;
+  z-index: 1;
+}
+.modal-host-role {
+  font-size: 11px;
+  color: rgba(255,255,255,0.55);
+  z-index: 1;
+  margin-top: 3px;
+}
+.modal-body { padding: 26px 28px 34px; }
+.modal-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; }
+.modal-tag {
+  font-size: 10px; font-weight: bold;
+  padding: 3px 10px; border-radius: 100px;
+}
+.modal-tag.t { background: #fff8f3; color: var(--orange); }
+.modal-tag.d { background: #f0f5ff; color: var(--blue); }
+.modal-tag.f { background: #f0fff4; color: var(--green); }
+.modal-quote {
+  background: #f8f7f5;
+  border-left: 3px solid var(--orange);
+  border-radius: 0 8px 8px 0;
+  padding: 13px 18px;
+  font-size: 13px;
+  color: var(--dark);
+  line-height: 1.85;
+  margin-bottom: 24px;
+  font-style: italic;
+}
+.modal-sec-label {
+  font-size: 11px;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #bbb;
+  margin-bottom: 14px;
+}
+.modal-schedule { margin-bottom: 24px; }
+.sched-item {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 14px;
+  align-items: flex-start;
+}
+.sched-time {
+  font-size: 11px;
+  font-weight: bold;
+  color: var(--orange);
+  min-width: 54px;
+  padding-top: 1px;
+  flex-shrink: 0;
+}
+.sched-dot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  padding-top: 5px;
+}
+.sched-dot-circle {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--orange);
+}
+.sched-dot-line {
+  width: 2px;
+  height: 28px;
+  background: #f0eeea;
+  margin-top: 3px;
+}
+.sched-item:last-child .sched-dot-line { display: none; }
+.sched-content {}
+.sched-label {
+  font-size: 13px;
+  font-weight: bold;
+  color: var(--dark);
+  margin-bottom: 3px;
+  line-height: 1.5;
+}
+.sched-detail {
+  font-size: 12px;
+  color: var(--gray);
+  line-height: 1.8;
+}
+.modal-takeaways {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 24px;
+}
+.modal-takeaway {
+  background: #f8f7f5;
+  border-radius: 10px;
+  padding: 12px;
+  font-size: 11px;
+  color: var(--dark);
+  line-height: 1.7;
+  text-align: center;
+}
+.modal-takeaway::before { content: '✓ '; color: var(--orange); font-weight: bold; }
+.modal-meta {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  background: #f8f7f5;
+  border-radius: 10px;
+  padding: 14px 18px;
+  margin-bottom: 20px;
+  font-size: 12px;
+  color: var(--gray);
+}
+.modal-meta strong { color: var(--dark); }
+.modal-avail {
+  background: #f0fff4;
+  border: 1px solid rgba(46,125,94,0.2);
+  border-radius: 10px;
+  padding: 14px 18px;
+  margin-bottom: 20px;
+}
+.modal-avail-title {
+  font-size: 11px;
+  font-weight: bold;
+  color: var(--green);
+  letter-spacing: 0.07em;
+  margin-bottom: 8px;
+}
+.modal-avail-slots { display: flex; flex-wrap: wrap; gap: 6px; }
+.modal-avail-slot {
+  font-size: 11px;
+  background: white;
+  border: 1px solid rgba(46,125,94,0.22);
+  color: var(--dark);
+  padding: 4px 12px;
+  border-radius: 100px;
+}
+.modal-cta-row { display: flex; gap: 10px; align-items: center; }
+.modal-line-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #06C755;
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 14px 20px;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: opacity 0.15s;
+}
+.modal-line-btn:hover { opacity: 0.85; }
+.modal-note-link {
+  font-size: 11px;
+  color: var(--gray);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.modal-note-link:hover { color: var(--dark); text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<!-- ═══ HEADER ═══ -->
+<header>
+  <img src="assets/ご決定デザイン_横組み_PNG.png" alt="KOKOROMi">
+  <nav>
+    <a href="for-individuals.html">参加するには</a>
+    <a href="for-organizations.html">ホストとして参加</a>
+    <a href="https://note.com/kokoromi_jp" target="_blank">note</a>
+    <a class="nav-line" href="https://lin.ee/RzAsEhv" target="_blank">💬 LINE登録</a>
+  </nav>
+</header>
+
+<!-- ═══ HERO ═══ -->
+<div class="hero">
+  <div class="hero-inner">
+
+    <div class="hero-copy">
+      <div class="hero-badge">Experience Projects</div>
+      <h1>自分の選択で動いている人の、<br><em>現場へ。</em></h1>
+      <p class="hero-desc">
+        転職支援でも、自己啓発セミナーでもない。<br>
+        「こういう生き方があるのか」と揺れる体験。<br>
+        その人の背中を、現場で見てくる時間。
+      </p>
+      <div class="hero-actions">
+        <a class="btn-line-lg" href="https://lin.ee/RzAsEhv" target="_blank">
+          <span>💬</span> LINEで参加を申し込む
+        </a>
+        <a class="btn-scroll" href="#projects">プロジェクトを見る ↓</a>
+      </div>
+    </div>
+
+    <div class="hero-photo-frame">
+      <div class="hero-photo-img">
+        <img src="assets/fujimori-portrait.jpg" alt="藤森 光一さん" onerror="this.style.display='none'; this.parentNode.style.background='#2a3830';">
+        <span class="hero-photo-tag">第1弾 公開中</span>
+      </div>
+      <div class="hero-photo-deco"></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══ CONCEPT STRIP ═══ -->
+<div class="concept-strip">
+  <div class="concept-item">
+    <div class="concept-jp">現場</div>
+    <div class="concept-text">
+      <div class="concept-en">On-site</div>
+      <div class="concept-desc">話を聞くだけじゃない。<br>その人がいる場所に、行く。</div>
+    </div>
+  </div>
+  <div class="concept-item">
+    <div class="concept-jp">揺れ</div>
+    <div class="concept-text">
+      <div class="concept-en">Shift</div>
+      <div class="concept-desc">価値観が動く瞬間がある。<br>それが、この体験のゴール。</div>
+    </div>
+  </div>
+  <div class="concept-item">
+    <div class="concept-jp">背中</div>
+    <div class="concept-text">
+      <div class="concept-en">Role model</div>
+      <div class="concept-desc">語るより、見せる。<br>その人の選択が、問いになる。</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MAIN ═══ -->
+<div class="main">
+
+  <!-- ── FEATURED PROJECT ── -->
+  <div class="featured-wrap" id="projects">
+    <div class="s-label">Featured — 今すぐ参加できます</div>
+    <div class="s-title">第1弾：学童の現場に入る</div>
+    <div class="s-sub">保育士を辞め、クラウドファンディングで自分の学童をつくった人の現場へ。</div>
+
+    <div class="featured-card" onclick="openModal('fujimori')">
+      <div class="featured-img">
+        <img src="assets/fujimori-portrait.jpg" alt="藤森 光一さん"
+             onerror="this.style.display='none'; this.parentNode.style.background='linear-gradient(145deg,#3d1f1f,#5e3232)';">
+        <span class="featured-badge">募集中</span>
+      </div>
+      <div class="featured-content">
+        <span class="featured-cat">学童・子どもの居場所</span>
+        <div class="featured-quote">
+          「自分の信じる保育をやるために」<br>
+          保育士・施設長・統括として長年働いた後、独立。<br>
+          東京都小金井市に、子どもの居場所をつくった。
+        </div>
+        <div class="featured-meta-row">
+          <div class="featured-meta-item">
+            <div class="featured-meta-label">場所</div>
+            <div class="featured-meta-value">東京都小金井市</div>
+          </div>
+          <div class="featured-meta-item">
+            <div class="featured-meta-label">所要時間</div>
+            <div class="featured-meta-value">約5時間</div>
+          </div>
+          <div class="featured-meta-item">
+            <div class="featured-meta-label">参加費</div>
+            <div class="featured-meta-value">無料（モニター期間）</div>
+          </div>
+          <div class="featured-meta-item">
+            <div class="featured-meta-label">日程</div>
+            <div class="featured-meta-value">火・金（9:30〜）</div>
+          </div>
+        </div>
+        <div class="featured-cta-row">
+          <span class="btn-orange" onclick="openModal('fujimori'); event.stopPropagation();">
+            詳細を見る →
+          </span>
+          <a class="btn-text" href="https://lin.ee/RzAsEhv" target="_blank" onclick="event.stopPropagation();">
+            LINEで申し込む ↗
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── PROJECT GRID ── -->
+  <div class="grid-wrap">
+    <div class="grid-head">
+      <h2>体験プロジェクト一覧</h2>
+      <span class="cnt">全8件公開中（随時追加予定）</span>
+    </div>
+
+    <div class="proj-grid">
+
+      <!-- 1 -->
+      <div class="proj-card" onclick="openModal('ikuta')">
+        <div class="proj-card-head c1">
+          <div class="card-emoji">🌍</div>
+          <div class="card-top">
+            <span class="card-live">募集中</span>
+            <span class="card-type">教育・地域</span>
+          </div>
+          <div class="card-bottom">
+            <div class="card-name">生田 あゆみ</div>
+            <div class="card-role">教育プロポーザー・独立</div>
+          </div>
+        </div>
+        <div class="proj-card-body">
+          <div class="card-title">高校教員を辞め、NZへ渡り、限界集落へ——その選択の現場で仕事を体験する</div>
+          <div class="card-footer">
+            <span class="card-loc">📍 詳細はLINEでご案内</span>
+            <span class="card-arrow">詳細 →</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2 -->
+      <div class="proj-card" onclick="openModal('niitsu')">
+        <div class="proj-card-head c2">
+          <div class="card-emoji">🔬</div>
+          <div class="card-top">
+            <span class="card-live">募集中</span>
+            <span class="card-type">教育・探究</span>
+          </div>
+          <div class="card-bottom">
+            <div class="card-name">新津 圭司</div>
+            <div class="card-role">合同会社探究BASE 代表</div>
+          </div>
+        </div>
+        <div class="proj-card-body">
+          <div class="card-title">18年間教えた後に起業した人の探究学習を、生徒として体験する</div>
+          <div class="card-footer">
+            <span class="card-loc">📍 東京都内</span>
+            <span class="card-arrow">詳細 →</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3 藤森（featured再掲） -->
+      <div class="proj-card" onclick="openModal('fujimori')">
+        <div class="proj-card-head c3">
+          <div class="card-emoji">🌱</div>
+          <div class="card-top">
+            <span class="card-live">募集中</span>
+            <span class="card-type">学童・居場所</span>
+          </div>
+          <div class="card-bottom">
+            <div class="card-name">藤森 光一</div>
+            <div class="card-role">こどもの居場所「ピカイチ」代表</div>
+          </div>
+        </div>
+        <div class="proj-card-body">
+          <div class="card-title">長年の保育現場を辞め、「主体性を育てる居場所」をつくった人の学童に入る</div>
+          <div class="card-footer">
+            <span class="card-loc">📍 東京都小金井市</span>
+            <span class="card-arrow">詳細 →</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 -->
+      <div class="proj-card" onclick="openModal('sato')">
+        <div class="proj-card-head c4">
+          <div class="card-emoji">⚽</div>
+          <div class="card-top">
+            <span class="card-live">募集中</span>
+            <span class="card-type">教育・地域</span>
+          </div>
+          <div class="card-bottom">
+            <div class="card-name">佐藤 健友</div>
+            <div class="card-role">教育コミュニティ「探球横丁」代表</div>
+          </div>
+        </div>
+        <div class="proj-card-body">
+          <div class="card-title">品川に「挑戦が伝染する塾」をつくった人のワークショップに、スタッフとして入る</div>
+          <div class="card-footer">
+            <span class="card-loc">📍 東京都品川区</span>
+            <span class="card-arrow">詳細 →</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5 -->
+      <div class="proj-card" onclick="openModal('suzuki')">
+        <div class="proj-card-head c6">
+          <div class="card-emoji">✏️</div>
+          <div class="card-top">
+            <span class="card-live">募集中</span>
+            <span class="card-type">デザイン・キャリア</span>
+          </div>
+          <div class="card-bottom">
+            <div class="card-name">鈴木 優太朗</div>
+            <div class="card-role">図解デザイナー・リスキリング支援</div>
+          </div>
+        </div>
+        <div class="proj-card-body">
+          <div class="card-title">高校教員を辞めた図解デザイナーと一緒に、自分のキャリアを図解する</div>
+          <div class="card-footer">
+            <span class="card-loc">📍 東京都内</span>
+            <span class="card-arrow">詳細 →</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6 -->
+      <div class="proj-card" onclick="openModal('yamakawa')">
+        <div class="proj-card-head c7">
+          <div class="card-emoji">💃</div>
+          <div class="card-top">
+            <span class="card-live">募集中</span>
+            <span class="card-type">ダンス・起業</span>
+          </div>
+          <div class="card-bottom">
+            <div class="card-name">山川 直美</div>
+            <div class="card-role">ESデザイン株式会社 代表</div>
+          </div>
+        </div>
+        <div class="proj-card-body">
+          <div class="card-title">ダンサー→教員15年→40代起業——遠回りが全部つながった人のビジョンワークへ</div>
+          <div class="card-footer">
+            <span class="card-loc">📍 詳細はLINEでご案内</span>
+            <span class="card-arrow">詳細 →</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 7 -->
+      <div class="proj-card" onclick="openModal('kasuya')">
+        <div class="proj-card-head c8">
+          <div class="card-emoji">🇩🇪</div>
+          <div class="card-top">
+            <span class="card-live">募集中</span>
+            <span class="card-type">教育・海外</span>
+          </div>
+          <div class="card-bottom">
+            <div class="card-name">糟谷 さん</div>
+            <div class="card-role">現役教師・ドイツ在住</div>
+          </div>
+        </div>
+        <div class="proj-card-body">
+          <div class="card-title">日本の現役教師のまま、ドイツで生きる選択をした人にオンラインで会いに行く</div>
+          <div class="card-footer">
+            <span class="card-loc">📍 オンライン（ドイツと接続）</span>
+            <span class="card-arrow">詳細 →</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 8 -->
+      <div class="proj-card" onclick="openModal('clash')">
+        <div class="proj-card-head c9">
+          <div class="card-emoji">👊</div>
+          <div class="card-top">
+            <span class="card-live">募集中</span>
+            <span class="card-type">教育・学校改革</span>
+          </div>
+          <div class="card-bottom">
+            <div class="card-name">中出さん・北岡さん</div>
+            <div class="card-role">現役教員2人 / CLASH</div>
+          </div>
+        </div>
+        <div class="proj-card-body">
+          <div class="card-title">現役教員2人が学校の外で立ち上げたワークショップ「CLASH」を体験する</div>
+          <div class="card-footer">
+            <span class="card-loc">📍 詳細はLINEでご案内</span>
+            <span class="card-arrow">詳細 →</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── PULL QUOTE ── -->
+  <div class="pullquote-wrap">
+    <div class="pq-text">
+      転職しなくていい。<br>
+      辞めなくていい。<br>
+      でも、<em>外の世界を知ることはできる。</em>
+    </div>
+    <div class="pq-sub">KOKOROMiは、「現場」を入口にした越境体験です。</div>
+    <a class="pq-btn" href="https://lin.ee/RzAsEhv" target="_blank">
+      <span>💬</span> LINEで参加を申し込む
+    </a>
+    <div class="pq-note">登録無料・いつでも退会できます</div>
+  </div>
+
+  <!-- ── FLOW ── -->
+  <div class="flow-wrap">
+    <div class="s-label">How it works</div>
+    <div class="s-title">参加の流れ</div>
+
+    <div class="flow-box">
+      <div class="flow-step">
+        <div class="f-num">1</div>
+        <h4>LINEで登録</h4>
+        <p>公式LINEに登録するだけ。費用は一切かかりません。</p>
+      </div>
+      <div class="f-arrow">›</div>
+      <div class="flow-step">
+        <div class="f-num">2</div>
+        <h4>プロジェクトに応募</h4>
+        <p>気になる体験を選んで「参加したい」と送る。</p>
+      </div>
+      <div class="f-arrow">›</div>
+      <div class="flow-step">
+        <div class="f-num">3</div>
+        <h4>事前面談</h4>
+        <p>スタッフとオンラインで話す。何を感じに行くかを一緒に考える。</p>
+      </div>
+      <div class="f-arrow">›</div>
+      <div class="flow-step">
+        <div class="f-num">4</div>
+        <h4>現地で体験</h4>
+        <p>話を聞く・一緒に動く。その人の現場で1日過ごす。</p>
+      </div>
+      <div class="f-arrow">›</div>
+      <div class="flow-step">
+        <div class="f-num">5</div>
+        <h4>振り返り</h4>
+        <p>体験後にスタッフと話す。「何が残ったか」を言語化する。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── WHO ── -->
+  <div class="who-wrap">
+    <div class="s-label">Who is this for</div>
+    <div class="s-title">こんな人に来てほしい</div>
+
+    <div class="who-grid">
+      <div class="who-card">
+        <span class="who-icon">😔</span>
+        <span class="who-text">「このままでいいのかな」と感じているけど、転職したいわけでもない</span>
+      </div>
+      <div class="who-card">
+        <span class="who-icon">🏢</span>
+        <span class="who-text">教員・公務員・医療職など、副業ができない職種についている</span>
+      </div>
+      <div class="who-card">
+        <span class="who-icon">🌍</span>
+        <span class="who-text">外の世界を知りたい。でも何から始めたらいいかわからない</span>
+      </div>
+      <div class="who-card">
+        <span class="who-icon">🔥</span>
+        <span class="who-text">子どもや周囲に「夢を語れる大人」でいたいと思っている</span>
+      </div>
+      <div class="who-hl">
+        <span style="font-size:24px; flex-shrink:0;">✦</span>
+        <p>スキルや経験は問いません。<strong>「会いに行きたい」という気持ち</strong>だけで参加できます。副業禁止の方も、KOKOROMiの体験は無償のプロボノ活動として参加できます。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── FAQ ── -->
+  <div class="faq-wrap">
+    <div class="s-label">FAQ</div>
+    <div class="s-title">よくある質問</div>
+
+    <div class="faq-box">
+      <div class="faq-item">
+        <div class="faq-q">副業禁止の職場ですが、参加できますか？</div>
+        <div class="faq-a">はい、参加できます。KOKOROMiの体験は「副業」ではなく「プロボノ・社会参加活動」です。報酬は発生しません。ただし職場のルールに不安がある場合は、参加前にご確認ください。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">参加費はいくらですか？</div>
+        <div class="faq-a">体験プロジェクトごとに異なります。現在のモニター期間は無料の案件もあります。詳細は各プロジェクトの詳細をご確認ください。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">特別なスキルや経験は必要ですか？</div>
+        <div class="faq-a">必要ありません。「会いに行きたい」という気持ちだけで参加できます。参加前に事前面談があるので、不安なことは何でも話せます。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">一人でも参加できますか？</div>
+        <div class="faq-a">もちろんです。一人参加が多数です。同じ思いを持った参加者同士がつながる機会にもなります。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">参加後はどうなりますか？</div>
+        <div class="faq-a">体験後にスタッフと振り返り面談を行います。「何を感じたか」「次に何をしたいか」を一緒に言語化します。希望者はKOKOROMiコミュニティにも参加できます。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── LINE CTA ── -->
+  <div class="line-cta-wrap">
+    <h2>まずはLINEで<em>登録</em>してください</h2>
+    <p>
+      新しいプロジェクトの先行案内や、参加募集のお知らせをLINEでお届けします。<br>
+      登録は無料。気になったときだけ参加できます。
+    </p>
+    <a class="line-big" href="https://lin.ee/RzAsEhv" target="_blank">
+      <span style="font-size:22px;">💬</span>
+      LINE公式アカウントに登録する
+    </a>
+    <div class="line-note">登録後、「ピカイチ」と送ると詳細と申し込みフォームをお送りします</div>
+  </div>
+
+</div><!-- /main -->
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <img src="assets/ご決定デザイン_横組み_PNG.png" alt="KOKOROMi">
+  <span>「子どもに夢を語れる大人を、もっと増やしたい。」</span>
+</footer>
+
+<!-- ═══ MODAL ═══ -->
+<div id="modal-overlay" class="modal-overlay" onclick="closeModal()">
+  <div class="modal-box" onclick="event.stopPropagation()">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div id="modal-head" class="modal-head">
+      <div id="modal-emoji" class="modal-head-emoji"></div>
+      <div>
+        <div id="modal-name" class="modal-host-name"></div>
+        <div id="modal-role" class="modal-host-role"></div>
+      </div>
+    </div>
+    <div class="modal-body">
+      <div id="modal-tags" class="modal-tags"></div>
+      <div id="modal-quote" class="modal-quote"></div>
+      <div class="modal-sec-label">プログラムの流れ</div>
+      <div id="modal-schedule" class="modal-schedule"></div>
+      <div class="modal-sec-label">この体験で持ち帰れること</div>
+      <div id="modal-takeaways" class="modal-takeaways"></div>
+      <div id="modal-meta" class="modal-meta"></div>
+      <div id="modal-avail" class="modal-avail" style="display:none">
+        <div class="modal-avail-title">🗓 受け入れ可能日時</div>
+        <div id="modal-avail-slots" class="modal-avail-slots"></div>
+      </div>
+      <div class="modal-cta-row">
+        <a class="modal-line-btn" href="https://lin.ee/RzAsEhv" target="_blank">
+          <span style="font-size:18px;">💬</span> LINEで参加を申し込む
+        </a>
+        <a id="modal-note" class="modal-note-link" href="#" target="_blank">📝 noteで読む</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SCRIPT ═══ -->
+<script>
+const COLORS = {
+  'color-1': 'linear-gradient(145deg,#2c3e50,#3e5c7a)',
+  'color-2': 'linear-gradient(145deg,#1e3d2f,#2e5c44)',
+  'color-3': 'linear-gradient(145deg,#3d1f1f,#5e3232)',
+  'color-4': 'linear-gradient(145deg,#1e2d3d,#2e4460)',
+  'color-6': 'linear-gradient(145deg,#2e2010,#4a3418)',
+  'color-7': 'linear-gradient(145deg,#1f1040,#36205a)',
+  'color-8': 'linear-gradient(145deg,#0f2d20,#1a4833)',
+  'color-9': 'linear-gradient(145deg,#2a2215,#3e3020)',
+};
+
+const PROGRAMS = {
+  ikuta: {
+    name: '生田 あゆみ',
+    role: '教育プロポーザー・独立',
+    emoji: '🌍',
+    color: 'color-1',
+    tags: [{t:'t',l:'教育・地域'},{t:'d',l:'約5時間'},{t:'f',l:'対話 + 仕事体験'}],
+    quote: '「タグの掛け合わせで唯一無二になれる」——高校教員を辞め、NZ移住、限界集落、そして独立。なぜそんな選択ができたのかを聞きに行く。',
+    schedule: [
+      {time:'10:00', label:'集合・現場案内', detail:'生田さんが活動している場所に集合。どんな環境でどんな人たちと関わっているかを最初に肌で感じる。'},
+      {time:'10:30', label:'対話「なぜ教員を辞め、移住したのか」', detail:'高校教員だった頃のこと、NZ移住の決め手、限界集落で感じたこと。その選択の裏にあった感情と覚悟をじっくり聞く（約1.5時間）。'},
+      {time:'12:00', label:'ランチ（一緒に食べながら深掘り）', detail:'食べながらリラックスした時間に。「あの時、本当は何を考えていたか」が引き出されやすい。'},
+      {time:'13:30', label:'仕事体験「教育コンテンツを一緒に設計する」', detail:'生田さんが実際に取り組んでいる教育プロポーザルや企画の作業に、横から参加。「考える仕事」の現場を手を動かしながら体験する（約2時間）。'},
+      {time:'15:30', label:'振り返り・自分への問いを言語化', detail:'「今日、何が刺さったか」「自分に何が重なったか」をスタッフと一緒に言語化して終わる。'},
+    ],
+    takeaways: ['枠に収まらない生き方のリアル', '「設計する仕事」の現場感覚', '自分の「タグ」を見直すきっかけ'],
+    fee: '2,000円',
+    loc: '詳細はLINEでご案内',
+    note: 'https://note.com/kokoromi_jp/m/m2fd2bec650b1',
+    availability: ['土曜 10:00〜', '日曜 10:00〜', '月1〜2回'],
+  },
+  niitsu: {
+    name: '新津 圭司（ニコラスさん）',
+    role: '合同会社探究BASE 代表',
+    emoji: '🔬',
+    color: 'color-2',
+    tags: [{t:'t',l:'教育・探究学習'},{t:'d',l:'約5時間'},{t:'f',l:'対話 + 探究ワーク'}],
+    quote: '「キャリアは線じゃなくていい」——18年間教員を務めた後、休職を経て起業。その選択の葛藤と覚悟を聞き、実際の探究プログラムを体験する。',
+    schedule: [
+      {time:'10:00', label:'探究BASEに集合・施設案内', detail:'ニコラスさんが運営している探究の場所を一緒に見て回る。どんな子どもたちが来ているか、どんな空間かを最初に感じる。'},
+      {time:'10:30', label:'対話「18年教えてから、なぜ起業したのか」', detail:'教員時代に感じた違和感、休職という決断、起業への道のり。「なぜ既存の枠ではダメだと思ったのか」をじっくり聞く。'},
+      {time:'12:00', label:'ランチ（現場のスタッフとも話す）', detail:'探究BASEのメンバーも交えて昼食。現場の雰囲気を感じる時間。'},
+      {time:'13:00', label:'探究学習ワークショップを実際に体験', detail:'参加者自身が「生徒」として探究プログラムに参加。何かテーマを決めて、探究BASE流の問いの立て方・深め方を本物のワークショップとして体験（約2.5時間）。'},
+      {time:'15:30', label:'振り返り・「自分の探究テーマ」を言語化', detail:'体験を経て「自分は何に興味があるのか」「何が気になっているのか」を言語化する時間。'},
+    ],
+    takeaways: ['既存の枠を出る理由と覚悟', '探究学習の本物の体験', '「問いを立てる」感覚'],
+    fee: '2,000円',
+    loc: '東京都内',
+    note: 'https://note.com/kokoromi_jp/m/m2fd2bec650b1',
+    availability: ['平日 10:00〜', '土曜 10:00〜', '月2〜3回'],
+  },
+  fujimori: {
+    name: '藤森 光一',
+    role: 'こどもの居場所「ピカイチ」代表 / 子育ち支援ファシリテーター',
+    emoji: '🌱',
+    color: 'color-3',
+    tags: [{t:'t',l:'学童・子どもの居場所'},{t:'d',l:'約5時間'},{t:'f',l:'対話 + 学童現場体験'}],
+    quote: '保育士・施設長・統括として長年働いた後、「自分の信じる保育をやるために」独立。東京都小金井市に、主体性を育てる子どもの居場所「ピカイチ」をクラウドファンディング100万円を集めて立ち上げた。午前はフリースクール、午後は学童保育という2つの顔を持つ現場に入る。',
+    schedule: [
+      {time:'09:30', label:'小金井市「ピカイチ」に集合・施設案内', detail:'藤森さんに施設を案内してもらう。午前は不登校・行き渋りの子たちのフリースクール、午後は学童保育という2つの顔を持つ場所。どんな子どもたちが来ているか、どんな空間かを最初に肌で感じる。'},
+      {time:'10:00', label:'フリースクールの様子を見学・子どもたちと過ごす', detail:'藤森さんが子どもたちの対応をしている時間。「ただそこにいる」大人として、子どもたちの日常の空気に溶け込む。無理に関わらなくていい。見て、感じるだけでいい時間。'},
+      {time:'10:30', label:'対話「長年勤めた保育現場を辞めた理由」', detail:'保育士として働き始めた頃の話、施設長・統括として積み上げた経験、そして「既存の枠の中ではできないことがある」と気づいた瞬間。「なぜ独立したのか」——長年働いてわかったことをじっくり聞く（約1.5時間）。'},
+      {time:'12:00', label:'ランチ（子どもたちと一緒につくる）', detail:'子どもたちと一緒にランチをつくる。料理をしながら自然に言葉を交わす時間。「ご飯を一緒に作る」という行為の中で、この場の空気がじんわり伝わってくる。'},
+      {time:'13:00', label:'学童タイムに子どもたちと一緒に動く', detail:'午後の学童時間に参加者として入る。「マイニチNOTE」やオープンダイアローグなど、ピカイチ独自のプログラムを体験。ただ見るのではなく、子どもたちと一緒に関わる（約2時間）。'},
+      {time:'15:00', label:'振り返り・「自分の職場・日常」を問い直す', detail:'「今日、何が気になったか」「自分のいる場所と何が違うか」「こういう場所が存在することを知って何を感じたか」をスタッフと一緒に言語化する。'},
+    ],
+    takeaways: ['長年かけてわかったことを直接聞ける', '主体性を育てる現場を体で感じる', '子どもとの関わりで自分の価値観が揺れる'],
+    fee: '無料（モニター期間）',
+    loc: '東京都小金井市',
+    note: 'https://note.com/gifted_curlew235',
+    availability: ['火・金（9:30〜）'],
+  },
+  sato: {
+    name: '佐藤 健友（探球さん）',
+    role: '教育コミュニティ「探球横丁」代表',
+    emoji: '⚽',
+    color: 'color-4',
+    tags: [{t:'t',l:'教育・地域'},{t:'d',l:'約5時間'},{t:'f',l:'対話 + ワークショップ参加'}],
+    quote: '「挑戦は伝染する」——品川・青物横丁で、子どもたちが挑戦できる場を作り続けている。「挑戦する大人を見せることが一番の教育」という信念の現場へ。',
+    schedule: [
+      {time:'10:00', label:'探球横丁に集合', detail:'品川・青物横丁にある「探球横丁」の場所に集合。まず探球さんに場所と活動の説明をしてもらう。'},
+      {time:'10:30', label:'対話「挑戦が伝染するとはどういうことか」', detail:'なぜここに場を作ったのか、どんな失敗があったか、子どもたちに何を見せたいのか（約1時間）。'},
+      {time:'11:30', label:'ランチ（子どもたちのリアルな話を聞く）', detail:''},
+      {time:'12:30', label:'探球横丁のワークショップにスタッフ側で参加', detail:'実際のワークショップを参加者として体験するのではなく、ファシリテーター・スタッフ側として一緒に動く。「場を作る側」の視点を体験（約2.5時間）。'},
+      {time:'15:00', label:'振り返り「自分が伝染させたいものは何か」', detail:'体験後に「自分は誰かに何を伝染させたいか」「自分の挑戦は何か」を言語化するワーク。'},
+    ],
+    takeaways: ['「場を作る側」の視点と体験', 'ファシリテーターとして動く感覚', '「自分の挑戦」を言語化するきっかけ'],
+    fee: '2,000円',
+    loc: '東京都品川区',
+    note: 'https://note.com/kokoromi_jp/m/m2fd2bec650b1',
+    availability: ['土日 10:00〜', '月2回程度（品川）'],
+  },
+  suzuki: {
+    name: '鈴木 優太朗（たろ）',
+    role: '図解デザイナー・リスキリング支援',
+    emoji: '✏️',
+    color: 'color-6',
+    tags: [{t:'t',l:'デザイン・キャリア'},{t:'d',l:'約5時間'},{t:'f',l:'対話 + 図解ワーク'}],
+    quote: '「やめることは選び直すこと」——高校教員を辞め、図解デザイナーとして独立。「やめる」を肯定してくれる人の話を聞き、自分のキャリアを図解するワークをやってみる。',
+    schedule: [
+      {time:'10:00', label:'集合（東京）', detail:'たろさんの活動拠点または都内カフェ等に集合。'},
+      {time:'10:30', label:'対話「教員を辞めた日のリアルな話」', detail:'「なぜ辞めたのか」だけでなく、「辞める前に何があったか」「辞めた後に何が起きたか」。ポジティブな話だけじゃない、等身大の話を聞く（約1.5時間）。'},
+      {time:'12:00', label:'ランチ（リラックスして深掘り）', detail:''},
+      {time:'13:00', label:'図解ワーク「自分のキャリアを図解する」', detail:'たろさんにファシリテートしてもらいながら、参加者自身のキャリアや価値観を「図解」する実践ワーク。文字じゃなくて絵と矢印で自分を表現してみる体験（約2時間）。'},
+      {time:'15:00', label:'振り返り・図解を眺めながら次のアクションを考える', detail:'自分の図解を見ながら「次に何をしたいか」を言語化。たろさんにフィードバックをもらう時間。'},
+    ],
+    takeaways: ['「やめる」を肯定する視点', '図解で自己表現する感覚', '自分のキャリア地図（図解）'],
+    fee: '2,000円',
+    loc: '東京都内',
+    note: 'https://note.com/kokoromi_jp/m/m2fd2bec650b1',
+    availability: ['平日 10:00〜', '土曜 10:00〜', '月2〜3回（東京）'],
+  },
+  yamakawa: {
+    name: '山川 直美',
+    role: 'ESデザイン株式会社 代表',
+    emoji: '💃',
+    color: 'color-7',
+    tags: [{t:'t',l:'ダンス・起業'},{t:'d',l:'約5時間'},{t:'f',l:'対話 + ビジョンワーク'}],
+    quote: '「全部つながっていた」——ダンサーから専門学校教員15年、そして40代で起業。遠回りに見えた道がすべて必要だったという話を聞きに行く。',
+    schedule: [
+      {time:'10:00', label:'集合・山川さんの活動拠点を見学', detail:'ESデザインの活動現場を見て回る。どんな空間でどんな人たちと仕事しているかを最初に感じる。'},
+      {time:'10:30', label:'対話「ダンサーから教員、そして起業へ」', detail:'ダンサー時代のこと、教員として15年過ごした日々、40代で起業することを決めた瞬間。「全部つながっていた」とはどういうことか（約1.5時間）。'},
+      {time:'12:00', label:'ランチ（一緒に食べながら）', detail:''},
+      {time:'13:00', label:'ビジョン・デザインワーク', detail:'山川さんの専門領域「ES（Employee Satisfaction＝働く人の幸せ）デザイン」の考え方を使い、参加者自身の「自分にとっての理想の働き方」をデザインするワーク（約2時間）。'},
+      {time:'15:00', label:'振り返り・自分のビジョンを言語化する', detail:'「今日感じたこと」「自分の中にある、まだ言葉になっていないもの」をアウトプット。'},
+    ],
+    takeaways: ['遠回りを肯定できる視点', '「ES（働く幸せ）」を考える体験', '自分の理想の働き方のヒント'],
+    fee: '2,500円',
+    loc: '詳細はLINEでご案内',
+    note: 'https://note.com/kokoromi_jp/m/m2fd2bec650b1',
+    availability: ['平日・土日 10:00〜', '月2〜3回（東京）'],
+  },
+  kasuya: {
+    name: '糟谷 さん（き～ちゃん先生）',
+    role: '現役教師・ドイツ在住',
+    emoji: '🇩🇪',
+    color: 'color-8',
+    tags: [{t:'t',l:'教育・海外'},{t:'d',l:'約3時間'},{t:'f',l:'オンライン対話'}],
+    quote: '「できない理由を作っていたのは自分だった」——日本の現役教師のまま、ドイツに住み続けている。その選択の話を聞き、自分の「できない理由」を問い直す。',
+    schedule: [
+      {time:'19:00', label:'オンライン接続・自己紹介', detail:'ドイツと日本をビデオ通話でつなぐ。参加者はそれぞれの自己紹介を短く。'},
+      {time:'19:15', label:'対話「日本の教師のままドイツに住む理由」', detail:'なぜドイツなのか、日本の学校とのやりとりはどうしているのか、ドイツで感じた「日本と違うこと」。「そんなことできるの？」を全部聞く（約1時間）。'},
+      {time:'20:15', label:'参加者との対話・Q&A', detail:'「自分がやりたいけどできないと思っていること」をざっくばらんに話す。き～ちゃん先生にぶつけてみる時間（約45分）。'},
+      {time:'21:00', label:'振り返り「自分の「できない理由」を書き出す」', detail:'今日の話を受けて、「自分が「できない」と思っていることのリスト」を書き出し、一つずつ「本当にできないのか？」を問い直すワーク。'},
+      {time:'21:30', label:'解散', detail:''},
+    ],
+    takeaways: ['「できない」を問い直す視点', '海外在住×現役教師というリアル', '自分の「言い訳リスト」の解体'],
+    fee: '1,500円',
+    loc: 'オンライン開催（Zoom等）',
+    note: 'https://note.com/kokoromi_jp/m/m2fd2bec650b1',
+    availability: ['土日 19:00〜（日本時間）', '月1〜2回', 'オンライン開催'],
+  },
+  clash: {
+    name: '中出さん・北岡さん（CLASH）',
+    role: '現役教員2人 / 主体性を育む活動',
+    emoji: '👊',
+    color: 'color-9',
+    tags: [{t:'t',l:'教育・学校改革'},{t:'d',l:'約5時間'},{t:'f',l:'対話 + ワークショップ'}],
+    quote: '「子どもの主体性を潰しているのは大人だった」——現役教員でありながら、学校の外でCLASHを立ち上げた2人。その現場でワークショップを体験する。',
+    schedule: [
+      {time:'10:00', label:'集合・CLASHの活動紹介', detail:'中出さん・北岡さんから「CLASHとは何か」「なぜ始めたのか」を聞く。まず文脈を知る時間（約30分）。'},
+      {time:'10:30', label:'対話「現役教員が学校の外で動き始めた理由」', detail:'学校の中で何が起きているのか、何が嫌で外に出ようと思ったのか（約1時間）。'},
+      {time:'11:30', label:'ランチ（学校のリアルをもっと深掘り）', detail:''},
+      {time:'12:30', label:'CLASHのワークショップに参加', detail:'「子どもの主体性を育てるワークショップ」を、参加者自身が受ける体験。どんな問いかけをすると人は動き出すのかを、自分の体で感じる（約2.5時間）。'},
+      {time:'15:00', label:'振り返り「大人として自分は何ができるか」', detail:'ワークショップを体験した後に「自分の職場・家庭・地域で、誰かの主体性を潰していないか」を問い直す。そして「自分にできることは何か」を言語化。'},
+    ],
+    takeaways: ['学校現場のリアルな内側の話', 'CLASHの主体性ワークを直接体験', '「子どもと関わる大人」としての自分を見直す視点'],
+    fee: '2,000円',
+    loc: '詳細はLINEでご案内',
+    note: 'https://note.com/kokoromi_jp/m/m2fd2bec650b1',
+    availability: ['土日 10:00〜', '月1〜2回（詳細LINEで）'],
+  },
+};
+
+function openModal(key) {
+  const p = PROGRAMS[key];
+  if (!p) return;
+
+  const head = document.getElementById('modal-head');
+  head.style.background = COLORS[p.color] || 'linear-gradient(145deg,#1a2744,#243352)';
+  document.getElementById('modal-emoji').textContent = p.emoji;
+  document.getElementById('modal-name').textContent = p.name;
+  document.getElementById('modal-role').textContent = p.role;
+
+  document.getElementById('modal-tags').innerHTML = p.tags.map(
+    t => `<span class="modal-tag ${t.t}">${t.l}</span>`
+  ).join('');
+
+  document.getElementById('modal-quote').textContent = p.quote;
+
+  document.getElementById('modal-schedule').innerHTML = p.schedule.map((s, i) => `
+    <div class="sched-item">
+      <div class="sched-time">${s.time}</div>
+      <div class="sched-dot">
+        <div class="sched-dot-circle"></div>
+        ${i < p.schedule.length - 1 ? '<div class="sched-dot-line"></div>' : ''}
+      </div>
+      <div class="sched-content">
+        <div class="sched-label">${s.label}</div>
+        ${s.detail ? `<div class="sched-detail">${s.detail}</div>` : ''}
+      </div>
+    </div>
+  `).join('');
+
+  document.getElementById('modal-takeaways').innerHTML = p.takeaways.map(
+    t => `<div class="modal-takeaway">${t}</div>`
+  ).join('');
+
+  document.getElementById('modal-meta').innerHTML = `
+    <span>⏱ <strong>${p.fee}</strong>（参加費）</span>
+    <span>📍 <strong>${p.loc}</strong></span>
+  `;
+
+  const availBox = document.getElementById('modal-avail');
+  const availSlots = document.getElementById('modal-avail-slots');
+  if (p.availability && p.availability.length) {
+    availSlots.innerHTML = p.availability.map(s => `<span class="modal-avail-slot">${s}</span>`).join('');
+    availBox.style.display = 'block';
+  } else {
+    availBox.style.display = 'none';
+  }
+
+  document.getElementById('modal-note').href = p.note;
+
+  document.getElementById('modal-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('modal-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+</script>
+
+</body>
+</html>

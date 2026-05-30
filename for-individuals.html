@@ -490,12 +490,65 @@ footer {
 footer img { height: 22px; opacity: 0.7; }
 footer p { font-size: 11px; color: rgba(255,255,255,0.3); }
 
+/* ===== EXPERIENCE TYPES ===== */
+.type-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 48px;
+}
+.type-card {
+  background: white;
+  border-radius: 14px;
+  padding: 28px 26px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+.type-card.a { border-top: 4px solid var(--orange); }
+.type-card.b { border-top: 4px solid var(--blue); }
+.type-label {
+  font-size: 10px;
+  font-weight: bold;
+  letter-spacing: 0.12em;
+  margin-bottom: 8px;
+}
+.type-card.a .type-label { color: var(--orange); }
+.type-card.b .type-label { color: var(--blue); }
+.type-card h3 { font-size: 18px; font-weight: bold; color: var(--dark); margin-bottom: 6px; }
+.type-card .type-sub { font-size: 12px; color: #aaa; margin-bottom: 14px; }
+.type-card p { font-size: 13px; color: var(--gray); line-height: 1.9; margin-bottom: 14px; }
+.type-detail {
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-size: 12px;
+  color: var(--dark);
+  line-height: 1.8;
+}
+.type-card.a .type-detail { background: #fff8f3; }
+.type-card.b .type-detail { background: #f0f5ff; }
+.type-detail-label {
+  font-size: 11px;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+.type-card.a .type-detail-label { color: var(--orange); }
+.type-card.b .type-detail-label { color: var(--blue); }
+.type-note {
+  background: #f8f7f5;
+  border-left: 3px solid #ccc;
+  border-radius: 0 8px 8px 0;
+  padding: 12px 16px;
+  font-size: 12px;
+  color: var(--gray);
+  line-height: 1.9;
+  margin-bottom: 48px;
+}
+
 @media (max-width: 768px) {
   header { padding: 14px 20px; }
   .hero { padding: 56px 20px 48px; }
   .hero h1 { font-size: 28px; }
   .main { padding: 40px 20px 80px; }
-  .forwho-grid, .peek-grid, .promise-grid { grid-template-columns: 1fr; }
+  .forwho-grid, .peek-grid, .promise-grid, .type-grid { grid-template-columns: 1fr; }
   .beta-notice { grid-template-columns: 1fr; }
   .what-block { padding: 28px 24px; }
   .cta-section { padding: 40px 24px; }
@@ -508,7 +561,7 @@ footer p { font-size: 11px; color: rgba(255,255,255,0.3); }
 <header>
   <img src="assets/ご決定デザイン_横組み_PNG.png" alt="KOKOROMi">
   <nav>
-    <a href="projects-v2.html">体験一覧</a>
+    <a href="projects-v3.html">体験一覧</a>
     <a href="for-organizations.html">団体の方へ</a>
     <a href="roadmap-v2.html">内部資料</a>
     <a class="header-cta" href="#cta">参加を申し込む</a>
@@ -538,11 +591,11 @@ footer p { font-size: 11px; color: rgba(255,255,255,0.3); }
   <div class="forwho-grid" style="margin-top: 24px;">
     <div class="forwho-card">
       <span class="forwho-check">✓ こんな人に</span>
-      <p>「なんのために働いているんだろう」と感じる、社会人1〜3年目</p>
+      <p>「なんのために働いているんだろう」と感じる、25〜34歳の社会人</p>
     </div>
     <div class="forwho-card">
       <span class="forwho-check">✓ こんな人に</span>
-      <p>「このまま今の会社にいていいのか」と迷っている、20代前半</p>
+      <p>「このまま今の会社にいていいのか」と迷っている、25〜34歳</p>
     </div>
     <div class="forwho-card">
       <span class="forwho-check">✓ こんな人に</span>
@@ -554,7 +607,7 @@ footer p { font-size: 11px; color: rgba(255,255,255,0.3); }
   <div class="section-label">WHAT IS KOKOROMi — KOKOROMiってなに？</div>
 
   <div class="what-block">
-    <h2>「面白い選択をした大人」の<em>現場に入れる</em>体験サービスです。</h2>
+    <h2>「自分の選択で動いている大人」の<em>現場に入れる</em>体験サービスです。</h2>
     <p>
       会社を辞めて子どもの居場所を作った人、教員を辞めて限界集落に飛び込んだ人、ダンサーから40代で起業した人——<br>
       そういう人たちに、<strong>実際に会えて、話を聞けて、現場を一緒に体験できる</strong>場をつくっています。<br><br>
@@ -567,6 +620,39 @@ footer p { font-size: 11px; color: rgba(255,255,255,0.3); }
       <span class="what-tag">一緒に動く</span>
       <span class="what-tag">振り返る</span>
     </div>
+  </div>
+
+  <!-- ===== 体験の2タイプ ===== -->
+  <div class="section-label">EXPERIENCE TYPES — 体験の関わり方</div>
+
+  <div class="type-grid">
+    <div class="type-card a">
+      <div class="type-label">TYPE A</div>
+      <h3>体験・同行型</h3>
+      <div class="type-sub">「観る・感じる」が主体</div>
+      <p>ホストの話を聞き、現場に同行・作業を体験する。その人の生き方・選択に触れることがゴール。</p>
+      <div class="type-detail">
+        <div class="type-detail-label">参加者の価値</div>
+        生き方・WHYに直接触れる
+        <div class="type-detail-label" style="margin-top:10px;">ホストの価値</div>
+        語る機会・共感者・ファン獲得
+      </div>
+    </div>
+    <div class="type-card b">
+      <div class="type-label">TYPE B</div>
+      <h3>課題関与型</h3>
+      <div class="type-sub">「考える・動かす」が主体</div>
+      <p>受け入れ先の課題やプロジェクトに、外の人が頭を使って関わる。<strong style="color:var(--blue);">未経験・素人歓迎が前提。</strong>関与の深さは単発〜数ヶ月まで幅がある。</p>
+      <div class="type-detail">
+        <div class="type-detail-label">例</div>
+        「島の人口をどう増やすか一緒に考えてほしい」<br>
+        「お店の集客アイデアを出してほしい」<br>
+        「イベントプログラムを一緒につくりたい」
+      </div>
+    </div>
+  </div>
+  <div class="type-note">
+    どちらのタイプも「その人の現場に入る」体験です。参加者の状況や関心に合わせて、スタッフが一緒に考えます。
   </div>
 
   <!-- ===== 参加の流れ ===== -->
@@ -584,7 +670,7 @@ footer p { font-size: 11px; color: rgba(255,255,255,0.3); }
     <div class="step">
       <div class="step-num">02</div>
       <div class="step-body">
-        <h3>まず運営（302）と30分話す</h3>
+        <h3>まずスタッフと30分話す</h3>
         <p>どんな体験をしたいか、今どんなことを考えているかを簡単にヒアリング。希望の日時も確認します。</p>
         <span class="step-note">💬 Zoom or 電話でOK</span>
       </div>
@@ -611,7 +697,7 @@ footer p { font-size: 11px; color: rgba(255,255,255,0.3); }
   <div class="section-label">EXPERIENCES — こんな体験があります</div>
 
   <div class="peek-grid">
-    <div class="peek-card" onclick="location.href='projects-v2.html'">
+    <div class="peek-card" onclick="location.href='projects-v3.html'">
       <div class="peek-thumb c1">🌱</div>
       <div class="peek-body">
         <div class="peek-tag">学童・子どもの居場所</div>
@@ -619,7 +705,7 @@ footer p { font-size: 11px; color: rgba(255,255,255,0.3); }
         <div class="peek-meta">📍 東京都小金井市 ／ 約5時間</div>
       </div>
     </div>
-    <div class="peek-card" onclick="location.href='projects-v2.html'">
+    <div class="peek-card" onclick="location.href='projects-v3.html'">
       <div class="peek-thumb c2">🏔</div>
       <div class="peek-body">
         <div class="peek-tag">限界集落・地域づくり</div>
@@ -627,7 +713,7 @@ footer p { font-size: 11px; color: rgba(255,255,255,0.3); }
         <div class="peek-meta">📍 長野県南木曽町 ／ 約7時間</div>
       </div>
     </div>
-    <div class="peek-card" onclick="location.href='projects-v2.html'">
+    <div class="peek-card" onclick="location.href='projects-v3.html'">
       <div class="peek-thumb c3">💃</div>
       <div class="peek-body">
         <div class="peek-tag">アート・起業</div>
@@ -638,7 +724,7 @@ footer p { font-size: 11px; color: rgba(255,255,255,0.3); }
   </div>
 
   <div class="peek-more">
-    <a href="projects-v2.html">すべての体験を見る →</a>
+    <a href="projects-v3.html">すべての体験を見る →</a>
   </div>
 
   <!-- ===== KOKOROMiが大事にすること ===== -->
@@ -688,10 +774,10 @@ footer p { font-size: 11px; color: rgba(255,255,255,0.3); }
     <h2>まず、気になる体験に<br>申し込んでみてください。</h2>
     <p>
       「まだよくわからない」でも大丈夫。<br>
-      申し込み後、まず運営（302）と30分話します。<br>
+      申し込み後、まずスタッフと30分話します。<br>
       それから一緒に考えましょう。
     </p>
-    <a class="cta-btn" href="projects-v2.html">
+    <a class="cta-btn" href="projects-v3.html">
       <span>体験プロジェクトを見てみる</span>
       <span>→</span>
     </a>
@@ -707,7 +793,7 @@ footer p { font-size: 11px; color: rgba(255,255,255,0.3); }
         どんな人が参加していますか？
       </div>
       <div class="faq-a">
-        社会人1〜5年目、大学4年生など、20代前半の方が多いです。「今の仕事でいいのか悩んでいる」「キャリアのヒントが欲しい」「面白い生き方をしている人に会ってみたい」という動機で来る方がほとんどです。
+        25〜34歳の社会人が中心です。「今の仕事でいいのか悩んでいる」「キャリアのヒントが欲しい」「面白い生き方をしている人に会ってみたい」という動機で来る方がほとんどです。
       </div>
     </div>
     <div class="faq-item">
