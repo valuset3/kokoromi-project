@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KOKOROMi ホスト募集</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif;
+      background: #f0ede8;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 24px;
+      min-height: 100vh;
+    }
+
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      background: #ffffff;
+      padding: 14mm 14mm 12mm;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    /* ヘッダー */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 10mm;
+    }
+
+    .logo {
+      font-size: 11px;
+      color: #888;
+      letter-spacing: 0.08em;
+      line-height: 1.6;
+    }
+
+    .logo strong {
+      display: block;
+      font-size: 15px;
+      color: #1a1a1a;
+      letter-spacing: 0.12em;
+      font-weight: 700;
+    }
+
+    .tag {
+      font-size: 10px;
+      background: #2d6a4f;
+      color: #fff;
+      padding: 3px 10px;
+      border-radius: 2px;
+      letter-spacing: 0.06em;
+      margin-top: 4px;
+    }
+
+    /* メインコピー */
+    .headline {
+      margin-bottom: 8mm;
+    }
+
+    .headline h1 {
+      font-size: 26px;
+      font-weight: 700;
+      line-height: 1.55;
+      color: #1a1a1a;
+      letter-spacing: 0.04em;
+      margin-bottom: 4mm;
+    }
+
+    .headline h1 em {
+      font-style: normal;
+      color: #2d6a4f;
+    }
+
+    .headline p {
+      font-size: 12px;
+      color: #444;
+      line-height: 1.9;
+      max-width: 480px;
+    }
+
+    /* 区切り線 */
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: #e0dbd3;
+      margin: 6mm 0;
+    }
+
+    /* 2カラム */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8mm;
+      margin-bottom: 6mm;
+    }
+
+    .col-block {
+      background: #f8f6f2;
+      padding: 5mm 6mm;
+      border-radius: 4px;
+    }
+
+    .col-block h2 {
+      font-size: 11px;
+      font-weight: 700;
+      color: #2d6a4f;
+      letter-spacing: 0.1em;
+      margin-bottom: 3mm;
+      padding-bottom: 2mm;
+      border-bottom: 1px solid #d5ede3;
+    }
+
+    .col-block ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .col-block ul li {
+      font-size: 12px;
+      color: #333;
+      line-height: 1.75;
+      padding-left: 12px;
+      position: relative;
+    }
+
+    .col-block ul li::before {
+      content: '–';
+      position: absolute;
+      left: 0;
+      color: #2d6a4f;
+    }
+
+    /* メリットセクション */
+    .merit {
+      margin-bottom: 6mm;
+    }
+
+    .merit h2 {
+      font-size: 11px;
+      font-weight: 700;
+      color: #2d6a4f;
+      letter-spacing: 0.1em;
+      margin-bottom: 3mm;
+    }
+
+    .merit-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 4mm;
+    }
+
+    .merit-card {
+      border: 1px solid #d5ede3;
+      border-radius: 4px;
+      padding: 4mm 5mm;
+      text-align: center;
+    }
+
+    .merit-card .icon {
+      font-size: 20px;
+      margin-bottom: 2mm;
+      display: block;
+    }
+
+    .merit-card p {
+      font-size: 11px;
+      color: #333;
+      line-height: 1.65;
+    }
+
+    .merit-card strong {
+      display: block;
+      font-size: 12px;
+      color: #1a1a1a;
+      font-weight: 700;
+      margin-bottom: 1mm;
+    }
+
+    /* 重要な一文 */
+    .highlight-quote {
+      background: #f0f9f4;
+      border-left: 3px solid #2d6a4f;
+      padding: 4mm 6mm;
+      margin-bottom: 6mm;
+      border-radius: 0 4px 4px 0;
+    }
+
+    .highlight-quote p {
+      font-size: 12.5px;
+      color: #1a1a1a;
+      line-height: 1.85;
+    }
+
+    /* 連絡先 */
+    .contact {
+      background: #1a1a1a;
+      border-radius: 4px;
+      padding: 5mm 7mm;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: auto;
+    }
+
+    .contact-left h2 {
+      font-size: 10px;
+      color: #aaa;
+      letter-spacing: 0.1em;
+      margin-bottom: 2mm;
+    }
+
+    .contact-left p {
+      font-size: 13px;
+      color: #fff;
+      line-height: 1.7;
+    }
+
+    .contact-left .name {
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .contact-right {
+      text-align: right;
+      font-size: 11px;
+      color: #aaa;
+      line-height: 1.7;
+    }
+
+    .contact-right a {
+      color: #74c99a;
+      text-decoration: none;
+    }
+
+    .qr-placeholder {
+      width: 50px;
+      height: 50px;
+      border: 1px dashed #555;
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: auto;
+      margin-bottom: 2mm;
+    }
+
+    .qr-placeholder span {
+      font-size: 8px;
+      color: #666;
+      text-align: center;
+      line-height: 1.3;
+    }
+
+    @media print {
+      body {
+        background: none;
+        padding: 0;
+      }
+      .page {
+        width: 100%;
+        min-height: auto;
+        box-shadow: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <!-- ヘッダー -->
+    <div class="header">
+      <div class="logo">
+        <strong>KOKOROMi</strong>
+        大人の挑戦が当たり前になる社会をつくる
+      </div>
+      <div class="tag">SHIBUYA QWS のみなさんへ</div>
+    </div>
+
+    <!-- メインコピー -->
+    <div class="headline">
+      <h1>あなたの場所で、<br>迷える大人と話してみませんか。</h1>
+      <p>
+        KOKOROMiは、「このままでいいのか」と感じている25〜34歳の社会人が、<br>
+        多様な働き方・生き方に出会えるコミュニティです。<br>
+        QWSで活動するみなさんのリアルな現場を、メンバーに届けさせてください。
+      </p>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- 2カラム：お願いと来る人 -->
+    <div class="two-col">
+      <div class="col-block">
+        <h2>お願いしたいこと</h2>
+        <ul>
+          <li>活動現場・職場への見学・体験受け入れ<br>（1〜3名、数時間程度）</li>
+          <li>担当者との対話の時間<br>（30分〜1時間ほど）</li>
+          <li>月1回程度・日程は都度ご相談</li>
+          <li>オンライン対応も可</li>
+        </ul>
+      </div>
+      <div class="col-block">
+        <h2>来るのはこんな人です</h2>
+        <ul>
+          <li>25〜34歳の会社員・フリーランスなど</li>
+          <li>転職したいわけではないが、<br>このままでもないと感じている人</li>
+          <li>多様な大人のリアルを知りたい人</li>
+          <li>あなたの話を聞きに来ます</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 引用ブロック -->
+    <div class="highlight-quote">
+      <p>
+        「スタートアップも、自治体も、NPOも関係なく、QWSにいる人の仕事のリアルが、<br>
+        誰かの一歩になると思っています。完成した話じゃなくていい。今やっていることを話してほしい。」
+      </p>
+    </div>
+
+    <!-- メリット -->
+    <div class="merit">
+      <h2>ご協力いただける方へ</h2>
+      <div class="merit-cards">
+        <div class="merit-card">
+          <span class="icon">🤝</span>
+          <strong>意欲的な人との出会い</strong>
+          <p>何かを変えたいと思っている人と、フラットに話す機会が生まれます</p>
+        </div>
+        <div class="merit-card">
+          <span class="icon">📣</span>
+          <strong>サイト・SNSで紹介</strong>
+          <p>KOKOROMiのサイト・SNSで活動を取り上げます（掲載内容は事前確認）</p>
+        </div>
+        <div class="merit-card">
+          <span class="icon">🌱</span>
+          <strong>社会へのつながり</strong>
+          <p>大人が挑戦できる社会をつくる取り組みへの参加になります</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- 連絡先 -->
+    <div class="contact">
+      <div class="contact-left">
+        <h2>CONTACT</h2>
+        <p class="name">浅野 紘毅</p>
+        <p>KOKOROMi 代表 ／ 株式会社Fluminal</p>
+      </div>
+      <div class="contact-right">
+        <div class="qr-placeholder"><span>QR<br>CODE</span></div>
+        <a href="https://kokoromi-base.com">kokoromi-base.com</a>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

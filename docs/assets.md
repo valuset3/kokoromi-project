@@ -18,3 +18,10 @@
 
 ## マガジン
 - MyStory YourShift: ゲストのストーリーシリーズ 10本
+
+---
+
+## 関連
+- [[CONTEXT]] — KOKOROMi プロジェクト詳細（ホスト一覧・フロー等）
+- [[kokoromi/vision]] — KOKOROMi ビジョン・キャッチコピー
+- [[strategy]] — クラファン戦略・SNSチャンネル別役割

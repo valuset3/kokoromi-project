@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KOKOROMi カラー選定</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Hiragino Sans', 'Meiryo', sans-serif;
+  background: #f0ede8;
+  color: #1a1a1a;
+  padding: 48px 40px 80px;
+}
+h1 {
+  font-size: 22px; font-weight: bold;
+  margin-bottom: 6px;
+}
+.subtitle {
+  font-size: 13px; color: #888;
+  margin-bottom: 48px;
+  line-height: 1.7;
+}
+.rule-note {
+  display: inline-block;
+  background: #1a1a1a; color: white;
+  font-size: 11px; font-weight: bold;
+  padding: 4px 12px; border-radius: 100px;
+  margin-bottom: 48px;
+  letter-spacing: 0.08em;
+}
+
+/* palette option */
+.palette-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.palette {
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+.palette-header {
+  padding: 24px 28px 16px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+.palette-meta {}
+.palette-letter {
+  font-size: 11px; font-weight: bold;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: #aaa; margin-bottom: 4px;
+}
+.palette-name {
+  font-size: 18px; font-weight: bold;
+  color: #1a1a1a; margin-bottom: 4px;
+}
+.palette-desc {
+  font-size: 12px; color: #888;
+  line-height: 1.7;
+}
+.palette-rec {
+  flex-shrink: 0;
+  font-size: 10px; font-weight: bold;
+  background: #e07b39; color: white;
+  padding: 4px 12px; border-radius: 100px;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+
+/* swatches */
+.swatches {
+  display: flex;
+  height: 120px;
+  margin: 0 28px 20px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+.swatch {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 10px 14px;
+  transition: flex 0.3s;
+}
+.swatch.w60 { flex: 6; }
+.swatch.w10 { flex: 1; }
+.swatch.w20 { flex: 2; }
+.swatch-pct {
+  font-size: 10px; font-weight: bold;
+  opacity: 0.65;
+  margin-bottom: 1px;
+}
+.swatch-label {
+  font-size: 11px; font-weight: bold;
+  opacity: 0.9;
+}
+
+/* color detail row */
+.color-row {
+  display: flex;
+  gap: 12px;
+  padding: 0 28px 24px;
+}
+.color-chip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+}
+.chip-dot {
+  width: 28px; height: 28px;
+  border-radius: 8px;
+  flex-shrink: 0;
+  border: 1px solid rgba(0,0,0,0.06);
+}
+.chip-info {}
+.chip-role {
+  font-size: 10px; color: #aaa;
+  margin-bottom: 2px;
+}
+.chip-hex {
+  font-size: 12px; font-weight: bold;
+  color: #333; font-family: monospace;
+}
+
+/* vibe tags */
+.vibe-row {
+  padding: 0 28px 20px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.vibe-tag {
+  font-size: 11px;
+  background: #f5f3f0;
+  color: #555;
+  padding: 4px 12px;
+  border-radius: 100px;
+}
+
+/* preview strip */
+.preview-strip {
+  margin: 0 28px 24px;
+  border-radius: 12px;
+  overflow: hidden;
+  height: 54px;
+  display: flex;
+  align-items: center;
+}
+.ps-dark {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  gap: 10px;
+}
+.ps-logo {
+  font-size: 13px; font-weight: bold;
+}
+.ps-btn {
+  font-size: 11px; font-weight: bold;
+  padding: 6px 16px; border-radius: 100px;
+  border: 1px solid rgba(255,255,255,0.2);
+  color: rgba(255,255,255,0.7);
+}
+.ps-accent-btn {
+  font-size: 11px; font-weight: bold;
+  padding: 6px 16px; border-radius: 8px;
+  color: white;
+}
+.ps-light {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  gap: 8px;
+}
+.ps-tag {
+  font-size: 11px; font-weight: bold;
+  padding: 4px 12px; border-radius: 100px;
+  opacity: 0.85;
+}
+.ps-text {
+  font-size: 12px; opacity: 0.6;
+}
+</style>
+</head>
+<body>
+
+<h1>KOKOROMi カラー選定</h1>
+<p class="subtitle">
+  コンセプトワード：現場・揺れ・背中<br>
+  ターゲット：みほさん（27歳・教員5年目・副業禁止・モヤモヤあり）
+</p>
+<div class="rule-note">60% PRIMARY ＋ 20% NEUTRAL ＋ 10% ACCENT ＋ 10% BG</div>
+
+<div class="palette-wrap">
+
+  <!-- ─── A ─── -->
+  <div class="palette">
+    <div class="palette-header">
+      <div class="palette-meta">
+        <div class="palette-letter">Case A</div>
+        <div class="palette-name">ダーク × アンバー（現在系）</div>
+        <div class="palette-desc">現行のオレンジを起点に整理した案。強い黒＋温かいオレンジ。<br>「夜の焚き火」感。深みと余白がある。</div>
+      </div>
+    </div>
+    <div class="swatches">
+      <div class="swatch w60" style="background:#1a1a1a;">
+        <div class="swatch-pct" style="color:#fff;">60%</div>
+        <div class="swatch-label" style="color:#fff;">Primary</div>
+      </div>
+      <div class="swatch w20" style="background:#4a4542;">
+        <div class="swatch-pct" style="color:#fff;">20%</div>
+        <div class="swatch-label" style="color:#fff;">Neutral</div>
+      </div>
+      <div class="swatch w10" style="background:#e07b39;">
+        <div class="swatch-pct" style="color:#fff;">10%</div>
+        <div class="swatch-label" style="color:#fff;">Accent</div>
+      </div>
+      <div class="swatch w10" style="background:#f5f3f0; border-left:1px solid #e8e5e0;">
+        <div class="swatch-pct" style="color:#999;">10%</div>
+        <div class="swatch-label" style="color:#999;">BG</div>
+      </div>
+    </div>
+    <div class="color-row">
+      <div class="color-chip">
+        <div class="chip-dot" style="background:#1a1a1a;"></div>
+        <div class="chip-info">
+          <div class="chip-role">Primary</div>
+          <div class="chip-hex">#1a1a1a</div>
+        </div>
+      </div>
+      <div class="color-chip">
+        <div class="chip-dot" style="background:#4a4542;"></div>
+        <div class="chip-info">
+          <div class="chip-role">Neutral</div>
+          <div class="chip-hex">#4a4542</div>
+        </div>
+      </div>
+      <div class="color-chip">
+        <div class="chip-dot" style="background:#e07b39;"></div>
+        <div class="chip-info">
+          <div class="chip-role">Accent</div>
+          <div class="chip-hex">#e07b39</div>
+        </div>
+      </div>
+      <div class="color-chip">
+        <div class="chip-dot" style="background:#f5f3f0; border:1px solid #ddd;"></div>
+        <div class="chip-info">
+          <div class="chip-role">BG</div>
+          <div class="chip-hex">#f5f3f0</div>
+        </div>
+      </div>
+    </div>
+    <div class="vibe-row">
+      <span class="vibe-tag">深み</span>
+      <span class="vibe-tag">温かさ</span>
+      <span class="vibe-tag">焚き火感</span>
+      <span class="vibe-tag">現在のブランドを継承</span>
+    </div>
+    <!-- mini preview -->
+    <div class="preview-strip">
+      <div class="ps-dark" style="background:#1a1a1a; flex:1.2;">
+        <span class="ps-logo" style="color:white;">KOKOROMi</span>
+        <span class="ps-btn">体験を見る</span>
+        <span class="ps-accent-btn" style="background:#e07b39;">LINE登録</span>
+      </div>
+      <div class="ps-light" style="background:#f5f3f0; flex:0.8;">
+        <span class="ps-tag" style="background:#e07b39; color:white;">募集中</span>
+        <span class="ps-text" style="color:#4a4542;">藤森 光一</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── B ─── -->
+  <div class="palette">
+    <div class="palette-header">
+      <div class="palette-meta">
+        <div class="palette-letter">Case B</div>
+        <div class="palette-name">フォレストグリーン × テラコッタ</div>
+        <div class="palette-desc">森・大地・成長感。オレンジをテラコッタに寄せた教育・自然系パレット。<br>みほさん（教員）に「ここなら安心」と感じてもらいやすい。</div>
+      </div>
+    </div>
+    <div class="swatches">
+      <div class="swatch w60" style="background:#1e3d2a;">
+        <div class="swatch-pct" style="color:#fff;">60%</div>
+        <div class="swatch-label" style="color:#fff;">Primary</div>
+      </div>
+      <div class="swatch w20" style="background:#2a3d30;">
+        <div class="swatch-pct" style="color:#fff;">20%</div>
+        <div class="swatch-label" style="color:#fff;">Neutral</div>
+      </div>
+      <div class="swatch w10" style="background:#c8593a;">
+        <div class="swatch-pct" style="color:#fff;">10%</div>
+        <div class="swatch-label" style="color:#fff;">Accent</div>
+      </div>
+      <div class="swatch w10" style="background:#f0ede6; border-left:1px solid #ddd;">
+        <div class="swatch-pct" style="color:#999;">10%</div>
+        <div class="swatch-label" style="color:#999;">BG</div>
+      </div>
+    </div>
+    <div class="color-row">
+      <div class="color-chip">
+        <div class="chip-dot" style="background:#1e3d2a;"></div>
+        <div class="chip-info">
+          <div class="chip-role">Primary</div>
+          <div class="chip-hex">#1e3d2a</div>
+        </div>
+      </div>
+      <div class="color-chip">
+        <div class="chip-dot" style="background:#2a3d30;"></div>
+        <div class="chip-info">
+          <div class="chip-role">Neutral</div>
+          <div class="chip-hex">#2a3d30</div>
+        </div>
+      </div>
+      <div class="color-chip">
+        <div class="chip-dot" style="background:#c8593a;"></div>
+        <div class="chip-info">
+          <div class="chip-role">Accent</div>
+          <div class="chip-hex">#c8593a</div>
+        </div>
+      </div>
+      <div class="color-chip">
+        <div class="chip-dot" style="background:#f0ede6; border:1px solid #ddd;"></div>
+        <div class="chip-info">
+          <div class="chip-role">BG</div>
+          <div class="chip-hex">#f0ede6</div>
+        </div>
+      </div>
+    </div>
+    <div class="vibe-row">
+      <span class="vibe-tag">成長・大地</span>
+      <span class="vibe-tag">安心感</span>
+      <span class="vibe-tag">本物っぽさ</span>
+      <span class="vibe-tag">教育・自然系に合う</span>
+    </div>
+    <div class="preview-strip">
+      <div class="ps-dark" style="background:#1e3d2a; flex:1.2;">
+        <span class="ps-logo" style="color:white;">KOKOROMi</span>
+        <span class="ps-btn" style="border-color:rgba(255,255,255,0.2); color:rgba(255,255,255,0.7);">体験を見る</span>
+        <span class="ps-accent-btn" style="background:#c8593a;">LINE登録</span>
+      </div>
+      <div class="ps-light" style="background:#f0ede6; flex:0.8;">
+        <span class="ps-tag" style="background:#c8593a; color:white;">募集中</span>
+        <span class="ps-text" style="color:#2a3d30;">藤森 光一</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── C ─── -->
+  <div class="palette">
+    <div class="palette-header">
+      <div class="palette-meta">
+        <div class="palette-letter">Case C</div>
+        <div class="palette-name">ディープネイビー × ウォームオレンジ</div>
+        <div class="palette-desc">
+          「信頼」×「熱量」。先生・公務員・医療職に届く誠実な重さ＋エネルギーのオレンジ。<br>
+          企業向け資料（sales_deck）との相性も◎。
+        </div>
+      </div>
+      <div class="palette-rec">おすすめ</div>
+    </div>
+    <div class="swatches">
+      <div class="swatch w60" style="background:#1a2744;">
+        <div class="swatch-pct" style="color:#fff;">60%</div>
+        <div class="swatch-label" style="color:#fff;">Primary</div>
+      </div>
+      <div class="swatch w20" style="background:#243352;">
+        <div class="swatch-pct" style="color:#fff;">20%</div>
+        <div class="swatch-label" style="color:#fff;">Neutral</div>
+      </div>
+      <div class="swatch w10" style="background:#e07b39;">
+        <div class="swatch-pct" style="color:#fff;">10%</div>
+        <div class="swatch-label" style="color:#fff;">Accent</div>
+      </div>
+      <div class="swatch w10" style="background:#f5f4f1; border-left:1px solid #ddd;">
+        <div class="swatch-pct" style="color:#999;">10%</div>
+        <div class="swatch-label" style="color:#999;">BG</div>
+      </div>
+    </div>
+    <div class="color-row">
+      <div class="color-chip">
+        <div class="chip-dot" style="background:#1a2744;"></div>
+        <div class="chip-info">
+          <div class="chip-role">Primary</div>
+          <div class="chip-hex">#1a2744</div>
+        </div>
+      </div>
+      <div class="color-chip">
+        <div class="chip-dot" style="background:#243352;"></div>
+        <div class="chip-info">
+          <div class="chip-role">Neutral</div>
+          <div class="chip-hex">#243352</div>
+        </div>
+      </div>
+      <div class="color-chip">
+        <div class="chip-dot" style="background:#e07b39;"></div>
+        <div class="chip-info">
+          <div class="chip-role">Accent</div>
+          <div class="chip-hex">#e07b39</div>
+        </div>
+      </div>
+      <div class="color-chip">
+        <div class="chip-dot" style="background:#f5f4f1; border:1px solid #ddd;"></div>
+        <div class="chip-info">
+          <div class="chip-role">BG</div>
+          <div class="chip-hex">#f5f4f1</div>
+        </div>
+      </div>
+    </div>
+    <div class="vibe-row">
+      <span class="vibe-tag">信頼・誠実</span>
+      <span class="vibe-tag">熱量・勇気</span>
+      <span class="vibe-tag">先生層に響く</span>
+      <span class="vibe-tag">企業向け資料にも使える</span>
+    </div>
+    <div class="preview-strip" style="outline: 2px solid #e07b39; border-radius: 12px;">
+      <div class="ps-dark" style="background:#1a2744; flex:1.2;">
+        <span class="ps-logo" style="color:white;">KOKOROMi</span>
+        <span class="ps-btn" style="border-color:rgba(255,255,255,0.2); color:rgba(255,255,255,0.7);">体験を見る</span>
+        <span class="ps-accent-btn" style="background:#e07b39;">LINE登録</span>
+      </div>
+      <div class="ps-light" style="background:#f5f4f1; flex:0.8;">
+        <span class="ps-tag" style="background:#e07b39; color:white;">募集中</span>
+        <span class="ps-text" style="color:#1a2744;">藤森 光一</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── D ─── -->
+  <div class="palette">
+    <div class="palette-header">
+      <div class="palette-meta">
+        <div class="palette-letter">Case D</div>
+        <div class="palette-name">スレートグレー × コーラルオレンジ</div>
+        <div class="palette-desc">都市的でモダン、でも冷たくない。スタートアップ感がある一方で<br>温かみのあるコーラルがやわらかさを足す。</div>
+      </div>
+    </div>
+    <div class="swatches">
+      <div class="swatch w60" style="background:#2d3440;">
+        <div class="swatch-pct" style="color:#fff;">60%</div>
+        <div class="swatch-label" style="color:#fff;">Primary</div>
+      </div>
+      <div class="swatch w20" style="background:#3a4250;">
+        <div class="swatch-pct" style="color:#fff;">20%</div>
+        <div class="swatch-label" style="color:#fff;">Neutral</div>
+      </div>
+      <div class="swatch w10" style="background:#e8603a;">
+        <div class="swatch-pct" style="color:#fff;">10%</div>
+        <div class="swatch-label" style="color:#fff;">Accent</div>
+      </div>
+      <div class="swatch w10" style="background:#f8f6f2; border-left:1px solid #ddd;">
+        <div class="swatch-pct" style="color:#999;">10%</div>
+        <div class="swatch-label" style="color:#999;">BG</div>
+      </div>
+    </div>
+    <div class="color-row">
+      <div class="color-chip">
+        <div class="chip-dot" style="background:#2d3440;"></div>
+        <div class="chip-info">
+          <div class="chip-role">Primary</div>
+          <div class="chip-hex">#2d3440</div>
+        </div>
+      </div>
+      <div class="color-chip">
+        <div class="chip-dot" style="background:#3a4250;"></div>
+        <div class="chip-info">
+          <div class="chip-role">Neutral</div>
+          <div class="chip-hex">#3a4250</div>
+        </div>
+      </div>
+      <div class="color-chip">
+        <div class="chip-dot" style="background:#e8603a;"></div>
+        <div class="chip-info">
+          <div class="chip-role">Accent</div>
+          <div class="chip-hex">#e8603a</div>
+        </div>
+      </div>
+      <div class="color-chip">
+        <div class="chip-dot" style="background:#f8f6f2; border:1px solid #ddd;"></div>
+        <div class="chip-info">
+          <div class="chip-role">BG</div>
+          <div class="chip-hex">#f8f6f2</div>
+        </div>
+      </div>
+    </div>
+    <div class="vibe-row">
+      <span class="vibe-tag">モダン</span>
+      <span class="vibe-tag">都市×温かみ</span>
+      <span class="vibe-tag">スタートアップ感</span>
+      <span class="vibe-tag">若いユーザーに響く</span>
+    </div>
+    <div class="preview-strip">
+      <div class="ps-dark" style="background:#2d3440; flex:1.2;">
+        <span class="ps-logo" style="color:white;">KOKOROMi</span>
+        <span class="ps-btn" style="border-color:rgba(255,255,255,0.2); color:rgba(255,255,255,0.7);">体験を見る</span>
+        <span class="ps-accent-btn" style="background:#e8603a;">LINE登録</span>
+      </div>
+      <div class="ps-light" style="background:#f8f6f2; flex:0.8;">
+        <span class="ps-tag" style="background:#e8603a; color:white;">募集中</span>
+        <span class="ps-text" style="color:#3a4250;">藤森 光一</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── E ─── -->
+  <div class="palette">
+    <div class="palette-header">
+      <div class="palette-meta">
+        <div class="palette-letter">Case E</div>
+        <div class="palette-name">ウォームブラック × サフラン</div>
+        <div class="palette-desc">
+          黒に少し茶みを足した「温かい黒」。金色がかったサフランがアクセント。<br>
+          「和の温もり」「コーヒーの深さ」。KOKOROMiという名前との相性◎。
+        </div>
+      </div>
+    </div>
+    <div class="swatches">
+      <div class="swatch w60" style="background:#2a2318;">
+        <div class="swatch-pct" style="color:#fff;">60%</div>
+        <div class="swatch-label" style="color:#fff;">Primary</div>
+      </div>
+      <div class="swatch w20" style="background:#3d3025;">
+        <div class="swatch-pct" style="color:#fff;">20%</div>
+        <div class="swatch-label" style="color:#fff;">Neutral</div>
+      </div>
+      <div class="swatch w10" style="background:#d4882a;">
+        <div class="swatch-pct" style="color:#fff;">10%</div>
+        <div class="swatch-label" style="color:#fff;">Accent</div>
+      </div>
+      <div class="swatch w10" style="background:#f7f3ec; border-left:1px solid #ddd;">
+        <div class="swatch-pct" style="color:#999;">10%</div>
+        <div class="swatch-label" style="color:#999;">BG</div>
+      </div>
+    </div>
+    <div class="color-row">
+      <div class="color-chip">
+        <div class="chip-dot" style="background:#2a2318;"></div>
+        <div class="chip-info">
+          <div class="chip-role">Primary</div>
+          <div class="chip-hex">#2a2318</div>
+        </div>
+      </div>
+      <div class="color-chip">
+        <div class="chip-dot" style="background:#3d3025;"></div>
+        <div class="chip-info">
+          <div class="chip-role">Neutral</div>
+          <div class="chip-hex">#3d3025</div>
+        </div>
+      </div>
+      <div class="color-chip">
+        <div class="chip-dot" style="background:#d4882a;"></div>
+        <div class="chip-info">
+          <div class="chip-role">Accent</div>
+          <div class="chip-hex">#d4882a</div>
+        </div>
+      </div>
+      <div class="color-chip">
+        <div class="chip-dot" style="background:#f7f3ec; border:1px solid #ddd;"></div>
+        <div class="chip-info">
+          <div class="chip-role">BG</div>
+          <div class="chip-hex">#f7f3ec</div>
+        </div>
+      </div>
+    </div>
+    <div class="vibe-row">
+      <span class="vibe-tag">和の温もり</span>
+      <span class="vibe-tag">コーヒーの深さ</span>
+      <span class="vibe-tag">独自性が高い</span>
+      <span class="vibe-tag">KOKOROMiという名前に合う</span>
+    </div>
+    <div class="preview-strip">
+      <div class="ps-dark" style="background:#2a2318; flex:1.2;">
+        <span class="ps-logo" style="color:white;">KOKOROMi</span>
+        <span class="ps-btn" style="border-color:rgba(255,255,255,0.2); color:rgba(255,255,255,0.7);">体験を見る</span>
+        <span class="ps-accent-btn" style="background:#d4882a;">LINE登録</span>
+      </div>
+      <div class="ps-light" style="background:#f7f3ec; flex:0.8;">
+        <span class="ps-tag" style="background:#d4882a; color:white;">募集中</span>
+        <span class="ps-text" style="color:#3d3025;">藤森 光一</span>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /wrap -->
+
+<div style="max-width:900px; margin:48px auto 0; background:white; border-radius:16px; padding:28px 32px;">
+  <div style="font-size:13px; font-weight:bold; color:#1a1a1a; margin-bottom:14px;">選ぶときの基準</div>
+  <table style="width:100%; border-collapse:collapse; font-size:12px;">
+    <tr style="border-bottom:1px solid #f0eeea;">
+      <td style="padding:10px 8px; color:#888; width:24%;">ターゲットとの相性</td>
+      <td style="padding:10px 8px;">みほさん（教員）に「安心」か「本物感」か「熱量」か、何を伝えたい？</td>
+    </tr>
+    <tr style="border-bottom:1px solid #f0eeea;">
+      <td style="padding:10px 8px; color:#888;">SNSでの見え方</td>
+      <td style="padding:10px 8px;">Instagramのフィードで並んだときに浮くか馴染むか</td>
+    </tr>
+    <tr style="border-bottom:1px solid #f0eeea;">
+      <td style="padding:10px 8px; color:#888;">既存のオレンジ</td>
+      <td style="padding:10px 8px;">現行オレンジ（#e07b39）を継承→ A・C。変える → B・D・E</td>
+    </tr>
+    <tr>
+      <td style="padding:10px 8px; color:#888;">今後の拡張性</td>
+      <td style="padding:10px 8px;">企業向け資料にも使う → C（ネイビー）が最も汎用性が高い</td>
+    </tr>
+  </table>
+</div>
+
+</body>
+</html>

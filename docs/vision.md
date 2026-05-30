@@ -23,3 +23,11 @@ KOKOROMi（株式会社Fluminalの事業①）
 
 ## 現在のフェーズ
 実証実験完了・事業化開始前
+
+---
+
+## 関連
+- [[briefing]] — 会社概要・KOKOROMiの直近優先事項
+- [[mission-vision]] — Fluminal 法人ミッション・ビジョン
+- [[team-values]] — 運営メンバー向け行動指針
+- [[CONTEXT]] — KOKOROMi プロジェクト詳細コンテキスト

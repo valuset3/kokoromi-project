@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>note-pikaichi.md</title>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: #f6f6f4;
+  font-family: 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif;
+  color: #1a1a1a;
+  padding: 48px 24px;
+}
+#content {
+  max-width: 720px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 6px;
+  padding: 48px 56px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  line-height: 1.9;
+}
+h1 { font-size: 26px; font-weight: bold; margin: 0 0 28px; line-height: 1.5; color: #111; }
+h2 { font-size: 20px; font-weight: bold; margin: 40px 0 16px; padding-bottom: 8px; border-bottom: 2px solid #eee; color: #111; }
+h3 { font-size: 16px; font-weight: bold; margin: 28px 0 12px; color: #333; }
+p { font-size: 15px; margin-bottom: 14px; color: #333; }
+ul, ol { padding-left: 22px; margin-bottom: 16px; }
+li { font-size: 15px; margin-bottom: 6px; color: #333; line-height: 1.8; }
+blockquote {
+  border-left: 3px solid #5b8af5;
+  background: #f7f9ff;
+  padding: 12px 18px;
+  margin: 20px 0;
+  border-radius: 0 6px 6px 0;
+  color: #444;
+  font-style: italic;
+}
+code {
+  background: #f4f4f2;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+}
+pre {
+  background: #f4f4f2;
+  border-radius: 6px;
+  padding: 18px 20px;
+  overflow-x: auto;
+  margin: 16px 0;
+}
+pre code { background: none; padding: 0; font-size: 13px; line-height: 1.7; }
+table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14px; }
+th { background: #1a1a1a; color: white; padding: 10px 14px; text-align: left; font-size: 13px; }
+td { padding: 10px 14px; border-bottom: 1px solid #eee; vertical-align: top; }
+tr:nth-child(even) td { background: #fafafa; }
+a { color: #41C9B4; }
+strong { font-weight: bold; color: #111; }
+hr { border: none; border-top: 1px solid #eee; margin: 32px 0; }
+img { max-width: 100%; border-radius: 6px; margin: 8px 0; }
+
+/* 編集メモ部分を薄く */
+.meta-section { opacity: 0.5; font-size: 13px; margin-top: 48px; border-top: 2px dashed #ddd; padding-top: 24px; }
+</style>
+</head>
+<body>
+<div id="content">読み込み中...</div>
+<script>
+fetch('/kokoromi/docs/note-pikaichi.md')
+  .then(r => r.text())
+  .then(md => {
+    // note掲載用の部分だけ抜き出す（編集メモ以降を薄く表示）
+    const split = md.split('## 編集メモ');
+    let main = split[0];
+    let meta = split[1] ? '## 編集メモ' + split[1] : '';
+
+    // コメントタグを除去
+    main = main.replace(/<!--.*?-->/gs, '').trim();
+
+    document.getElementById('content').innerHTML =
+      marked.parse(main) +
+      (meta ? `<div class="meta-section">${marked.parse(meta)}</div>` : '');
+  });
+</script>
+</body>
+</html>

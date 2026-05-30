@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>note記事プレビュー｜社会人のための生き方インターン</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: #f2f2f2;
+  font-family: 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif;
+  color: #1a1a1a;
+  line-height: 1.9;
+}
+.note-wrapper {
+  max-width: 680px;
+  margin: 48px auto;
+  background: white;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+}
+.note-header {
+  padding: 20px 24px 16px;
+  border-bottom: 1px solid #f0f0f0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.avatar {
+  width: 36px; height: 36px;
+  background: #1a2744;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: white; font-size: 12px; font-weight: bold;
+  flex-shrink: 0;
+}
+.author-name { font-size: 13px; font-weight: bold; }
+.post-date { font-size: 11px; color: #999; }
+
+.note-body { padding: 44px 52px 72px; }
+
+.draft-badge {
+  display: inline-block;
+  background: #fff3e0;
+  color: #e07b39;
+  font-size: 11px;
+  font-weight: bold;
+  padding: 3px 10px;
+  border-radius: 20px;
+  margin-bottom: 28px;
+  letter-spacing: 0.05em;
+}
+
+h1 {
+  font-size: 26px;
+  font-weight: bold;
+  line-height: 1.5;
+  color: #1a1a1a;
+  margin-bottom: 32px;
+  letter-spacing: -0.01em;
+}
+
+h2 {
+  font-size: 19px;
+  font-weight: bold;
+  color: #1a1a1a;
+  margin: 44px 0 16px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+p {
+  font-size: 15px;
+  line-height: 2;
+  color: #333;
+  margin-bottom: 18px;
+}
+p:last-child { margin-bottom: 0; }
+
+hr {
+  border: none;
+  border-top: 1px solid #f0f0f0;
+  margin: 36px 0;
+}
+
+.lead {
+  font-size: 15px;
+  color: #444;
+  line-height: 2;
+  margin-bottom: 32px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid #f0f0f0;
+}
+.lead p { margin-bottom: 14px; }
+
+.emphasis {
+  background: #f0f4ff;
+  border-left: 3px solid #1a2744;
+  padding: 14px 20px;
+  border-radius: 0 6px 6px 0;
+  margin: 20px 0;
+  font-size: 15px;
+  color: #333;
+  line-height: 1.9;
+}
+
+/* 流れ */
+.flow-block { margin: 20px 0; }
+.flow-item {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 14px;
+  align-items: flex-start;
+}
+.flow-num {
+  width: 32px; height: 32px;
+  background: #1a2744;
+  border-radius: 50%;
+  color: white;
+  font-size: 13px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 6px;
+}
+.flow-num.pre, .flow-num.post {
+  background: #888;
+  font-size: 11px;
+}
+.flow-content.pre-content {
+  background: #f0f0f0;
+}
+.flow-divider {
+  font-size: 11px;
+  color: #aaa;
+  text-align: center;
+  padding: 4px 0 8px 46px;
+  letter-spacing: 0.05em;
+}
+.flow-content {
+  background: #f7f7f7;
+  padding: 12px 18px;
+  border-radius: 8px;
+  flex: 1;
+}
+.flow-content strong { font-size: 14px; color: #1a1a1a; display: block; margin-bottom: 4px; }
+.flow-content span { font-size: 13px; color: #666; line-height: 1.7; }
+
+/* 土日バッジ */
+.schedule-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background: #eef6ff;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin: -4px 0 20px;
+  font-size: 13px;
+  color: #444;
+  line-height: 1.7;
+}
+.schedule-note strong { color: #1a2744; }
+
+/* ターゲット */
+.target-list {
+  list-style: none;
+  padding: 0;
+  background: #fafafa;
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin: 16px 0 0;
+}
+.target-list li {
+  font-size: 14px;
+  color: #333;
+  line-height: 1.8;
+  padding: 8px 0;
+  border-bottom: 1px solid #f0f0f0;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+.target-list li:last-child { border-bottom: none; }
+.target-list li::before { content: '→'; color: #1a2744; font-weight: bold; flex-shrink: 0; }
+
+/* CTA */
+.cta-block {
+  background: #f7f7f7;
+  border-radius: 10px;
+  padding: 28px 32px;
+  margin-top: 16px;
+  text-align: center;
+}
+.cta-block p { font-size: 14px; color: #555; margin-bottom: 16px; }
+.cta-btn {
+  display: inline-block;
+  background: #06C755;
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+  padding: 14px 36px;
+  border-radius: 6px;
+  text-decoration: none;
+}
+.cta-sub { font-size: 12px; color: #999; margin-top: 10px; margin-bottom: 0 !important; }
+</style>
+</head>
+<body>
+<div class="note-wrapper">
+
+  <div class="note-header">
+    <div class="avatar">K</div>
+    <div>
+      <div class="author-name">KOKOROMi</div>
+      <div class="post-date">2026年5月 · 草稿プレビュー</div>
+    </div>
+  </div>
+
+  <div class="note-body">
+    <div class="draft-badge">草稿 v3</div>
+
+    <h1>社会人のための「生き方インターン」をつくっています。</h1>
+
+    <div class="lead">
+      <p>これから、社会人向けのインターンのような体験をつくっていきます。</p>
+      <p>仕事体験と聞くと、学生のインターンを思い浮かべる方が多いと思います。KOKOROMiがやりたいのも、それに近い。ただ、対象は社会人で、体験するのは「仕事の内容」より「その仕事を選んだ人の生き方」です。</p>
+      <p>この記事では、やろうと思った経緯と、どんな体験なのかをお話しします。</p>
+    </div>
+
+    <h2>KOKOROMiってなに？</h2>
+    <p>一言で言うと、<strong>キッザニアの大人版</strong>です。</p>
+    <p>子どもが様々な職業の現場に入るように、大人が「自分の選択で生きている大人」の現場に入る。大手商社を辞めて長野でゲストハウスを開いた人、銀行員をやめて有機農家になった人——そういう人たちの現場に1日入り、話を聞き、一緒に動く体験をつくっています。</p>
+    <p>体験する「仕事」はあります。でも、ゴールはスキルを学ぶことではありません。その人がなぜそこにいるのか、何を大切にして動いているのか——そこに触れることが、この体験の目的です。</p>
+
+    <h2>なぜはじめたのか</h2>
+    <p>「このままでいいのか」という感覚、持ったことはありますか？</p>
+    <p>仕事が嫌なわけじゃない。でも、10年後の自分が想像できない。転職サイトを開いても、なんか違うと閉じてしまう。そういう感覚です。</p>
+    <p>こういうとき、よくある解決策は「転職情報を集める」「スキルを身につける」「セミナーに行く」といったものです。でも、それで何か変わったという話を、あまり聞きません。</p>
+    <div class="emphasis">変わるきっかけになるのは、情報よりも「出会い」だと思っています。自分とは違う選択をして生きている人に、実際に会う。話を聞く。同じ空気を吸う。それだけで、「こういう生き方もあるんだ」という感覚が生まれることがある。</div>
+    <p>KOKOROMiは、その出会いの場をつくりたくて、はじめました。</p>
+
+    <h2>体験の流れ</h2>
+    <div class="schedule-note">
+      <span>🗓</span>
+      <span><strong>土日・平日夜の開催もあります。</strong>今の仕事を続けながら参加できます。</span>
+    </div>
+
+    <div class="flow-block">
+      <div class="flow-item">
+        <div class="flow-num pre">前</div>
+        <div class="flow-content pre-content">
+          <strong>スタッフとの面談</strong>
+          <span>参加前に、KOKOROMiスタッフと短い面談をします。どんなことを持ち帰りたいか、今どんな状況にあるかを聞かせてください。</span>
+        </div>
+      </div>
+      <div class="flow-divider">— 体験当日 —</div>
+      <div class="flow-item">
+        <div class="flow-num">①</div>
+        <div class="flow-content">
+          <strong>ホストの話を聞く</strong>
+          <span>なぜその仕事・場所を選んだのか。何を大切にしているのか。対話形式で聞きます。</span>
+        </div>
+      </div>
+      <div class="flow-item">
+        <div class="flow-num">②</div>
+        <div class="flow-content">
+          <strong>現場で一緒に動く</strong>
+          <span>見学で終わりにしません。その場の一員として、実際に関わります。</span>
+        </div>
+      </div>
+      <div class="flow-item">
+        <div class="flow-num">③</div>
+        <div class="flow-content">
+          <strong>振り返る</strong>
+          <span>「自分の日常と何が違ったか」を言語化して持ち帰ります。</span>
+        </div>
+      </div>
+      <div class="flow-divider">— 体験後 —</div>
+      <div class="flow-item">
+        <div class="flow-num post">後</div>
+        <div class="flow-content pre-content">
+          <strong>簡単なインタビューへのご協力をお願いしています</strong>
+          <span>体験後、スタッフから感想を聞かせてもらう時間をいただきます（30分程度）。より良い体験をつくるためのフィードバックとして活用させてください。</span>
+        </div>
+      </div>
+    </div>
+
+    <h2>「楽しかった」で終わらせない</h2>
+    <p>体験が終わった後に何が残るか、ここを大切にしています。</p>
+    <p>「面白い人だったな」で終わるのではなく、「自分はどんな場所で、何のために働きたいんだろう」という問いが残る体験にしたい。答えを出す場所ではなく、問いを持ち帰る場所です。</p>
+    <p>そのために、体験の最後に必ず振り返りの時間をとっています。</p>
+
+    <h2>こんな人に来てほしい</h2>
+    <p>職業・業界は問いません。こういう感覚がある人に来てほしいと思っています。</p>
+    <ul class="target-list">
+      <li>職場では問題なくやれているが、「10年後の自分」を想像すると少し怖い</li>
+      <li>転職サイトを開いたことはあるが、なんか違うと閉じてしまう</li>
+      <li>違う生き方をしている人の話を、SNSや本ではなくリアルで聞いてみたい</li>
+      <li>答えよりも、問いが欲しい</li>
+      <li>「いいな」と思える大人の背中を、現場で見てきたい</li>
+    </ul>
+
+    <h2>体験プログラムは順次公開予定です</h2>
+    <p>現在、複数のホストとプログラムを準備しています。</p>
+    <p>公式LINEに登録しておくと、募集開始時にいち早くお知らせします。</p>
+    <div class="cta-block">
+      <a class="cta-btn" href="https://lin.ee/RzAsEhv">👇 LINE登録はこちら</a>
+      <p class="cta-sub">募集開始時にお知らせします</p>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>

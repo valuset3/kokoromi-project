@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KOKOROMi カスタマージャーニーマップ</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif;
+  background: #f2f2f0;
+  color: #1a1a1a;
+  padding: 40px 24px 80px;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+h1 {
+  font-size: 22px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 6px;
+  color: #1a1a1a;
+}
+.subtitle {
+  text-align: center;
+  color: #888;
+  font-size: 12px;
+  margin-bottom: 48px;
+}
+
+/* ペルソナ */
+.persona-card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px 28px;
+  max-width: 700px;
+  margin: 0 auto 48px;
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+.persona-icon { font-size: 48px; flex-shrink: 0; }
+.persona-info h3 { font-size: 15px; margin-bottom: 8px; }
+.persona-info p { font-size: 13px; color: #555; margin-bottom: 4px; }
+.persona-quote {
+  background: #f7f7f5;
+  border-left: 3px solid #e07b39;
+  padding: 10px 14px;
+  margin-top: 12px;
+  font-size: 13px;
+  color: #444;
+  font-style: italic;
+  border-radius: 0 6px 6px 0;
+}
+
+/* セクションタイトル */
+.section-label {
+  max-width: 1200px;
+  margin: 0 auto 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.section-label h2 {
+  font-size: 18px;
+  font-weight: bold;
+}
+.badge {
+  font-size: 11px;
+  font-weight: bold;
+  padding: 3px 10px;
+  border-radius: 20px;
+  letter-spacing: 0.05em;
+}
+.badge.asis { background: #ffe0d0; color: #c44; }
+.badge.tobe { background: #d0f0e0; color: #277; }
+
+/* テーブルラッパー */
+.table-wrap {
+  max-width: 1200px;
+  margin: 0 auto 56px;
+  overflow-x: auto;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  min-width: 900px;
+}
+
+/* ヘッダー行 */
+thead tr th {
+  padding: 12px 14px;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 0.04em;
+  text-align: left;
+  white-space: nowrap;
+}
+.asis thead tr th {
+  background: #c44;
+  color: white;
+}
+.tobe thead tr th {
+  background: #2a7a5a;
+  color: white;
+}
+thead tr th:first-child { width: 110px; }
+
+/* フェーズ行 */
+.phase-row td {
+  padding: 8px 14px;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 0.03em;
+  color: white;
+  vertical-align: middle;
+}
+.asis .phase-row td { background: #e05a3a; }
+.tobe .phase-row td { background: #38a878; }
+
+/* データ行 */
+tbody tr.data-row td {
+  padding: 12px 14px;
+  vertical-align: top;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 13px;
+  color: #333;
+  line-height: 1.75;
+}
+tbody tr.data-row:last-child td { border-bottom: none; }
+tbody tr.data-row td:first-child {
+  font-weight: bold;
+  font-size: 12px;
+  color: #888;
+  white-space: nowrap;
+  background: #fafaf8;
+  width: 110px;
+}
+
+/* 行ラベルの色 */
+.row-action td:first-child { color: #333 !important; background: #f7f7f5 !important; }
+.row-thought td:first-child { color: #5566aa !important; background: #f5f6ff !important; }
+.row-feeling td:first-child { color: #e07b39 !important; background: #fff8f4 !important; }
+.row-touchpoint td:first-child { color: #888 !important; background: #fafaf8 !important; }
+.row-pain td:first-child { color: #c44 !important; background: #fff5f5 !important; }
+.row-gain td:first-child { color: #277 !important; background: #f3fdf7 !important; }
+.row-opportunity td:first-child { color: #8844cc !important; background: #faf5ff !important; }
+
+/* 感情バー */
+.emotion {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  margin: 2px 2px;
+}
+.e-neg { background: #ffe0d8; color: #c44; }
+.e-mid { background: #fff3d0; color: #996600; }
+.e-pos { background: #d4f5e4; color: #277; }
+
+/* ペイン */
+.pain { color: #c44; }
+.gain { color: #277; }
+
+ul { padding-left: 16px; margin: 0; }
+ul li { margin-bottom: 3px; }
+
+/* 感情曲線セクション */
+.curve-section {
+  max-width: 1200px;
+  margin: 0 auto 56px;
+  background: white;
+  border-radius: 12px;
+  padding: 28px 32px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+}
+.curve-section h3 { font-size: 15px; font-weight: bold; margin-bottom: 20px; }
+
+.curve-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+.curve-label { font-size: 12px; font-weight: bold; color: #888; margin-bottom: 8px; }
+
+svg.curve { width: 100%; height: 100px; }
+</style>
+</head>
+<body>
+
+<h1>KOKOROMi カスタマージャーニーマップ</h1>
+<p class="subtitle">ペルソナ：みほさん（27歳・中学校教員5年目）｜作成日：2026-05-27</p>
+
+<!-- ペルソナ -->
+<div class="persona-card">
+  <div class="persona-icon">👩‍🏫</div>
+  <div class="persona-info">
+    <h3>みほさん — アーリーアダプター</h3>
+    <p>27歳・女性・地方都市在住・中学校国語教員5年目・担任＋部活顧問</p>
+    <p>7時登校・19時退勤・土日も部活。手取り24万円。副業禁止。</p>
+    <p>転職したいわけではないが、「外の世界を知らないままでいいのか」という違和感が蓄積している。</p>
+    <div class="persona-quote">「私って学校のことしか知らないまま、子どもに何を語れるんだろう」</div>
+  </div>
+</div>
+
+
+<!-- ======== AS IS ======== -->
+<div class="section-label">
+  <h2>AS IS — 現在の顧客体験</h2>
+  <span class="badge asis">現状</span>
+</div>
+
+<div class="table-wrap">
+<table class="asis">
+  <thead>
+    <tr>
+      <th>行</th>
+      <th>① モヤモヤの蓄積</th>
+      <th>② 深夜の情報収集</th>
+      <th>③ 手段を探す</th>
+      <th>④ 断念・離脱</th>
+      <th>⑤ 現状維持へ戻る</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="phase-row">
+      <td>フェーズ</td>
+      <td>学校の中だけで完結する日々</td>
+      <td>「辞めた人」「変わった人」を探す</td>
+      <td>コーチング・転職・スクールを検討</td>
+      <td>「私には無理」で閉じる</td>
+      <td>また翌日から同じ日常</td>
+    </tr>
+    <tr class="data-row row-action">
+      <td>行動</td>
+      <td>授業・部活・保護者対応で1日が終わる。子どもに将来の話を聞かれてうまく答えられない</td>
+      <td>深夜23時すぎ、YouTubeで「教師 辞めた」「副業 教員」を検索。Xで起業家・フリーランスをフォロー</td>
+      <td>コーチングのLPを開く。転職エージェントに仮登録する。オンラインサロンの説明を読む</td>
+      <td>金額を見て閉じる。「副業禁止だから無理」「辞める覚悟はない」と自分に言い聞かせる</td>
+      <td>翌朝また7時に出勤。「まあいっか、いつかやろう」</td>
+    </tr>
+    <tr class="data-row row-thought">
+      <td>思考</td>
+      <td>「外の世界を知らないまま教員やっていていいのか」「このまま定年まで行くのか」</td>
+      <td>「この人はなぜ辞められたんだろう」「自分も変わりたいのかな」「でも何がしたいのかわからない」</td>
+      <td>「月3万は高い」「転職前提じゃないと使えないのか」「スクールって何ヶ月かかるんだろう」</td>
+      <td>「どうせ私には無理」「タイミングじゃない」「まず副業解禁してから」</td>
+      <td>「また調べただけで終わった」「いつになったら変わるんだろう」</td>
+    </tr>
+    <tr class="data-row row-feeling">
+      <td>感情</td>
+      <td><span class="emotion e-neg">焦り</span><span class="emotion e-neg">閉塞感</span><span class="emotion e-neg">罪悪感</span></td>
+      <td><span class="emotion e-mid">好奇心</span><span class="emotion e-mid">共感</span><span class="emotion e-neg">羨ましさ</span></td>
+      <td><span class="emotion e-mid">期待</span><span class="emotion e-neg">躊躇</span><span class="emotion e-neg">不安</span></td>
+      <td><span class="emotion e-neg">諦め</span><span class="emotion e-neg">自己否定</span><span class="emotion e-neg">無力感</span></td>
+      <td><span class="emotion e-neg">後悔</span><span class="emotion e-neg">虚無感</span><span class="emotion e-neg">慢性的な焦り</span></td>
+    </tr>
+    <tr class="data-row row-touchpoint">
+      <td>タッチポイント</td>
+      <td>職場・授業・生徒</td>
+      <td>YouTube・X・note（深夜）</td>
+      <td>コーチングLP・転職エージェントサイト・オンラインサロン</td>
+      <td>料金ページ・「副業禁止」の就業規則</td>
+      <td>スマホの閲覧履歴、消えるブックマーク</td>
+    </tr>
+    <tr class="data-row row-pain">
+      <td>ペイン</td>
+      <td class="pain">
+        <ul>
+          <li>転職しないと外の世界に関われない</li>
+          <li>「辞めない自分」への罪悪感</li>
+          <li>何がやりたいかもわからない</li>
+        </ul>
+      </td>
+      <td class="pain">
+        <ul>
+          <li>見るだけで行動変容が起きない</li>
+          <li>「どうせ自分には無理」で終わる</li>
+          <li>視聴後に虚しさが残る</li>
+        </ul>
+      </td>
+      <td class="pain">
+        <ul>
+          <li>コーチング：月3〜5万円・高すぎる</li>
+          <li>転職エージェント：転職前提でしか動けない</li>
+          <li>スクール：数ヶ月の高コミットが必要</li>
+        </ul>
+      </td>
+      <td class="pain">
+        <ul>
+          <li>副業禁止で参加できるものがない</li>
+          <li>「辞める覚悟がないと使えない」</li>
+          <li>ハードルが高すぎて踏み出せない</li>
+        </ul>
+      </td>
+      <td class="pain">
+        <ul>
+          <li>「また調べただけ」の繰り返し</li>
+          <li>変わろうとする自分への信頼が下がる</li>
+          <li>モヤモヤがさらに蓄積する</li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+<!-- ======== TO BE ======== -->
+<div class="section-label">
+  <h2>TO BE — KOKOROMiが提供する体験</h2>
+  <span class="badge tobe">理想</span>
+</div>
+
+<div class="table-wrap">
+<table class="tobe">
+  <thead>
+    <tr>
+      <th>行</th>
+      <th>① 認知</th>
+      <th>② LINE登録</th>
+      <th>③ 事前面談</th>
+      <th>④ 体験当日</th>
+      <th>⑤ 振り返り</th>
+      <th>⑥ コミュニティへ</th>
+      <th>⑦ 循環・還元</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="phase-row">
+      <td>フェーズ</td>
+      <td>X/Instagramで告知に触れる</td>
+      <td>LINE登録・詳細受け取り</td>
+      <td>浅野との10〜15分の話</td>
+      <td>ピカイチの現場に入る（約5時間）</td>
+      <td>体験後の言語化</td>
+      <td>KOKOROMi BASEに招待</td>
+      <td>次のロールモデルになる</td>
+    </tr>
+    <tr class="data-row row-action">
+      <td>行動</td>
+      <td>「保育士を辞めて自分の学童をつくった人の現場に入る」という投稿を見る。「気になる」と思ってLINEを登録</td>
+      <td>「ピカイチ」と送信。note詳細と申込フォームが届く。フォームに記入して送信</td>
+      <td>浅野と10〜15分の話。「なぜ気になったか」「何を持って帰りたいか」を話す</td>
+      <td>9:30集合。施設案内→子どもたちと過ごす→対話1.5時間→ランチ→学童→振り返り</td>
+      <td>「今日気になったこと」「自分の日常と何が違ったか」をスタッフと一緒に言語化する</td>
+      <td>KOKOROMi BASEのコミュニティに招待される。月1,650円で継続参加</td>
+      <td>自分の「変化の話」をコミュニティでシェア。次のゲスト登壇・ロールモデルになる</td>
+    </tr>
+    <tr class="data-row row-thought">
+      <td>思考</td>
+      <td>「副業禁止でも参加できる？」「無料なら試せるかも」「なんか気になる」</td>
+      <td>「申し込みはLINEだけで済むのか」「noteを読んだら具体的にわかった」「フォームを送ってみよう」</td>
+      <td>「面接みたいじゃなくてよかった」「浅野さん、同じような経験をしてるんだ」「行ってみようと思えた」</td>
+      <td>「子どもがこんなに自分で決めてるのか」「藤森さんの話、自分の状況と重なる部分がある」「ここと自分の職場、何が違うんだろう」</td>
+      <td>「あのズレ、言葉にできた」「辞めることだけが答えじゃないとわかった」「次は何をしてみようかな」</td>
+      <td>「似たモヤモヤを持つ人がこんなにいるんだ」「ここなら動ける気がする」</td>
+      <td>「自分も誰かにとってのロールモデルになれるかもしれない」</td>
+    </tr>
+    <tr class="data-row row-feeling">
+      <td>感情</td>
+      <td><span class="emotion e-mid">好奇心</span><span class="emotion e-pos">軽さ（無料・副業禁止OK）</span></td>
+      <td><span class="emotion e-pos">安心感</span><span class="emotion e-mid">少しの緊張</span></td>
+      <td><span class="emotion e-pos">信頼</span><span class="emotion e-pos">期待</span><span class="emotion e-pos">共感</span></td>
+      <td><span class="emotion e-pos">驚き</span><span class="emotion e-pos">没入</span><span class="emotion e-mid">揺れ・刺激</span></td>
+      <td><span class="emotion e-pos">スッキリ感</span><span class="emotion e-pos">小さな自信</span><span class="emotion e-pos">前向きな問い</span></td>
+      <td><span class="emotion e-pos">居場所感</span><span class="emotion e-pos">継続したい</span></td>
+      <td><span class="emotion e-pos">誇り</span><span class="emotion e-pos">貢献感</span><span class="emotion e-pos">循環の実感</span></td>
+    </tr>
+    <tr class="data-row row-touchpoint">
+      <td>タッチポイント</td>
+      <td>X / Instagram投稿（LINE誘導）</td>
+      <td>LINE自動返信・note記事・申込フォーム</td>
+      <td>LINE / Zoom（浅野との話）</td>
+      <td>ピカイチ（現場）・藤森さん・子どもたち</td>
+      <td>KOKOROMiスタッフとの対話・記録</td>
+      <td>KOKOROMi BASE（コミュニティ）</td>
+      <td>コミュニティ内登壇・次の体験告知</td>
+    </tr>
+    <tr class="data-row row-gain">
+      <td>ゲイン</td>
+      <td class="gain">
+        <ul>
+          <li>副業禁止・転職しなくても参加できる</li>
+          <li>無料で試せる安心感</li>
+          <li>「今の自分でいい」という入口</li>
+        </ul>
+      </td>
+      <td class="gain">
+        <ul>
+          <li>LINEだけで完結する手軽さ</li>
+          <li>noteで「どんな体験か」が事前にわかる</li>
+          <li>フォームでハードルが明確</li>
+        </ul>
+      </td>
+      <td class="gain">
+        <ul>
+          <li>審査ではなく「対話」で安心できる</li>
+          <li>浅野の原体験への共感</li>
+          <li>「自分に合うか」が事前にわかる</li>
+        </ul>
+      </td>
+      <td class="gain">
+        <ul>
+          <li>教科書では学べない「生き方の現場」に入れる</li>
+          <li>「見るだけ」ではなく「一緒に動く」</li>
+          <li>子どもとの関わりで自分の価値観が揺れる</li>
+        </ul>
+      </td>
+      <td class="gain">
+        <ul>
+          <li>漠然としたモヤモヤが言葉になる</li>
+          <li>「辞めなくてもいい」が腑に落ちる</li>
+          <li>次に試したいことが見つかる</li>
+        </ul>
+      </td>
+      <td class="gain">
+        <ul>
+          <li>同じモヤモヤを持つ仲間と繋がれる</li>
+          <li>月1,650円で継続して変化し続けられる</li>
+          <li>次の体験を優先的に紹介される</li>
+        </ul>
+      </td>
+      <td class="gain">
+        <ul>
+          <li>自分の変化が誰かの背中を押せる</li>
+          <li>「大人になってから面白くなった」の体現者になる</li>
+          <li>プラットフォームの循環を担う存在になる</li>
+        </ul>
+      </td>
+    </tr>
+    <tr class="data-row row-opportunity">
+      <td>設計ポイント</td>
+      <td>
+        <ul>
+          <li>CTAはLINE登録のみ。noteへの直リンクは使わない</li>
+          <li>「副業禁止OK」「無料」を前面に出す</li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li>自動返信でnote+フォームをセットで送る</li>
+          <li>フォームは3問以内でハードルを下げる</li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li>「面接じゃない」を言葉で伝える</li>
+          <li>浅野の原体験を最初に開示する</li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li>「ただいるだけでいい」時間をつくる</li>
+          <li>振り返りの時間を必ずセットで設計する</li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li>言語化テンプレートを用意する</li>
+          <li>感想をコミュニティでシェアする動線</li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li>体験 → コミュニティへの招待を必ず行う</li>
+          <li>体験レポートをコミュニティ内で共有</li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li>「次のゲスト候補」として積極的に声をかける</li>
+          <li>参加者の変化を可視化・発信する</li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+<!-- 感情曲線 -->
+<div class="curve-section">
+  <h3>感情曲線の比較</h3>
+  <div class="curve-grid">
+    <div>
+      <div class="curve-label">AS IS（現状）</div>
+      <svg class="curve" viewBox="0 0 400 100" xmlns="http://www.w3.org/2000/svg">
+        <line x1="0" y1="50" x2="400" y2="50" stroke="#eee" stroke-width="1"/>
+        <text x="4" y="14" font-size="9" fill="#aaa">高</text>
+        <text x="4" y="90" font-size="9" fill="#aaa">低</text>
+        <!-- AS IS curve: starts mid, dips slightly up (curiosity), then drops sharply -->
+        <polyline points="0,60 60,55 120,40 180,45 240,75 300,82 360,80 400,78"
+          fill="none" stroke="#e05a3a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <text x="0" y="98" font-size="8" fill="#aaa">蓄積</text>
+        <text x="90" y="98" font-size="8" fill="#aaa">検索</text>
+        <text x="170" y="98" font-size="8" fill="#aaa">比較</text>
+        <text x="245" y="98" font-size="8" fill="#aaa">断念</text>
+        <text x="340" y="98" font-size="8" fill="#aaa">現状維持</text>
+      </svg>
+    </div>
+    <div>
+      <div class="curve-label">TO BE（KOKOROMi体験後）</div>
+      <svg class="curve" viewBox="0 0 500 100" xmlns="http://www.w3.org/2000/svg">
+        <line x1="0" y1="50" x2="500" y2="50" stroke="#eee" stroke-width="1"/>
+        <text x="4" y="14" font-size="9" fill="#aaa">高</text>
+        <text x="4" y="90" font-size="9" fill="#aaa">低</text>
+        <!-- TO BE: starts mid, rises gradually with dips at uncertainty -->
+        <polyline points="0,58 60,50 110,52 170,42 230,28 290,22 350,18 420,14 500,10"
+          fill="none" stroke="#38a878" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <text x="0" y="98" font-size="8" fill="#aaa">認知</text>
+        <text x="68" y="98" font-size="8" fill="#aaa">LINE</text>
+        <text x="125" y="98" font-size="8" fill="#aaa">面談</text>
+        <text x="185" y="98" font-size="8" fill="#aaa">体験</text>
+        <text x="258" y="98" font-size="8" fill="#aaa">振り返り</text>
+        <text x="338" y="98" font-size="8" fill="#aaa">コミュニティ</text>
+        <text x="432" y="98" font-size="8" fill="#aaa">循環</text>
+      </svg>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

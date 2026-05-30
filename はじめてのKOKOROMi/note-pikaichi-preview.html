@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>note記事プレビュー｜ピカイチ体験</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: #f2f2f2;
+  font-family: 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif;
+  color: #1a1a1a;
+  line-height: 1.9;
+}
+
+/* note風ラッパー */
+.note-wrapper {
+  max-width: 680px;
+  margin: 48px auto;
+  background: white;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+}
+
+/* ヘッダー（noteのUIを模倣） */
+.note-header {
+  padding: 20px 24px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+.note-header-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.avatar {
+  width: 36px; height: 36px;
+  background: #1a1a1a;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: white; font-size: 13px; font-weight: bold;
+}
+.author-info { line-height: 1.4; }
+.author-name { font-size: 13px; font-weight: bold; color: #1a1a1a; }
+.post-date { font-size: 11px; color: #999; }
+
+/* 本文エリア */
+.note-body {
+  padding: 40px 48px 64px;
+}
+
+/* intro box */
+.intro-box {
+  background: #f7f7f7;
+  border-left: 3px solid #41C9B4;
+  padding: 16px 20px;
+  margin-bottom: 36px;
+  border-radius: 0 4px 4px 0;
+}
+.intro-box p {
+  font-size: 14px;
+  color: #444;
+  line-height: 1.8;
+  margin-bottom: 8px;
+}
+.intro-box p:last-child { margin-bottom: 0; }
+.intro-box strong { color: #1a1a1a; }
+
+/* タイトル */
+h1 {
+  font-size: 26px;
+  font-weight: bold;
+  line-height: 1.5;
+  color: #1a1a1a;
+  margin-bottom: 28px;
+  letter-spacing: -0.01em;
+}
+
+/* 写真プレースホルダー */
+.photo-placeholder {
+  background: #e8e8e8;
+  border-radius: 8px;
+  height: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 0 32px;
+  color: #999;
+  font-size: 14px;
+  gap: 8px;
+}
+.photo-placeholder .icon { font-size: 32px; }
+.photo-placeholder.small { height: 220px; margin: 24px 0; }
+
+/* リード文 */
+.lead {
+  font-size: 15px;
+  line-height: 2;
+  color: #333;
+  margin-bottom: 32px;
+}
+.lead p { margin-bottom: 12px; }
+.lead p:last-child { margin-bottom: 0; }
+
+hr {
+  border: none;
+  border-top: 1px solid #f0f0f0;
+  margin: 36px 0;
+}
+
+/* セクション見出し */
+h2 {
+  font-size: 20px;
+  font-weight: bold;
+  color: #1a1a1a;
+  margin: 40px 0 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+/* チェックリスト（この体験で） */
+.check-list { margin-bottom: 8px; }
+.check-item {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  background: #f9f9f9;
+  border-radius: 8px;
+  padding: 16px 18px;
+  margin-bottom: 12px;
+}
+.check-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+.check-text { font-size: 14px; color: #333; line-height: 1.75; }
+.check-text strong { color: #1a1a1a; font-size: 15px; display: block; margin-bottom: 4px; }
+
+/* ホスト */
+.host-label {
+  font-size: 11px;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  color: #999;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.host-role {
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 16px;
+}
+blockquote {
+  background: #f7f9ff;
+  border-left: 3px solid #5b8af5;
+  padding: 14px 18px;
+  margin: 20px 0;
+  border-radius: 0 6px 6px 0;
+}
+blockquote p {
+  font-size: 14px;
+  color: #333;
+  line-height: 1.8;
+  font-style: italic;
+}
+
+.body-text {
+  font-size: 15px;
+  line-height: 2;
+  color: #333;
+  margin-bottom: 16px;
+}
+.body-text strong { color: #1a1a1a; }
+
+/* リンクブロック */
+.links-block {
+  background: #f7f7f7;
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin: 24px 0;
+}
+.links-block p {
+  font-size: 13px;
+  color: #555;
+  line-height: 2;
+}
+.links-block a { color: #41C9B4; text-decoration: none; }
+
+/* タイムテーブル */
+.timetable {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0 28px;
+  font-size: 14px;
+}
+.timetable th {
+  background: #1a1a1a;
+  color: white;
+  padding: 10px 14px;
+  text-align: left;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+}
+.timetable td {
+  padding: 12px 14px;
+  border-bottom: 1px solid #f0f0f0;
+  vertical-align: top;
+  line-height: 1.7;
+}
+.timetable tr:last-child td { border-bottom: none; }
+.timetable td:first-child {
+  font-weight: bold;
+  color: #41C9B4;
+  white-space: nowrap;
+  width: 72px;
+}
+.timetable tr:nth-child(even) td { background: #fafafa; }
+
+.sub-heading {
+  font-size: 15px;
+  font-weight: bold;
+  color: #1a1a1a;
+  margin: 24px 0 12px;
+}
+
+ul.detail-list {
+  padding-left: 20px;
+  margin-bottom: 16px;
+}
+ul.detail-list li {
+  font-size: 14px;
+  color: #444;
+  line-height: 1.8;
+  margin-bottom: 4px;
+}
+
+/* 概要テーブル */
+.overview-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  margin: 20px 0;
+}
+.overview-table tr { border-bottom: 1px solid #f0f0f0; }
+.overview-table tr:last-child { border-bottom: none; }
+.overview-table td {
+  padding: 12px 14px;
+  vertical-align: top;
+  line-height: 1.7;
+}
+.overview-table td:first-child {
+  font-weight: bold;
+  color: #666;
+  width: 100px;
+  white-space: nowrap;
+  background: #fafafa;
+}
+.overview-table .free {
+  color: #e07b39;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+/* こんな人 */
+.persona-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 16px;
+}
+.persona-list li {
+  font-size: 14px;
+  color: #444;
+  line-height: 1.8;
+  padding: 10px 0;
+  border-bottom: 1px solid #f5f5f5;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+.persona-list li::before { content: '→'; color: #41C9B4; font-weight: bold; flex-shrink: 0; }
+.persona-list li:last-child { border-bottom: none; }
+
+/* フロー */
+.flow-block {
+  background: #f9f9f9;
+  border-radius: 10px;
+  padding: 24px 28px;
+  margin: 20px 0;
+}
+.flow-step {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+.flow-step:last-child { margin-bottom: 0; }
+.flow-num {
+  width: 26px; height: 26px;
+  background: #1a1a1a;
+  color: white;
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: bold;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.flow-text { font-size: 14px; color: #333; line-height: 1.75; }
+.flow-arrow { text-align: center; color: #ccc; font-size: 18px; margin: 4px 0; }
+
+/* CTA */
+.cta-block {
+  background: #1a1a1a;
+  border-radius: 12px;
+  padding: 32px 28px;
+  text-align: center;
+  margin: 36px 0 0;
+}
+.cta-block p {
+  color: rgba(255,255,255,0.75);
+  font-size: 14px;
+  margin-bottom: 16px;
+  line-height: 1.8;
+}
+.cta-block strong { color: white; }
+.cta-btn {
+  display: inline-block;
+  background: #06C755;
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+  padding: 14px 32px;
+  border-radius: 8px;
+  text-decoration: none;
+  margin-top: 4px;
+}
+.cta-url {
+  font-size: 13px;
+  color: rgba(255,255,255,0.4);
+  margin-top: 10px;
+}
+
+/* KOKOROMiについて */
+.about-block {
+  background: #f7f7f7;
+  border-radius: 10px;
+  padding: 24px 28px;
+  margin-top: 40px;
+}
+.about-block h3 {
+  font-size: 15px;
+  font-weight: bold;
+  color: #1a1a1a;
+  margin-bottom: 12px;
+}
+.about-block p {
+  font-size: 13px;
+  color: #555;
+  line-height: 1.9;
+  margin-bottom: 8px;
+}
+.about-block p:last-child { margin-bottom: 0; }
+
+.note-footer {
+  text-align: center;
+  padding: 16px 24px 24px;
+  font-size: 12px;
+  color: #bbb;
+}
+
+/* プレビューラベル */
+.preview-banner {
+  background: #ff6b35;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+}
+</style>
+</head>
+<body>
+
+<div class="preview-banner">📝 NOTE 記事プレビュー（草稿）— 写真は仮置き</div>
+
+<div class="note-wrapper">
+
+  <!-- noteっぽいヘッダー -->
+  <div class="note-header">
+    <div class="note-header-meta">
+      <div class="avatar">K</div>
+      <div class="author-info">
+        <div class="author-name">KOKOROMi</div>
+        <div class="post-date">2026年●月●日</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="note-body">
+
+    <!-- イントロボックス -->
+    <div class="intro-box">
+      <p><strong>参加者を募集しています（無料・モニター）</strong></p>
+      <p>東京・小金井の子どもの居場所「ピカイチ」で1日を過ごす体験の参加者を募集しています。</p>
+      <p>当日は朝から夕方まで、フリースクールと学童の現場に入り、代表の藤森光一さんから話を聞き、子どもたちと一緒に動きます。社会人対象・年齢・職種不問。現在はモニター期間のため、<strong>参加費は無料</strong>です。</p>
+    </div>
+
+    <!-- タイトル -->
+    <h1>【参加者募集・無料】保育士を辞めて、自分の学童をつくった人の現場に1日入ってみませんか</h1>
+
+    <!-- メイン写真 -->
+    <div class="photo-placeholder">
+      <span class="icon">📷</span>
+      <span>メイン写真：ピカイチの外観 or 子どもたちの様子</span>
+    </div>
+
+    <!-- リード文 -->
+    <div class="lead">
+      <p>保育士として長年働き、施設長・統括まで経験した。<br>それでも「自分の信じる保育」をやるためには、辞めるしかなかった。</p>
+      <p>藤森光一さんは、2025年4月に東京都小金井市で子どもの居場所「ピカイチ」を立ち上げた。</p>
+      <p>午前はフリースクール、午後は学童保育。<br>不登校・行き渋りの子も、そうでない子も、ただそこにいられる場所。</p>
+      <p>KOKOROMiでは、その現場に入らせてもらえることになりました。<br>今回は<strong>モニター参加者</strong>を募集します。</p>
+    </div>
+
+    <hr>
+
+    <!-- この体験で感じること -->
+    <h2>この体験で感じること</h2>
+
+    <div class="check-list">
+      <div class="check-item">
+        <span class="check-icon">✅</span>
+        <div class="check-text">
+          <strong>「長年かけてわかったこと」を直接聞ける</strong>
+          保育士・施設長・統括として積み上げた経験と、それでも独立を選んだ理由。答えじゃなく、問いごと受け取れる時間です。
+        </div>
+      </div>
+      <div class="check-item">
+        <span class="check-icon">✅</span>
+        <div class="check-text">
+          <strong>主体性を育てる現場を、体で感じる</strong>
+          「見守る」ってどういうことか。「干渉しない」ってどういうことか。教わるより、その空気の中にいることで気づくことがある。
+        </div>
+      </div>
+      <div class="check-item">
+        <span class="check-icon">✅</span>
+        <div class="check-text">
+          <strong>子どもとの関わりで、自分の価値観が揺れる</strong>
+          普段の自分の職場・日常と、何かが違う——そのズレを言語化することが、この体験のゴールのひとつです。
+        </div>
+      </div>
+    </div>
+
+    <hr>
+
+    <!-- ホスト紹介 -->
+    <h2>ホスト：藤森 光一さん</h2>
+
+    <div class="photo-placeholder small">
+      <span class="icon">👤</span>
+      <span>藤森さんのポートレート写真</span>
+    </div>
+
+    <div class="host-label">Host</div>
+    <div class="host-role">こどもの居場所「ピカイチ」代表 / 子育ち支援ファシリテーター</div>
+
+    <blockquote>
+      <p>「保育士として働いてきて、いろんな施設を経験して、管理職もやった。でも、既存の枠の中ではできないことがあると気づいた。だから出た。」</p>
+    </blockquote>
+
+    <p class="body-text">保育士として働き始め、施設長・統括という立場まで経験した藤森さん。組織の中で積み上げてきたものは確かにあった。でも、だからこそ見えてきた「ここではできないこと」があった。</p>
+
+    <p class="body-text">「ピカイチ」は、そういう葛藤の先にある場所です。</p>
+
+    <p class="body-text">午前中はフリースクール。不登校・行き渋りの子どもたちが、学校の代わりに来る場所。午後は学童保育。学校が終わった子どもたちが放課後を過ごす場所。どちらも根底にある哲学は同じ——<strong>子どもが自分の意思で動けること</strong>。</p>
+
+    <div class="photo-placeholder small">
+      <span class="icon">📷</span>
+      <span>施設内の写真：子どもたちの日常の様子</span>
+    </div>
+
+    <p class="body-text">「マイニチNOTE」という活動日誌を、子どもたちが自分で書く。「オープンダイアローグ」という民主的な対話の時間を、毎日持つ。大人が決めたスケジュールをこなすのではなく、子どもが選んでいく。</p>
+
+    <p class="body-text">それを可能にしているのが、藤森さんの長年の現場経験と、試行錯誤の末にたどり着いた哲学です。</p>
+
+    <div class="links-block">
+      <p>📝 藤森さんのnote：<a href="https://note.com/gifted_curlew235">https://note.com/gifted_curlew235</a></p>
+      <p>📷 Instagram：<a href="https://www.instagram.com/fujimori.5.fam/">https://www.instagram.com/fujimori.5.fam/</a></p>
+      <p>🌱 ピカイチ公式サイト：<a href="https://north-sta.co.jp/thirdplace-pikaichi">https://north-sta.co.jp/thirdplace-pikaichi</a></p>
+    </div>
+
+    <hr>
+
+    <!-- 体験の流れ -->
+    <h2>体験の流れ</h2>
+
+    <p class="body-text">この日は朝から夕方まで、「ピカイチ」の1日をまるごと体験します。</p>
+
+    <table class="timetable">
+      <tr><th>時間</th><th>内容</th></tr>
+      <tr><td>09:30</td><td>小金井市「ピカイチ」に集合・施設案内</td></tr>
+      <tr><td>10:00</td><td>フリースクールの様子を見学・子どもたちと過ごす</td></tr>
+      <tr><td>10:30</td><td>対話「長年勤めた保育現場を辞めた理由」（約1.5時間）</td></tr>
+      <tr><td>12:00</td><td>ランチ（子どもたちと一緒につくる）</td></tr>
+      <tr><td>13:00</td><td>学童タイムに子どもたちと一緒に動く（約2時間）</td></tr>
+      <tr><td>15:00</td><td>振り返り・「自分の職場・日常」を問い直す</td></tr>
+    </table>
+
+    <p class="sub-heading">対話（10:30〜）では、こんな話を聞きます。</p>
+    <ul class="detail-list">
+      <li>保育士として働き始めた頃の話</li>
+      <li>施設長・統括として積み上げた経験</li>
+      <li>「既存の枠の中ではできないことがある」と気づいた瞬間</li>
+      <li>「ピカイチ」が大切にしている哲学</li>
+    </ul>
+
+    <p class="sub-heading">学童タイム（13:00〜）では、見るだけじゃなく、一緒に動きます。</p>
+    <p class="body-text">子どもたちとランチを一緒につくり、午後の学童時間もただの見学ではなく「その場にいる大人のひとり」として関わります。無理に何かをしなくていい。でも、関わりたくなったら、どうぞ。</p>
+
+    <hr>
+
+    <!-- 開催概要 -->
+    <h2>開催概要</h2>
+    <table class="overview-table">
+      <tr><td>場所</td><td>〒184-0015 東京都小金井市貫井北町2-19-6 伊東ビル2F</td></tr>
+      <tr><td>日程</td><td>火曜・金曜（9:30〜15:00 ごろ）<br><span style="font-size:13px;color:#888;">※参加決定後、藤森さんとの打ち合わせで日程を決めます</span></td></tr>
+      <tr><td>参加費</td><td><span class="free">無料</span>（モニター期間のため）</td></tr>
+      <tr><td>定員</td><td>1〜2名（少人数で丁寧にやります）</td></tr>
+      <tr><td>対象</td><td>社会人 / 年齢・職種不問</td></tr>
+    </table>
+
+    <hr>
+
+    <!-- こんな人に -->
+    <h2>こんな人に来てほしい</h2>
+    <ul class="persona-list">
+      <li>今の仕事・場所にモヤモヤしているけど、辞める勇気がない</li>
+      <li>子どもや教育に関わる仕事をしている、またはしたい</li>
+      <li>「自分の信じることをやる」という選択をした人の話を聞いてみたい</li>
+      <li>「学校でも家でもない場所」に、純粋に興味がある</li>
+    </ul>
+    <p class="body-text"><strong>特定の職業・経験は問いません。「気になった」という直感で来てください。</strong></p>
+
+    <hr>
+
+    <!-- 参加のながれ -->
+    <h2>参加のながれ</h2>
+    <div class="flow-block">
+      <div class="flow-step"><div class="flow-num">1</div><div class="flow-text">このnote記事を読んで気になった</div></div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-step"><div class="flow-num">2</div><div class="flow-text">KOKOROMiの公式LINEに登録</div></div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-step"><div class="flow-num">3</div><div class="flow-text">「ピカイチ 参加したい」と送る</div></div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-step"><div class="flow-num">4</div><div class="flow-text">浅野（KOKOROMi代表）と10〜15分の話</div></div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-step"><div class="flow-num">5</div><div class="flow-text">問題なければ藤森さんを紹介・日程調整</div></div>
+      <div class="flow-arrow">↓</div>
+      <div class="flow-step"><div class="flow-num">6</div><div class="flow-text">体験当日</div></div>
+    </div>
+    <p class="body-text">面接、というほど大げさなものではありません。「どんな人か」「何を持って帰りたいか」を聞かせてもらうだけです。</p>
+
+    <!-- CTA -->
+    <div class="cta-block">
+      <p><strong>KOKOROMi 公式LINEに登録して、「ピカイチ」と送ってください。</strong></p>
+      <a class="cta-btn" href="https://lin.ee/RzAsEhv">👇 LINE登録はこちら</a>
+      <div class="cta-url">https://lin.ee/RzAsEhv</div>
+    </div>
+
+    <!-- KOKOROMiについて -->
+    <div class="about-block">
+      <h3>KOKOROMiについて</h3>
+      <p>KOKOROMiは、<strong>「自分の選択で動いている大人」と「迷っている社会人」をつなぐプラットフォーム</strong>です。</p>
+      <p>転職情報でも、自己啓発セミナーでもない。「その人の現場」に直接入り、話を聞き、一緒に動く。それが、KOKOROMiが考える「ロールモデルとの出会い方」です。</p>
+      <p>現在はモニター期間として無料で開催中。今回の藤森さんの体験が、KOKOROMi初の体験プロジェクトです。</p>
+    </div>
+
+  </div><!-- /note-body -->
+
+  <div class="note-footer">質問があれば、公式LINEからどうぞ。</div>
+
+</div><!-- /note-wrapper -->
+
+</body>
+</html>
